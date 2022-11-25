@@ -155,19 +155,51 @@ form {
  height: 60px;
 }
 
-.runde{
+.rundeOverskrift{
  text-align: left;
  margin-left: 30px;
 }
 
-.valg{
- /* display: inline-block; */
- /* float:center; */
+.valg h3{
+ margin-right: 10px;
+}
+
+.runde{
+ width: 100%;
+ display: flex;
+ display: inline-block;
 }
 
 .række{
- /* float:center;
+ justify-content: center;
+ display: flex;
+ width: 100%;
+}
+
+.valg{
+ display: flex;
+ margin-right: 10px;
+ margin-left: 10px;
+ width: 30%;
+}
+
+.kategoriDropdown{
+ width: 180px;
+ border-radius: 5px;
+ padding-left: 10px;
+ font-size: 16px;
+ margin: 10px;
+ margin-left:0px;
+}
+
+.startknap{
+ float:center;
  display: flex;
  justify-content: center;
- align-items: center; */
+ align-items: center;
+ padding-top: 50px;
+}
+
+#start-knap{
+ /* margin-top: 10px; */
 }
