@@ -1,0 +1,42 @@
+.header {
+    position: relative;
+    display: flex;
+    width: 100%;
+    background-color: yellow;
+    justify-content: center;
+}
+
+.logo {
+    height: 70px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.knap {
+    height: 50px;
+    width: 150px;
+    border-radius: 25px;
+    border-color: orangered;
+    background-color: orange;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    border-width: 5px;
+}
+
+#spil-knap {
+    margin-right: 500px;
+    margin-top: 75px;
+    position: absolute;
+}
+
+#highscore-knap {
+    margin-left: 500px;
+    margin-top: 75px;
+    position: absolute;
+}
