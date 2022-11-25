@@ -75,7 +75,6 @@ body {
 h2 {
  text-align: center;
  font-size: 35px;
- /* margin-top: 20px; */
  margin: 0px;
  font-weight: bold;
 }
@@ -90,8 +89,6 @@ margin: 10px;
  position: relative;
  justify-content: center;
   width: 70%;
- /* background-color: red; */
- /* display: flex; */
  display: inline-block;
  
 }
@@ -106,7 +103,6 @@ margin: 10px;
 }
 .minus{
  float: right;
- /* background-color: green; */
  width: 20%;
  display: flex;
  justify-content: center;
@@ -144,6 +140,10 @@ form {
  display: none;
 } */
 
+/* #spillerForm4{
+ display: none;
+} */
+
 .plus{
  float:center;
  display: flex;
@@ -153,4 +153,21 @@ form {
 
 .plus img {
  height: 60px;
+}
+
+.runde{
+ text-align: left;
+ margin-left: 30px;
+}
+
+.valg{
+ /* display: inline-block; */
+ /* float:center; */
+}
+
+.række{
+ /* float:center;
+ display: flex;
+ justify-content: center;
+ align-items: center; */
 }
