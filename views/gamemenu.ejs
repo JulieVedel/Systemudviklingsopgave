@@ -7,8 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/styles.css">
     <script>var exports = {};</script>
-    <script src="../scripts/loadCategories.js"></script>
-    <script src="../scripts/buzzer.js"></script>
+    <script src="/scripts/loadCategories.js"></script>
+    <script src="/scripts/buzzer.js"></script>
     <!-- Find bedre ikon: -->
     <!-- https://icon-library.com/images/jeopardy-icon/jeopardy-icon-29.jpg -->
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
@@ -17,7 +17,7 @@
 <body>
     <div class="header">
         <button class="knap" id="spil-knap">SPIL</button>
-        <img class="logo" src="../images/logo.png" alt="Jeopardy logo">
+        <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
         <button class="knap" id="highscore-knap">HIGHSCORE</button>
     </div>
     
@@ -32,12 +32,12 @@
        <div class="formFormat">
      
         <div class="internal">
-         <img src="../images/spiller.png" class="spillerAvatar">
+         <img src="/images/spiller.png" class="spillerAvatar">
          <input type="text" value="Spiller1" id="spiller1" class="internalInput">
         </div>
 
         <div class="internal">
-         <img src="../images/buzzer.png" class="spillerAvatar">
+         <img src="/images/buzzer.png" class="spillerAvatar">
          <!-- HUSK AT INDSTILLE HVER SPILLER MED EGEN LYD. FIND BEDRE LYDE! -->
          <input type="text" placeholder="Buzzer-knap" id="buzzer1" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1">
         </div>
@@ -45,7 +45,7 @@
        </div>
 
        <div class="minus">
-        <input type="image" src="../images/minus.png">
+        <input type="image" src="/images/minus.png">
        </div>
 
       </form>
@@ -58,19 +58,19 @@
        <div class="formFormat">
      
         <div class="internal">
-         <img src="../images/spiller.png" class="spillerAvatar">
+         <img src="/images/spiller.png" class="spillerAvatar">
          <input type="text" value="Spiller2" id="spiller2" class="internalInput">
         </div>
 
         <div class="internal">
-         <img src="../images/buzzer.png" class="spillerAvatar">
+         <img src="/images/buzzer.png" class="spillerAvatar">
          <input type="text" placeholder="Buzzer-knap" id="buzzer2" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1">
         </div>
 
        </div>
 
        <div class="minus">
-        <input type="image" src="../images/minus.png">
+        <input type="image" src="/images/minus.png">
        </div>
 
       </form>
@@ -83,19 +83,19 @@
        <div class="formFormat">
 
         <div class="internal">
-         <img src="../images/spiller.png" class="spillerAvatar">
+         <img src="/images/spiller.png" class="spillerAvatar">
          <input type="text" value="Spiller3" id="spiller3" class="internalInput">
         </div>
 
         <div class="internal">
-         <img src="../images/buzzer.png" class="spillerAvatar">
+         <img src="/images/buzzer.png" class="spillerAvatar">
          <input type="text" placeholder="Buzzer-knap" id="buzzer3" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1">
         </div>
 
        </div>
 
        <div class="minus">
-        <input type="image" src="../images/minus.png">
+        <input type="image" src="/images/minus.png">
        </div>
 
       </form>
@@ -105,25 +105,25 @@
        <div class="formFormat">
      
         <div class="internal">
-         <img src="../images/spiller.png" class="spillerAvatar">
+         <img src="/images/spiller.png" class="spillerAvatar">
          <input type="text" value="Spiller4" id="spiller4" class="internalInput">
         </div>
 
         <div class="internal">
-         <img src="../images/buzzer.png" class="spillerAvatar">
+         <img src="/images/buzzer.png" class="spillerAvatar">
          <input type="text" placeholder="Buzzer-knap" id="buzzer4" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1">
         </div>
 
        </div>
 
        <div class="minus">
-        <input type="image" src="../images/minus.png">
+        <input type="image" src="/images/minus.png">
        </div>
 
       </form>
      
       <div class="plus">
-       <img src="../images/plus.png">
+       <img src="/images/plus.png">
       </div>
       
       <h2>Tilføj spiller</h2>
