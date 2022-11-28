@@ -200,6 +200,9 @@ form {
  padding-top: 50px;
 }
 
-#start-knap{
- /* margin-top: 10px; */
+#test-knap{
+ font-size: 20px;
 }
+
+/* Tjek den her for button animations!:
+https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */

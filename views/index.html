@@ -9,6 +9,10 @@
     <script>var exports = {};</script>
     <script src="../scripts/loadCategories.js"></script>
     <script src="../scripts/buzzer.js"></script>
+    <!-- Find bedre ikon: -->
+    <!-- https://icon-library.com/images/jeopardy-icon/jeopardy-icon-29.jpg -->
+    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
+    
 </head>
 <body>
     <div class="header">
@@ -34,7 +38,8 @@
 
         <div class="internal">
          <img src="../images/buzzer.png" class="spillerAvatar">
-         <input type="text" value="Buzzer-knap" id="buzzer1" class="internalInput">
+         <!-- HUSK AT INDSTILLE HVER SPILLER MED EGEN LYD. FIND BEDRE LYDE! -->
+         <input type="text" placeholder="Buzzer-knap" id="buzzer1" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1">
         </div>
 
        </div>
@@ -59,7 +64,7 @@
 
         <div class="internal">
          <img src="../images/buzzer.png" class="spillerAvatar">
-         <input type="text" value="Buzzer-knap" id="buzzer2" class="internalInput">
+         <input type="text" placeholder="Buzzer-knap" id="buzzer2" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1">
         </div>
 
        </div>
@@ -84,7 +89,7 @@
 
         <div class="internal">
          <img src="../images/buzzer.png" class="spillerAvatar">
-         <input type="text" value="Buzzer-knap" id="buzzer3" class="internalInput">
+         <input type="text" placeholder="Buzzer-knap" id="buzzer3" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1">
         </div>
 
        </div>
@@ -106,7 +111,7 @@
 
         <div class="internal">
          <img src="../images/buzzer.png" class="spillerAvatar">
-         <input type="text" value="Buzzer-knap" id="buzzer4" class="internalInput">
+         <input type="text" placeholder="Buzzer-knap" id="buzzer4" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1">
         </div>
 
        </div>
@@ -125,10 +130,12 @@
 
      </div>
 
-     <!-- Når vi tilføjer mr 3 spiller, skal vi vise minusknapper (fjern .minus input display:none) -->
+     <!-- Når vi tilføjer nr 3 spiller, skal vi vise minusknapper (fjern ".minus input display:none" fra styles.css) -->
 
      <!----------------------------------------- KATEGORIER ------------------------------------------->
 
+     <!-- Vi burde nok bygge alt dette fra javascriptet ?!?: -->
+     <!-- Fjern tal fra kategorier - de viser ikke rigtig noget, der giver mening?! -->
      <div class="kategori">
       <h1 class="overskrift">KATEGORIER</h1>
       <h2 class="rundeOverskrift">Runde 1</h2>
@@ -285,7 +292,7 @@
       
 
      </div>
-
+     <button class="knap" id="test-knap" onclick="loadCategories().then()">Nye kategorier</button>
     </div>
 
 </body>

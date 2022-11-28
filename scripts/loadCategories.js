@@ -1,9 +1,30 @@
+//Stjålet fra: https://bost.ocks.org/mike/shuffle/ og https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+ var m = array.length, t, i;
+
+ // While there remain elements to shuffle…
+ while (m) {
+
+   // Pick a remaining element…
+   i = Math.floor(Math.random() * m--);
+
+   // And swap it with the current element.
+   t = array[m];
+   array[m] = array[i];
+   array[i] = t;
+ };
+
+ return array;
+};
+
 // Hent data via JSON
-async function createCluesTable() {
+async function loadCategories() {
 
  try {
-  // Sæt offset = 50 for runde 2:
-  let apiPath = `https://jservice.io/api/categories?count=100&offset=0`;
+  // Sæt offset til random (0,xyz * 10 * 1000):
+  let randomCatOffset = Math.round(Math.random()*10000);
+
+  let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCatOffset}`;
 
   const response = await fetch(apiPath);
 
@@ -13,12 +34,16 @@ async function createCluesTable() {
 
   let catArray = [[],[],[],[],[],[],[],[],[],[],[],[]];
 
+  // Test for tomme kategorier og byg cats med 60 kategorier:
   let cats = [];
   for (i = 0; cats.length < 60; i++){
     if (data[i].clues_count > 0){
      cats.push(data[i]);
     };
   };
+
+  //Randomize cats array:
+  shuffle(cats);
 
   console.log("Adjusted categories: ", cats);
   console.log("catArray: ", catArray);
@@ -27,7 +52,7 @@ async function createCluesTable() {
 
   let catArray1 = [];
   for (i = 0; i < 5; i++){
-    catArray1.push(cats[i]);
+   catArray1.push(cats[i]);
   };
 
   let catArray2 = [];
@@ -107,16 +132,17 @@ async function createCluesTable() {
    // Dropdown1:
    let choice1 = document.getElementById("kategori1");
    choice1.innerHTML = "";
+   choice1.innerHTML += `<option value='test'>Vælg kat</option>`;
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
-    choice1.innerHTML += `<option value='test'>${catArray[0][0][j].title}</option>`;
+    // console.log(catArray[0][0][j].title);
+     choice1.innerHTML += `<option value='test'>${catArray[0][0][j].title}</option>`;
    };
 
+   
    // Dropdown2:
    let choice2 = document.getElementById("kategori2");
    choice2.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
     choice2.innerHTML += `<option value='test'>${catArray[1][0][j].title}</option>`;
    };
 
@@ -124,7 +150,6 @@ async function createCluesTable() {
    let choice3 = document.getElementById("kategori3");
    choice3.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
     choice3.innerHTML += `<option value='test'>${catArray[2][0][j].title}</option>`;
    };
 
@@ -132,7 +157,6 @@ async function createCluesTable() {
    let choice4 = document.getElementById("kategori4");
    choice4.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
     choice4.innerHTML += `<option value='test'>${catArray[3][0][j].title}</option>`;
    };
 
@@ -140,7 +164,6 @@ async function createCluesTable() {
    let choice5 = document.getElementById("kategori5");
    choice5.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
     choice5.innerHTML += `<option value='test'>${catArray[4][0][j].title}</option>`;
    };
 
@@ -148,7 +171,6 @@ async function createCluesTable() {
    let choice6 = document.getElementById("kategori6");
    choice6.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
     choice6.innerHTML += `<option value='test'>${catArray[5][0][j].title}</option>`;
    };
 
@@ -158,7 +180,6 @@ async function createCluesTable() {
    let choice7 = document.getElementById("kategori7");
    choice7.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
     choice7.innerHTML += `<option value='test'>${catArray[6][0][j].title}</option>`;
    };
 
@@ -166,7 +187,6 @@ async function createCluesTable() {
    let choice8 = document.getElementById("kategori8");
    choice8.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
     choice8.innerHTML += `<option value='test'>${catArray[7][0][j].title}</option>`;
    };
 
@@ -174,39 +194,37 @@ async function createCluesTable() {
    let choice9 = document.getElementById("kategori9");
    choice9.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
-    choice9.innerHTML += `<option value='test'>${catArray[5][0][j].title}</option>`;
+    choice9.innerHTML += `<option value='test'>${catArray[8][0][j].title}</option>`;
    };
 
    // Dropdown10:
    let choice10 = document.getElementById("kategori10");
    choice10.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
-    choice10.innerHTML += `<option value='test'>${catArray[5][0][j].title}</option>`;
+    choice10.innerHTML += `<option value='test'>${catArray[9][0][j].title}</option>`;
    };
 
    // Dropdown11:
    let choice11 = document.getElementById("kategori11");
    choice11.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
-    choice11.innerHTML += `<option value='test'>${catArray[5][0][j].title}</option>`;
+    choice11.innerHTML += `<option value='test'>${catArray[10][0][j].title}</option>`;
    };
 
    // Dropdown12:
    let choice12 = document.getElementById("kategori12");
    choice12.innerHTML = "";
    for (j = 0; j < 5; j++){     
-    console.log(catArray[0][0][j].title);
-    choice12.innerHTML += `<option value='test'>${catArray[5][0][j].title}</option>`;
+    choice12.innerHTML += `<option value='test'>${catArray[11][0][j].title}</option>`;
    };
 
-  localStorage.clear();
+  // localStorage.clear();
+  console.log(randomCatOffset);
 
  } catch (e) {
   console.log(e);
   console.log("There was an error fetching the data");
  }
 };
-createCluesTable();
+
+loadCategories();
