@@ -233,7 +233,14 @@ https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */
  transform: translate(-50%, -50%) scale(1);
 }
 
-/* .show *{
- display: none;
- visibility: hidden;
-} */
+/* Fade background */
+.fade{
+ /* viewport width: */
+ width: 100vw;
+ /* viewport height: */
+ height: 100vh;
+ top: -100px;
+ left: 0;
+ background: rgba(33, 33, 33, 0.5);
+ position: absolute;
+}
