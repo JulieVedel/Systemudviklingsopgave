@@ -88,7 +88,7 @@ margin: 10px;
 .formFormat {
  position: relative;
  justify-content: center;
-  width: 70%;
+ width: 70%;
  display: inline-block;
  
 }
@@ -119,7 +119,7 @@ form {
  display: flex;
 }
 
-.minus input {
+.minusbutton {
  display: none;
  height: 60px;
 }
@@ -136,13 +136,13 @@ form {
  display: none;
 }
 
-/* #spillerForm3{
+#spillerForm3{
  display: none;
-} */
+}
 
-/* #spillerForm4{
+#spillerForm4{
  display: none;
-} */
+}
 
 .plus{
  float:center;
