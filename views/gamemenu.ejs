@@ -9,6 +9,7 @@
     <script>var exports = {};</script>
     <script src="/scripts/loadCategories.js"></script>
     <script src="/scripts/buzzer.js"></script>
+    <script src="/scripts/popup.js"></script>
     <!-- Find bedre ikon: -->
     <!-- https://icon-library.com/images/jeopardy-icon/jeopardy-icon-29.jpg -->
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
@@ -280,10 +281,6 @@
 
        </div>
 
-
-
-
-
       </form>
 
       <div class="startknap">
@@ -293,6 +290,24 @@
 
      </div>
      <button class="knap" id="test-knap" onclick="loadCategories().then()">Nye kategorier</button>
+     
+     
+     <div>
+      <!-- popup button -->
+      <button type="submit" class="knap" onclick="showRulesPopup()">Vis regler</button>
+      <!-- popup msg -->
+      <div class="popup" id="popup">
+       <br>
+       <h2>Regler</h2>
+       <p>1. I skal mindst være 2 for at spille.</p>
+       <p>2. Tryk på den grønne plusknap for at tilføje en trejde eller fjerde spiller.</p>
+       <p>3. Brug de røde minusknapper for at tilføje fjerne en spiller.</p>
+       <p>4. Tryk i feltet "Buzzer-knap" og tryk derefter på en tast på tastaturet for at indstille en buzzerknap for hver spiller</p>
+       <button type="button" onclick="closeRulesPopup()">OK</button>
+      </div>
+
+     </div>
+     <!-- <button class="knap" id="regler-knap" onclick="showRulesPopup()">Regler</button> -->
     </div>
 
 </body>

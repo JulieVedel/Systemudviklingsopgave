@@ -28,6 +28,7 @@ body {
     color: white;
     font-size: 30px;
     border-width: 5px;
+    cursor: pointer;
 }
 
 #spil-knap {
@@ -206,3 +207,33 @@ form {
 
 /* Tjek den her for button animations!:
 https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */
+
+
+/* POPUP: */
+
+.popup{
+ width: 1000px;
+ background: #fff;
+ border-radius: 6px;
+ position: absolute;
+ /* top: 50%; */
+ top: 0;
+ left: 50%;
+ transform: translate(-50%, -50%) scale(0.1);
+ text-align: left;
+ padding: 0 30px 30px;
+ color: #333;
+ visibility: hidden;
+ transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup{
+ visibility: visible;
+ top: 50%;
+ transform: translate(-50%, -50%) scale(1);
+}
+
+/* .show *{
+ display: none;
+ visibility: hidden;
+} */
