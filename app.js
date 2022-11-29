@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
  res.render('index', {title: 'Forside'});
 });
 
+app.get('/tableVeiw', (req, res) => {
+    res.render('tableVeiw', { title: 'tableVeiw' });
+});
+
 app.get('/gamemenu', (req, res) => {
  res.render('gamemenu', {title: 'gamemenu'});
 });
