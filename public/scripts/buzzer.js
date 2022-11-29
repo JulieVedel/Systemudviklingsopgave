@@ -1,21 +1,24 @@
-let firstToBuzz = "";
+// let firstToBuzz = "";
 
 // Skal der tænkes lidt bedre? Teknisk set sætter vi vel listener hver gang der trykkes? Der er kun behov for at sætte 1 gang?
-function setBuzzerKey(key, filename) {
+// function setBuzzerKey(key) {
 
- document.addEventListener("keydown", event => {
-   // Læs lige hvad isComposing gør?:
-   if (event.isComposing || event.key !== key) {
-     return;
-   };
-   if (firstToBuzz == "") {
-    // Husk at nulstille firstToBuzz efter hvert spørgsmål:
-    firstToBuzz = key;
-    console.log(key, "var først!");
-    playBuzzer(filename);
-   };
+ // sessionStorage.setItem("buzzerKnap1", key);
+
+
+ // document.addEventListener("keydown", event => {
+ //   // Læs lige hvad isComposing gør?:
+ //   if (event.isComposing || event.key !== key) {
+ //     return;
+ //   };
+ //   if (firstToBuzz == "") {
+ //    // Husk at nulstille firstToBuzz efter hvert spørgsmål:
+ //    firstToBuzz = key;
+ //    console.log(key, "var først!");
+ //    playBuzzer(filename);
+ //   };
    
- });
+ // });
 
 //  document.addEventListener("keyup", event => {
 //   // Læs lige hvad isComposing gør?:
@@ -28,7 +31,7 @@ function setBuzzerKey(key, filename) {
  
 // });
 
-};
+// };
 
 
 
