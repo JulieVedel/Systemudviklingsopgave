@@ -50,7 +50,28 @@ function startGame() {
     sessionStorage.setItem("cat12", dd12.value);
     sessionStorage.setItem("cat12name", dd12.options[dd12.selectedIndex].text);
 
-
+    savePlayerInSession();
 
     window.location.href = 'http://localhost:5500/tableVeiw';
 } 
+
+function savePlayerInSession () {
+debugger
+    if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none") {
+        sessionStorage.setItem("player1", document.getElementById("spiller1").value);
+    }
+    
+    if (window.getComputedStyle(document.getElementById('spillerForm2')).display != "none") {
+        sessionStorage.setItem("player2", document.getElementById("spiller2").value);
+    }
+
+    if (window.getComputedStyle(document.getElementById('spillerForm3')).display != "none") {
+        sessionStorage.setItem("player3", document.getElementById("spiller3").value);
+    }
+
+    if (window.getComputedStyle(document.getElementById('spillerForm4')).display != "none") {
+        sessionStorage.setItem("player4", document.getElementById("spiller4").value);
+    }
+
+
+}

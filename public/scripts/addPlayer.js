@@ -15,7 +15,6 @@ function addPlayer ()  {
             checkNumberOfElements();
 
         } else if (window.getComputedStyle(form2).display === "none") {
-            debugger
             form2.style.display = "flex";
             document.getElementById('dividerForm2').style.display = "block";
             synligeElementer += 1;
@@ -38,7 +37,6 @@ function addPlayer ()  {
 }
 
 function removePlayer (element, divider) {
-    debugger
     element.style.display = "none";
     divider.style.display = "none";
     synligeElementer -= 1;
