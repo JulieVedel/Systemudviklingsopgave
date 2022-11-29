@@ -89,7 +89,7 @@ margin: 10px;
 .formFormat {
  position: relative;
  justify-content: center;
-  width: 70%;
+ width: 70%;
  display: inline-block;
  
 }
@@ -120,7 +120,7 @@ form {
  display: flex;
 }
 
-.minus input {
+.minusbutton {
  display: none;
  height: 60px;
 }
@@ -137,13 +137,13 @@ form {
  display: none;
 }
 
-/* #spillerForm3{
+#spillerForm3{
  display: none;
-} */
+}
 
-/* #spillerForm4{
+#spillerForm4{
  display: none;
-} */
+}
 
 .plus{
  float:center;
@@ -204,6 +204,71 @@ form {
 #test-knap{
  font-size: 20px;
 }
+
+
+/* ############Table ############### */
+
+.theTableOne {
+    width: 100%;
+    background-color: black;
+}
+
+.table table  {
+    justify-content: center;
+    display: flex;
+    border-collapse: collapse;
+
+}
+.table table {
+    padding-top: 50px;
+    max-height: 50px;
+
+}
+.table th {
+    padding: 12px 15px;
+    border: 2px solid #FFEDC3;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    box-sizing: content-box;
+}
+
+.table .Kategori th {
+    text-align: center;
+    font-size: 1vw;
+    background-color: #FFFDEA;
+    color: #FF9700;
+    width: 200px;
+    height: 30px;
+    box-sizing: content-box;
+    text-overflow: ellipsis;
+    max-height: 40px;
+}
+
+.table .first th {
+    background-color: #FF9700;
+}
+.table .second th {
+    background-color: #E18603;
+}
+.table .third th {
+    background-color: #D17C00;
+}
+.table .forth th {
+    background-color: #B86D00;
+}
+.table .fifth th {
+    background-color: #9D5D00;
+}
+
+.podium {
+    margin-top: 500px;
+    justify-content: center;
+    position: relative;
+    display: flex;
+}
+
+
 
 /* Tjek den her for button animations!:
 https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */

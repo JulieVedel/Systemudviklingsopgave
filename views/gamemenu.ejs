@@ -10,6 +10,8 @@
     <script src="/scripts/loadCategories.js"></script>
     <script src="/scripts/buzzer.js"></script>
     <script src="/scripts/popup.js"></script>
+    <script src="/scripts/startGame.js"></script>
+    <script src="/scripts/addPlayer.js"></script>
     <!-- Find bedre ikon: -->
     <!-- https://icon-library.com/images/jeopardy-icon/jeopardy-icon-29.jpg -->
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
@@ -46,13 +48,13 @@
        </div>
 
        <div class="minus">
-        <input type="image" src="/images/minus.png">
+        <img src="/images/minus.png" alt="" class="minusbutton" onclick="removePlayer(spillerForm1, dividerForm1)">
        </div>
 
       </form>
       
       <!-- Divider -->
-      <hr class="solid">
+      <hr class="solid" id="dividerForm1">
 
       <!-- SPILLER2 -->
       <form id="spillerForm2">
@@ -71,13 +73,13 @@
        </div>
 
        <div class="minus">
-        <input type="image" src="/images/minus.png">
+        <img src="/images/minus.png" alt="" class="minusbutton" onclick="removePlayer(spillerForm2, dividerForm2)">
        </div>
 
       </form>
       
       <!-- Divider -->
-      <hr class="solid">
+      <hr class="solid" id="dividerForm2">
 
       <!-- SPILLER3 -->
       <form id="spillerForm3">
@@ -96,10 +98,12 @@
        </div>
 
        <div class="minus">
-        <input type="image" src="/images/minus.png">
+        <img src="/images/minus.png" alt="" class="minusbutton" onclick="removePlayer(spillerForm3, dividerForm3)">
        </div>
 
       </form>
+
+      <hr class="solid" id="dividerForm3" style="display: none;">
 
       <!-- SPILLER4 -->
       <form id="spillerForm4">
@@ -118,16 +122,18 @@
        </div>
 
        <div class="minus">
-        <input type="image" src="/images/minus.png">
+        <img src="/images/minus.png" alt="" class="minusbutton" onclick="removePlayer4(spillerForm4)">
        </div>
 
       </form>
+
+      <hr class="solid" id="dividerForm4" style="display: none;">
      
-      <div class="plus">
-       <img src="/images/plus.png">
+      <div class="plus" id="plusknap">
+       <img src="/images/plus.png" onclick="addPlayer()">
       </div>
       
-      <h2>Tilføj spiller</h2>
+      <h2 id="plusOverskrift">Tilføj spiller</h2>
 
      </div>
 
@@ -284,7 +290,7 @@
       </form>
 
       <div class="startknap">
-       <button class="knap" id="start-knap">START</button>
+       <button class="knap" id="start-knap" onclick="startGame()">START</button>
       </div>
       
 
