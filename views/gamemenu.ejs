@@ -21,7 +21,7 @@
         <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
         <button class="knap" id="highscore-knap">HIGHSCORE</button>
     </div>
-    
+
     <div class="beholder">
 
      <!----------------------------------------- SPILLERE ------------------------------------------->
@@ -31,7 +31,7 @@
       <!-- SPILLER1 -->
       <form id="spillerForm1">
        <div class="formFormat">
-     
+
         <div class="internal">
          <img src="/images/spiller.png" class="spillerAvatar">
          <input type="text" value="Spiller1" id="spiller1" class="internalInput">
@@ -40,7 +40,8 @@
         <div class="internal">
          <img src="/images/buzzer.png" class="spillerAvatar">
          <!-- HUSK AT INDSTILLE HVER SPILLER MED EGEN LYD. FIND BEDRE LYDE! -->
-         <input type="text" placeholder="Buzzer-knap" id="buzzer1" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1">
+
+         <input type="text" placeholder="Buzzer-knap" id="buzzer1" class="internalInput" oninput="closeBuzzerPopup()" onclick="showBuzzerPopup(this.id)" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1" title="Vælg en knap på tastaturet">
         </div>
 
        </div>
@@ -65,7 +66,7 @@
 
         <div class="internal">
          <img src="/images/buzzer.png" class="spillerAvatar">
-         <input type="text" placeholder="Buzzer-knap" id="buzzer2" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1">
+         <input type="text" placeholder="Buzzer-knap" id="buzzer2" class="internalInput" oninput="closeBuzzerPopup()" onclick="showBuzzerPopup(this.id)" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1" title="Vælg en knap på tastaturet">
         </div>
 
        </div>
@@ -90,7 +91,7 @@
 
         <div class="internal">
          <img src="/images/buzzer.png" class="spillerAvatar">
-         <input type="text" placeholder="Buzzer-knap" id="buzzer3" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1">
+         <input type="text" placeholder="Buzzer-knap" id="buzzer3" class="internalInput" oninput="closeBuzzerPopup()" onclick="showBuzzerPopup(this.id)" onchange="setBuzzerKey(this.value, 'buzz1.mp3')" maxlength="1" title="Vælg en knap på tastaturet">
         </div>
 
        </div>
@@ -112,7 +113,7 @@
 
         <div class="internal">
          <img src="/images/buzzer.png" class="spillerAvatar">
-         <input type="text" placeholder="Buzzer-knap" id="buzzer4" class="internalInput" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1">
+         <input type="text" placeholder="Buzzer-knap" id="buzzer4" class="internalInput" onblur="test()" oninput="closeBuzzerPopup()" onclick="showBuzzerPopup(this.id)" onchange="setBuzzerKey(this.value, 'buzz2.wav')" maxlength="1" title="Vælg en knap på tastaturet">
         </div>
 
        </div>
@@ -311,6 +312,21 @@
 
      </div>
      <!----------------------------------------------------------------------------------------------------------------->
+
+             <!------------------------------ TEST KEYBOARD POPUP ---------------------------------------------------->
+        <!-- fade background -->
+
+        <div>
+         
+         <div class="popupBuzzer" id="popupBuzzer">
+          <br>
+          <h2>Buzzer</h2>
+          <p>Vælg en knap på tastaturet!</p>
+          <button type="button" onclick="closeBuzzerPopup()">OK</button>
+         </div>
+
+        </div>
+        <!----------------------------------------------------------------------------------------------------------------->
 
     </div>
 
