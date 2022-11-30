@@ -1,3 +1,4 @@
+// ------------------------------ REGLER POPUP ------------------------------------
 function showRulesPopup() {
 
  var popup = document.getElementById("popup");
@@ -17,20 +18,23 @@ function closeRulesPopup() {
  popup.classList.remove("fade");
 
 };
+// --------------------------------------------------------------------------------
 
+// ------------------------------ BUZZER POPUP ------------------------------------
+// MANGLER: TEST OM KNAP ER SAT I FORVEJEN!
 function showBuzzerPopup(buzzerInputField) {
- console.log(buzzerInputField);
 
- let buzzerKnap = document.getElementById(buzzerInputField);
+ console.log(`${buzzerInputField}Label`);
+ var buzzerLabel = document.getElementById(`${buzzerInputField}Label`);
 
- //Ryd gammel knap-tildeling:
- document.removeEventListener("keydown", event => {
-  // Læs lige hvad isComposing gør?:
-  if (event.isComposing || event.key !== buzzerKnap.value) {
-   return;
+ buzzerLabel.innerText = "Buzzerknap: ";
+
+ document.onkeydown = function (e) {
+  e = e || window.event;
+  buzzerLabel.innerText += e.key;
+  sessionStorage.setItem(buzzerLabel.id, e.key);
+  closeBuzzerPopup();
  };
-});
-buzzerKnap.value = "";
 
  var popup = document.getElementById("popupBuzzer");
  popup.classList.add("open-popupBuzzer");
@@ -48,8 +52,8 @@ function closeBuzzerPopup() {
  var popup = document.getElementById("fadeBackground");
  popup.classList.remove("fade");
 
-};
+ // test:
+ // console.log("buzzerlabel:",sessionStorage.getItem("buzzer1Label"));
 
-function test() {
- console.log("onended");
 };
+// --------------------------------------------------------------------------------
