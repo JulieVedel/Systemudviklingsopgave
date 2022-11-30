@@ -298,20 +298,20 @@
      
      <!------------------------------ POPUP REGLER OG FADE BAGGRUND ---------------------------------------------------->
      <!-- fade background -->
-     <div id="fadeBackground"></div>
+     <div id="fadeBackground" onclick="closeHelpPopup()"></div>
 
      <div>
       <!-- popup button -->
-      <button type="submit" class="knap" onclick="showRulesPopup()">Vis regler</button>
+      <button type="submit" class="knap" onclick="showHelpPopup()">Hjælp</button>
       <!-- popup msg -->
       <div class="popup" id="popup">
        <br>
-       <h2>Regler</h2>
+       <h2>HJÆLP</h2>
        <p>1. I skal mindst være 2 for at spille.</p>
        <p>2. Tryk på den grønne plusknap for at tilføje en trejde eller fjerde spiller.</p>
        <p>3. Brug de røde minusknapper for at tilføje fjerne en spiller.</p>
        <p>4. Tryk i feltet "Buzzer-knap" og tryk derefter på en tast på tastaturet for at indstille en buzzerknap for hver spiller</p>
-       <button type="button" onclick="closeRulesPopup()">OK</button>
+       <button type="button" onclick="closeHelpPopup()">OK</button>
       </div>
 
      </div>

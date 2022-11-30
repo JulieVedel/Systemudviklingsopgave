@@ -1,5 +1,5 @@
 // ------------------------------ REGLER POPUP ------------------------------------
-function showRulesPopup() {
+function showHelpPopup() {
 
  var popup = document.getElementById("popup");
  popup.classList.add("open-popup");
@@ -9,7 +9,7 @@ function showRulesPopup() {
 
 };
 
-function closeRulesPopup() {
+function closeHelpPopup() {
 
  var popup = document.getElementById("popup");
  popup.classList.remove("open-popup");
@@ -27,11 +27,12 @@ function showBuzzerPopup(buzzerInputField) {
  console.log(`${buzzerInputField}Label`);
  var buzzerLabel = document.getElementById(`${buzzerInputField}Label`);
 
- buzzerLabel.innerText = "Buzzerknap: ";
+
 
  document.onkeydown = function (e) {
   e = e || window.event;
-  buzzerLabel.innerText += e.key;
+  let buzzerText = "Buzzerknap: " + e.key;
+  buzzerLabel.innerText = buzzerText;
   sessionStorage.setItem(buzzerLabel.id, e.key);
   closeBuzzerPopup();
  };
