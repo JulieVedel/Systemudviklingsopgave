@@ -207,10 +207,7 @@ form {
 
 /* ############Table ############### */
 
-.theTableOne {
-    width: 100%;
-    background-color: black;
-}
+
 
 .table table  {
     justify-content: center;
@@ -265,6 +262,56 @@ form {
     justify-content: center;
     position: relative;
     display: flex;
+}
+
+.card {
+    display: table;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+.points {
+    position: relative;
+    background-color: #A49D5D;
+    justify-content: center;
+    display: flex;
+    width: 150px;
+    height: 50px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0 ; 
+
+}
+
+.name {
+    position: relative;
+    background-color: #C2B96D;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    width: 150px;
+    height: 100px;
+    color: white;
+    font-weight: bold;
+    font-size: 32px;
+    border-radius: 0 0 10px 10px;
+}
+
+.button {
+    position: absolute;
+    background-color: #A49D5D;
+    width: 100px;
+    height: 40px;
+    justify-content: center;
+    text-align: center;
+    margin-top: -20px;
+    margin-left: 25px;
+    border-radius: 15px;
+
 }
 
 
