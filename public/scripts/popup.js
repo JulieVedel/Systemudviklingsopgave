@@ -35,10 +35,10 @@ function showBuzzerPopup(buzzerInputField) {
   //validering her:
   var buzzerLabel = document.getElementById(`${buzzerInputField}Label`);
   let buzzerLabels = document.getElementsByClassName("buzzerLabel");
-  let buzzerSelections = validateBuzzers();
-  for (let i = 0; i < buzzerSelections.length; i++) {
+  let buzzerAssignments = getBuzzerAssignments();
+  for (let i = 0; i < buzzerAssignments.length; i++) {
    //Knappen findes for en anden spiller:
-   if (e.key == buzzerSelections[i][0]){
+   if (e.key == buzzerAssignments[i]){
     let buzzerText = "Buzzerknap: " + e.key;
     buzzerLabel.innerText = buzzerText;
     buzzerLabels[i].innerHTML = "Buzzerknap: ";
@@ -71,23 +71,15 @@ function closeBuzzerPopup() {
 
 };
 
-function validateBuzzers(){
+function getBuzzerAssignments(){
 
  let buzzerLabels = document.getElementsByClassName("buzzerLabel");
 
- let playerForm = [
-  document.getElementById("spillerForm1"), 
-  document.getElementById("spillerForm2"),
-  document.getElementById("spillerForm3"),
-  document.getElementById("spillerForm4")
- ];
-
- let buzzerSelections = [];
+ let buzzerAssignments = [];
  for (let i = 0; i < buzzerLabels.length; i++) {
-  buzzerSelections[i] = [buzzerLabels[i].innerHTML.substring(12,13),(window.getComputedStyle(playerForm[i]).display === "none")];
-  console.log(buzzerLabels[i].id, "ComputedStyleNone?:", window.getComputedStyle(playerForm[i]).display === "none");
+  buzzerAssignments[i] = [buzzerLabels[i].innerHTML.substring(12,13)];
  };
 
- return buzzerSelections;
+ return buzzerAssignments;
 };
 // --------------------------------------------------------------------------------
