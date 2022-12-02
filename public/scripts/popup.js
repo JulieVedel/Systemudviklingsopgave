@@ -35,22 +35,15 @@ function showBuzzerPopup(buzzerInputField) {
   //validering her:
   var buzzerLabel = document.getElementById(`${buzzerInputField}Label`);
   let buzzerLabels = document.getElementsByClassName("buzzerLabel");
-  let buzzerSelections = validateBuzzers();
-  for (let i = 0; i < buzzerSelections.length; i++) {
-   //Knappen findes på et synligt felt:
-   if (e.key == buzzerSelections[i][0] && buzzerSelections[i][1] === false){
-    popupText.innerHTML = "Knappen er allerede i brug, prøv en anden.";
-    popupText.style.color = 'red';
-    return;
-   };
-   //Knappen findes på et usynligt felt:
-   if (e.key == buzzerSelections[i][0] && buzzerSelections[i][1] === true){
-    buzzerLabels[i].innerHTML = "Buzzerknap: ";
+  let buzzerAssignments = getBuzzerAssignments();
+  for (let i = 0; i < buzzerAssignments.length; i++) {
+   //Knappen findes for en anden spiller:
+   if (e.key == buzzerAssignments[i]){
     let buzzerText = "Buzzerknap: " + e.key;
     buzzerLabel.innerText = buzzerText;
+    buzzerLabels[i].innerHTML = "Buzzerknap: ";
     sessionStorage.setItem(buzzerLabel.id, e.key);
     closeBuzzerPopup();
-    return;
    };
    //Knappen findes ikke:
    let buzzerText = "Buzzerknap: " + e.key;
@@ -78,23 +71,15 @@ function closeBuzzerPopup() {
 
 };
 
-function validateBuzzers(){
+function getBuzzerAssignments(){
 
  let buzzerLabels = document.getElementsByClassName("buzzerLabel");
 
- let playerForm = [
-  document.getElementById("spillerForm1"), 
-  document.getElementById("spillerForm2"),
-  document.getElementById("spillerForm3"),
-  document.getElementById("spillerForm4")
- ];
-
- let buzzerSelections = [];
+ let buzzerAssignments = [];
  for (let i = 0; i < buzzerLabels.length; i++) {
-  buzzerSelections[i] = [buzzerLabels[i].innerHTML.substring(12,13),(window.getComputedStyle(playerForm[i]).display === "none")];
-  console.log(buzzerLabels[i].id, "ComputedStyleNone?:", window.getComputedStyle(playerForm[i]).display === "none");
+  buzzerAssignments[i] = [buzzerLabels[i].innerHTML.substring(12,13)];
  };
 
- return buzzerSelections;
+ return buzzerAssignments;
 };
 // --------------------------------------------------------------------------------
