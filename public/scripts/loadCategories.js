@@ -1,6 +1,8 @@
 // Global counter:
 let globalI = 0;
 
+
+
 //Stjålet fra: https://bost.ocks.org/mike/shuffle/ og https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
  var m = array.length, t, i;
@@ -29,7 +31,7 @@ async function loadCategories() {
   // Sæt offset til random (0,xyz * 10 * 1000):
   // rename randomCatOffset
 
-  let randomCatOffset = Math.round(Math.random()*10000);
+  let randomCatOffset = Math.round(Math.random()*8000);
 
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCatOffset}`;
 
@@ -47,9 +49,14 @@ async function loadCategories() {
   let cats = [];
   for (i = 0; cats.length < 60; i++){
     if (data[i].clues_count > 4){
+
      cats.push(data[i]);
     };
   };
+
+
+
+
 
   //Randomize cats array:
   shuffle(cats);
@@ -150,7 +157,7 @@ async function loadCategories() {
 
      
       // ----------tilføj type="submit" til den valgte kategori, for at kunne gemme den i sessionStorage:------------------
-      choice1.innerHTML += `<option value='test'>${catArray[0][0][j].title}</option>`;
+      choice1.innerHTML += `<option value=${catArray[0][0][j].title}>${catArray[0][0][j].title}</option>`;
       // Og brug dette for at hente den valgte værdi:
       // var e = document.getElementById("kategori1");
       // var value = e.value;
@@ -224,7 +231,7 @@ async function loadCategories() {
     choice2.innerHTML = "";
     choice2.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice2.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[1][0][j].title}</option>`;
+      choice2.innerHTML += `<option value=${catArray[1][0][j].id}>${catArray[1][0][j].title}</option>`;
     };
 
     // Dropdown3:
@@ -232,7 +239,7 @@ async function loadCategories() {
     choice3.innerHTML = "";
     choice3.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice3.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[2][0][j].title}</option>`;
+      choice3.innerHTML += `<option value=${catArray[2][0][j].id}>${catArray[2][0][j].title}</option>`;
     };
 
     // Dropdown4:
@@ -240,7 +247,7 @@ async function loadCategories() {
     choice4.innerHTML = "";
     choice4.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice4.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[3][0][j].title}</option>`;
+      choice4.innerHTML += `<option value=${catArray[3][0][j].id}>${catArray[3][0][j].title}</option>`;
     };
 
     // Dropdown5:
@@ -248,7 +255,7 @@ async function loadCategories() {
     choice5.innerHTML = "";
     choice5.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice5.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[4][0][j].title}</option>`;
+      choice5.innerHTML += `<option value=${catArray[4][0][j].id}>${catArray[4][0][j].title}</option>`;
     };
 
     // Dropdown6:
@@ -256,7 +263,7 @@ async function loadCategories() {
     choice6.innerHTML = "";
     choice6.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice6.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[5][0][j].title}</option>`;
+      choice6.innerHTML += `<option value=${catArray[5][0][j].id}>${catArray[5][0][j].title}</option>`;
     };
 
     // ------------------------ RUNDE2 -----------------------------------------------
@@ -266,7 +273,7 @@ async function loadCategories() {
     choice7.innerHTML = "";
     choice7.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice7.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[6][0][j].title}</option>`;
+      choice7.innerHTML += `<option value=${catArray[6][0][j].id}>${catArray[6][0][j].title}</option>`;
     };
 
     // Dropdown8:
@@ -274,7 +281,7 @@ async function loadCategories() {
     choice8.innerHTML = "";
     choice8.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice8.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[7][0][j].title}</option>`;
+      choice8.innerHTML += `<option value=${catArray[7][0][j].id}>${catArray[7][0][j].title}</option>`;
     };
 
     // Dropdown9:
@@ -282,7 +289,7 @@ async function loadCategories() {
     choice9.innerHTML = "";
     choice9.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice9.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[8][0][j].title}</option>`;
+      choice9.innerHTML += `<option value=${catArray[8][0][j].id}>${catArray[8][0][j].title}</option>`;
     };
 
     // Dropdown10:
@@ -290,7 +297,7 @@ async function loadCategories() {
     choice10.innerHTML = "";
     choice10.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice10.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[9][0][j].title}</option>`;
+      choice10.innerHTML += `<option value=${catArray[9][0][j].id}>${catArray[9][0][j].title}</option>`;
     };
 
     // Dropdown11:
@@ -298,7 +305,7 @@ async function loadCategories() {
     choice11.innerHTML = "";
     choice11.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice11.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[10][0][j].title}</option>`;
+      choice11.innerHTML += `<option value=${catArray[10][0][j].id}>${catArray[10][0][j].title}</option>`;
     };
 
     // Dropdown12:
@@ -306,7 +313,7 @@ async function loadCategories() {
     choice12.innerHTML = "";
     choice12.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-      choice12.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[11][0][j].title}</option>`;
+      choice12.innerHTML += `<option value=${catArray[11][0][j].id}>${catArray[11][0][j].title}</option>`;
     };
 
     console.log(randomCatOffset);
@@ -327,35 +334,35 @@ async function loadCategories() {
     let choice2 = document.getElementById("kategori2");
     choice2.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice2.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[1][0][j].title}</option>`;
+      choice2.innerHTML += `<option value=${catArray[1][0][j].id}>${catArray[1][0][j].title}</option>`;
     };
 
     // Dropdown3:
     let choice3 = document.getElementById("kategori3");
     choice3.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice3.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[2][0][j].title}</option>`;
+      choice3.innerHTML += `<option value=${catArray[2][0][j].id}>${catArray[2][0][j].title}</option>`;
     };
 
     // Dropdown4:
     let choice4 = document.getElementById("kategori4");
     choice4.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice4.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[3][0][j].title}</option>`;
+      choice4.innerHTML += `<option value=${catArray[3][0][j].id}>${catArray[3][0][j].title}</option>`;
     };
 
     // Dropdown5:
     let choice5 = document.getElementById("kategori5");
     choice5.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice5.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[4][0][j].title}</option>`;
+      choice5.innerHTML += `<option value=${catArray[4][0][j].id}>${catArray[4][0][j].title}</option>`;
     };
 
     // Dropdown6:
     let choice6 = document.getElementById("kategori6");
     choice6.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice6.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[5][0][j].title}</option>`;
+      choice6.innerHTML += `<option value=${catArray[5][0][j].id}>${catArray[5][0][j].title}</option>`;
     };
 
     // ------------------------ RUNDE2 -----------------------------------------------
@@ -364,42 +371,42 @@ async function loadCategories() {
     let choice7 = document.getElementById("kategori7");
     choice7.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice7.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[6][0][j].title}</option>`;
+      choice7.innerHTML += `<option value=${catArray[6][0][j].id}>${catArray[6][0][j].title}</option>`;
     };
 
     // Dropdown8:
     let choice8 = document.getElementById("kategori8");
     choice8.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice8.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[7][0][j].title}</option>`;
+      choice8.innerHTML += `<option value=${catArray[7][0][j].id}>${catArray[7][0][j].title}</option>`;
     };
 
     // Dropdown9:
     let choice9 = document.getElementById("kategori9");
     choice9.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice9.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[8][0][j].title}</option>`;
+      choice9.innerHTML += `<option value=${catArray[8][0][j].id}>${catArray[8][0][j].title}</option>`;
     };
 
     // Dropdown10:
     let choice10 = document.getElementById("kategori10");
     choice10.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice10.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[9][0][j].title}</option>`;
+      choice10.innerHTML += `<option value=${catArray[9][0][j].id}>${catArray[9][0][j].title}</option>`;
     };
 
     // Dropdown11:
     let choice11 = document.getElementById("kategori11");
     choice11.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice11.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[10][0][j].title}</option>`;
+      choice11.innerHTML += `<option value=${catArray[10][0][j].id}>${catArray[10][0][j].title}</option>`;
     };
 
     // Dropdown12:
     let choice12 = document.getElementById("kategori12");
     choice12.innerHTML = "";
     for (j = 0; j < 5; j++){     
-      choice12.innerHTML += `<option value=${catArray[0][0][j].id}>${catArray[11][0][j].title}</option>`;
+      choice12.innerHTML += `<option value=${catArray[11][0][j].id}>${catArray[11][0][j].title}</option>`;
     };
 
     console.log(randomCatOffset);

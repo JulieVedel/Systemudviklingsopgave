@@ -1,10 +1,15 @@
 
 
 function startGame() {
+
+
     
     let dd1 = document.getElementById("kategori1");
     sessionStorage.setItem("cat1" , dd1.value);
     sessionStorage.setItem("cat1name", dd1.options[dd1.selectedIndex].text);
+
+    console.log(sessionStorage.getItem("cat1"));
+    console.log(sessionStorage.getItem("cat1name"))
 
     let dd2 = document.getElementById("kategori2");
     sessionStorage.setItem("cat2", dd2.value);
@@ -56,7 +61,7 @@ function startGame() {
 } 
 
 function savePlayerInSession () {
-debugger
+
     if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none") {
         sessionStorage.setItem("player1", document.getElementById("spiller1").value);
     }

@@ -238,7 +238,13 @@ form {
     text-align: center;
     color: white;
     box-sizing: content-box;
+    cursor: pointer;
+    user-select: none;
 }
+
+
+
+
 
 .table .Kategori th {
     text-align: center;
@@ -267,6 +273,19 @@ form {
 .table .fifth th {
     background-color: #9D5D00;
 }
+
+
+.table th:hover {
+    background-color: #714400;
+
+    cursor: pointer;
+}
+
+.table .Kategori th:hover {
+    background-color: #FFFDEA;
+    cursor: default;
+}
+
 
 .podium {
     margin-top: 500px;
