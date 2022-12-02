@@ -5,56 +5,51 @@
 let cells =  document.querySelectorAll('.first th')      
 for (var i = 0; i < cells.length; i++) {
  cells[i].onclick = function () {  clickRow1( this.getAttribute("value")); };
-}
-
+};
 async function clickRow1(i) {
  let clue = await loadQuestion(0, i);
  showQuestionPopup(clue);
-}
+};
 
 // row 2
 let cells2 = document.querySelectorAll('.second th')
 for (var i = 0; i < cells2.length; i++) {
  cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
-}
-
+};
 async function clickRow2(i) {
  let clue = await loadQuestion(1, i);
  showQuestionPopup(clue);
-}
+};
 
 // row 3
 let cells3 = document.querySelectorAll('.third th')
 for (var i = 0; i < cells3.length; i++) {
  cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
-}
-
+};
 async function clickRow3(i) {
  let clue = await loadQuestion(2, i);
  showQuestionPopup(clue);
-}
+};
 
 // cell row 4
 let cells4 = document.querySelectorAll('.forth th')
 for (var i = 0; i < cells4.length; i++) {
  cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
-}
-
+};
 async function clickRow4(i) {
  let clue = await loadQuestion(3, i);
  showQuestionPopup(clue);
-}
+};
 
 // cell row 5
 let cells5 = document.querySelectorAll('.fifth th')
 for (var i = 0; i < cells5.length; i++) {
  cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
-}
-
+};
 async function clickRow5(i) {
  let clue = await loadQuestion(4 , i);
  showQuestionPopup(clue);
-}
+};
 
 
 async function loadQuestion(value, categori) {

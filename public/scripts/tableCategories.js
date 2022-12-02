@@ -100,7 +100,9 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
 
         cards[i].classList.remove("card-hide");
         names[i].innerHTML = playernames[i];
-        buzzers[i].innerHTML = buzzerKeys[i].toUpperCase();
+        if(typeof buzzerKeys[i] !== "undefined"){
+         buzzers[i].innerHTML = buzzerKeys[i].toUpperCase();
+        }
 
     }
 
