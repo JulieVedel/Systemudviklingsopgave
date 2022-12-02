@@ -281,7 +281,26 @@ form {
     align-items: center;
     margin-right: 3%;
     margin-left: 3%;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #464646;
+    border-width: 3.5px;
 }
+
+
+.card-selected {
+    border-color: #ff0000;
+}
+
+
+.card-hide {
+    justify-content: center;
+    align-items: center;
+    margin-right: 3%;
+    margin-left: 3%;
+    display: none;
+}
+
 
 .points {
     position: relative;
@@ -308,9 +327,17 @@ form {
     height: 100px;
     color: white;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 2.2vmin;
+
     border-radius: 0 0 10px 10px;
 }
+
+.name p {
+    overflow-wrap: break-word;
+    max-width: 150px;
+}
+
+
 
 .button {
     position: absolute;
