@@ -48,7 +48,8 @@ async function loadCategories() {
   // rename "cats"
   let cats = [];
   for (i = 0; cats.length < 60; i++){
-    if (data[i].clues_count > 4){
+   //4068 er "name that artist" og burde vist indeholde billeder...
+    if (data[i].clues_count > 4 && data.id != 4068){
 
      cats.push(data[i]);
     };

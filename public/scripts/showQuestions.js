@@ -86,6 +86,7 @@ async function loadQuestion(value, categori) {
 
 console.log(document.querySelectorAll('.first th'));
 
+
 // ------------------------------ QUESTION POPUP ------------------------------------
 
 const RESPONCE_TIME_IN_MILLISECONDS = 1000;
@@ -93,6 +94,51 @@ let startTimer;
 
 
 function showQuestionPopup(clue) {
+// ------------------------------ BUZZERS -------------------------------------------
+let firstToBuzz = "";
+document.getElementById("firstToBuzzH2").innerHTML = "";
+
+let key1 = sessionStorage.getItem("buzzer1Label");
+let key2 = sessionStorage.getItem("buzzer2Label");
+let key3 = sessionStorage.getItem("buzzer3Label");
+let key4 = sessionStorage.getItem("buzzer4Label");
+
+ document.onkeydown = function (e) {
+
+  console.log(e.key);
+
+  if (e.key !== key1 && e.key !== key2 && e.key !== key3 && e.key !== key4) {
+    return;
+  };
+
+  if (firstToBuzz == "" && e.key == key1) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player1"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!"
+  };
+  
+  if (firstToBuzz == "" && e.key == key2) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player2"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!"
+  };
+
+  if (firstToBuzz == "" && e.key == key3) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player3"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!"
+  };
+
+  if (firstToBuzz == "" && e.key == key4) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player4"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!"
+  };
+};
 
  var popup = document.getElementById("Question_popup");
  popup.classList.add("question-open-popup");
@@ -104,8 +150,8 @@ function showQuestionPopup(clue) {
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
 
-// Countdown:
-startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
+// Countdown: (MIS)
+// startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
 
 };
 
@@ -117,8 +163,16 @@ function closeQuestionPopup() {
  var popup = document.getElementById("fadeQuestion_popup_background");
  popup.classList.remove("fade");
 
+
 };
 // --------------------------------------------------------------------------------
+
+function playBuzzer() {
+  var audio = new Audio("../sounds/buzz2.wav");
+  audio.play();
+};
+
+// ------------------------------ TIMER -------------------------------------------
 let timer = 100;
 
 function inputTimer(){
@@ -145,3 +199,4 @@ function inputTimer(){
  answerBlock.classList.add(test);
 
 };
+// --------------------------------------------------------------------------------

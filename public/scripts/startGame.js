@@ -1,9 +1,5 @@
-
-
 function startGame() {
 
-
-    
     let dd1 = document.getElementById("kategori1");
     sessionStorage.setItem("cat1" , dd1.value);
     sessionStorage.setItem("cat1name", dd1.options[dd1.selectedIndex].text);
@@ -64,19 +60,26 @@ function savePlayerInSession () {
 
     if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none") {
         sessionStorage.setItem("player1", document.getElementById("spiller1").value);
-    }
+    };
     
     if (window.getComputedStyle(document.getElementById('spillerForm2')).display != "none") {
         sessionStorage.setItem("player2", document.getElementById("spiller2").value);
-    }
+    };
 
     if (window.getComputedStyle(document.getElementById('spillerForm3')).display != "none") {
         sessionStorage.setItem("player3", document.getElementById("spiller3").value);
-    }
+    };
 
     if (window.getComputedStyle(document.getElementById('spillerForm4')).display != "none") {
         sessionStorage.setItem("player4", document.getElementById("spiller4").value);
-    }
+    };
+};
 
+savePlayerInSession();
 
-}
+function validatePlayerData(){
+  
+ 
+
+};
+validatePlayerData();
