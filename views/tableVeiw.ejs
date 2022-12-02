@@ -73,7 +73,7 @@
 
 </div>
 
-    <script src="/scripts/showQuestions.js"></script>
+
 
     </section>
 
@@ -133,11 +133,35 @@
 
     </section>
 
+     <!------------------------------ POPUP REGLER OG FADE BAGGRUND ---------------------------------------------------->
+     <!-- fade background -->
+     <!-- <div id="fadeQuestion_popup_background" onclick="closeQuestionPopup()"></div> -->
+     <div id="fadeQuestion_popup_background"></div>
+     <div>
+      <!-- popup button -->
+      <!-- <button type="submit" class="knap" onclick="showQuestionPopup()">Spørgsmål</button> -->
+      <!-- popup msg -->
+      <div class="question-popup" id="Question_popup">
+       <br>
+       <h2 id="question_popup_H2">Spørgsmål</h2>
 
+       <div id="answerBlock" class="answerBlock100">
+        <input id=answerInput type="text" placeholder="skriv svaret her...">
+       </div>
+
+       <div id="numberTimeout">
+        <!-- 10 sekunder... -->
+       </div>
+
+       <button type="button" onclick="closeQuestionPopup()">OK</button>
+      </div>
+
+     </div>
 
 
 </body>
 
+<script src="/scripts/showQuestions.js"></script>
 
 <script src="/scripts/tableCategories.js"></script>
 

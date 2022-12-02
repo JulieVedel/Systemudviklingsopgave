@@ -1,77 +1,61 @@
 
 
 
-// Cell row 1
-
-let cells =  document.querySelectorAll('.first th')
-        
+// row 1
+let cells =  document.querySelectorAll('.first th')      
 for (var i = 0; i < cells.length; i++) {
-    cells[i].onclick = function () {  test1( this.getAttribute("value")); };
+ cells[i].onclick = function () {  clickRow1( this.getAttribute("value")); };
 }
 
-function test1(i) {
-    console.log("clicked ");
-
-    loadQuestion(0, i);
-
+async function clickRow1(i) {
+ let clue = await loadQuestion(0, i);
+ showQuestionPopup(clue);
 }
 
-// cell row 2
-
+// row 2
 let cells2 = document.querySelectorAll('.second th')
-
 for (var i = 0; i < cells2.length; i++) {
-    cells2[i].onclick = function () { test2(this.getAttribute("value")); };
+ cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
 }
 
-function test2(i) {
-    console.log("clicked ");
-
-    loadQuestion(1, i);
-
+async function clickRow2(i) {
+ let clue = await loadQuestion(1, i);
+ showQuestionPopup(clue);
 }
 
-// cell row 3
-
+// row 3
 let cells3 = document.querySelectorAll('.third th')
-
 for (var i = 0; i < cells3.length; i++) {
-    cells3[i].onclick = function () { test3(this.getAttribute("value")); };
+ cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
 }
 
-function test3(i) {
-    console.log("clicked ");
-
-    loadQuestion(2, i);
-
+async function clickRow3(i) {
+ let clue = await loadQuestion(2, i);
+ showQuestionPopup(clue);
 }
 
 // cell row 4
-
 let cells4 = document.querySelectorAll('.forth th')
-
 for (var i = 0; i < cells4.length; i++) {
-    cells4[i].onclick = function () { test4(this.getAttribute("value")); };
+ cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
 }
 
-function test4(i) {
-    console.log("clicked ");
-
-    loadQuestion(3, i);
-
+async function clickRow4(i) {
+ let clue = await loadQuestion(3, i);
+ showQuestionPopup(clue);
 }
 
 // cell row 5
-
 let cells5 = document.querySelectorAll('.fifth th')
-
 for (var i = 0; i < cells5.length; i++) {
-    cells5[i].onclick = function () { test5(this.getAttribute("value")); };
+ cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
 }
 
-function test5(i) {
-    loadQuestion(4 , i);
+async function clickRow5(i) {
+ let clue = await loadQuestion(4 , i);
+ showQuestionPopup(clue);
 }
+
 
 async function loadQuestion(value, categori) {
 
@@ -96,20 +80,68 @@ async function loadQuestion(value, categori) {
 
     console.log(data[value]);
 
-
-
+    return data[value];
 
 }
 
-
-
-
-
-
-
-
-
-
 console.log(document.querySelectorAll('.first th'));
 
+// ------------------------------ QUESTION POPUP ------------------------------------
 
+const RESPONCE_TIME_IN_MILLISECONDS = 1000;
+let startTimer;
+
+
+function showQuestionPopup(clue) {
+
+ var popup = document.getElementById("Question_popup");
+ popup.classList.add("question-open-popup");
+
+ var popup = document.getElementById("fadeQuestion_popup_background");
+ popup.classList.add("fade");
+
+ document.getElementById("question_popup_H2").innerHTML += " til " + clue.value;
+
+ document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
+
+// Countdown:
+startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
+
+};
+
+function closeQuestionPopup() {
+
+ var popup = document.getElementById("Question_popup");
+ popup.classList.remove("question-open-popup");
+
+ var popup = document.getElementById("fadeQuestion_popup_background");
+ popup.classList.remove("fade");
+
+};
+// --------------------------------------------------------------------------------
+let timer = 100;
+
+function inputTimer(){
+
+ let answerBlock = document.getElementById("answerBlock");
+
+ console.log(timer);
+
+ let test = "answerBlock" + timer;
+ console.log(test);
+
+ answerBlock.classList.remove(test);
+ 
+ let numberTimeout = document.getElementById("numberTimeout");
+
+ numberTimeout.innerHTML = timer/10 * RESPONCE_TIME_IN_MILLISECONDS/1000 + " sekunder..."
+
+ if (timer == 0) {
+  clearTimeout(startTimer);
+ };
+
+ timer = timer - 10;
+
+ answerBlock.classList.add(test);
+
+};
