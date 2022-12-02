@@ -37,20 +37,13 @@ function showBuzzerPopup(buzzerInputField) {
   let buzzerLabels = document.getElementsByClassName("buzzerLabel");
   let buzzerSelections = validateBuzzers();
   for (let i = 0; i < buzzerSelections.length; i++) {
-   //Knappen findes på et synligt felt:
-   if (e.key == buzzerSelections[i][0] && buzzerSelections[i][1] === false){
-    popupText.innerHTML = "Knappen er allerede i brug, prøv en anden.";
-    popupText.style.color = 'red';
-    return;
-   };
-   //Knappen findes på et usynligt felt:
-   if (e.key == buzzerSelections[i][0] && buzzerSelections[i][1] === true){
-    buzzerLabels[i].innerHTML = "Buzzerknap: ";
+   //Knappen findes for en anden spiller:
+   if (e.key == buzzerSelections[i][0]){
     let buzzerText = "Buzzerknap: " + e.key;
     buzzerLabel.innerText = buzzerText;
+    buzzerLabels[i].innerHTML = "Buzzerknap: ";
     sessionStorage.setItem(buzzerLabel.id, e.key);
     closeBuzzerPopup();
-    return;
    };
    //Knappen findes ikke:
    let buzzerText = "Buzzerknap: " + e.key;
