@@ -15,8 +15,9 @@ function getSessionCategories() {
     categorie.push(sessionStorage.getItem("cat5name"))
     categorie.push(sessionStorage.getItem("cat6name"))
 
-
     console.log(categorie);
+
+
 
     let catH = document.getElementById("kategori");
 
@@ -39,6 +40,8 @@ function getPlayerNames() {
             playerNames.push(sessionStorage.getItem("player" + i));
         }
     };
+
+    console.log(playerNames);
 
     return playerNames;
 
@@ -105,9 +108,6 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
     cards[randomNumber].classList.add("card-selected");
 
 }
-
-
-
 
 
 getSessionCategories();
