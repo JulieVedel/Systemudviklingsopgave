@@ -110,28 +110,32 @@ let key4 = sessionStorage.getItem("buzzer4Label");
    firstToBuzz = e.key;
    console.log(sessionStorage.getItem("player1"), "var først!");
    playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!"
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
   };
   
   if (firstToBuzz == "" && e.key == key2) {
    firstToBuzz = e.key;
    console.log(sessionStorage.getItem("player2"), "var først!");
    playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!"
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
   };
 
   if (firstToBuzz == "" && e.key == key3) {
    firstToBuzz = e.key;
    console.log(sessionStorage.getItem("player3"), "var først!");
    playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!"
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
   };
 
   if (firstToBuzz == "" && e.key == key4) {
    firstToBuzz = e.key;
    console.log(sessionStorage.getItem("player4"), "var først!");
    playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!"
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
   };
 };
 
@@ -145,10 +149,13 @@ let key4 = sessionStorage.getItem("buzzer4Label");
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
 
-// Countdown: (MIS)
-// startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
-
 };
+
+function flipCardDelay(){
+ document.getElementById("thecard").classList.add("flipcard");
+ // Countdown: (MIS)
+startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
+}
 
 function closeQuestionPopup() {
 

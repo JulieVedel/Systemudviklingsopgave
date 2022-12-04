@@ -135,30 +135,32 @@
 
      <!------------------------------ POPUP QUESTION ---------------------------------------------------->
      <!-- fade background -->
-     <!-- <div id="fadeQuestion_popup_background" onclick="closeQuestionPopup()"></div> -->
      <div id="fadeQuestion_popup_background"></div>
-     <div>
-      <!-- popup button -->
-      <!-- <button type="submit" class="knap" onclick="showQuestionPopup()">Spørgsmål</button> -->
-      <!-- popup msg -->
-      <div class="question-popup" id="Question_popup">
-       <br>
-       <h2 id="question_popup_H2">Spørgsmål</h2>
+     
+     <!-- <div class="maincontainer" class="question-popup" id="Question_popup">
+      <div class="thecard"> -->
 
-       <!-- <div id="answerBlock" class="answerBlock100">
-        <input id=answerInput type="text" placeholder="skriv svaret her...">
+       <!-- maincontainer: -->
+       <div class="question-popup" id="Question_popup"> 
+        <div class="thecard" id="thecard">
+
+         <div class="thefront">
+          <br>
+          <h2 id="question_popup_H2">Spørgsmål</h2>
+          <h2 id="firstToBuzzH2"></h2>
+         </div>
+
+         <div class="theback">
+          <br>
+          <h2>Svarside</h2>
+          <div id="answerBlock" class="answerBlock100">
+           <input id=answerInput type="text" placeholder="skriv svaret her...">
+          </div>
+          <div id="numberTimeout"></div>
+         </div>
+
+        </div>
        </div>
-
-       <div id="numberTimeout">
-        
-       </div> -->
-
-       <!-- <button type="button" onclick="closeQuestionPopup()">OK</button> -->
-       <h2 id="firstToBuzzH2"></h2>
-      </div>
-
-     </div>
-
 
 </body>
 
