@@ -406,6 +406,9 @@ https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */
 #forsideBeholder {
     width: 100%;
     position: relative;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    font-size: 18px;
 }
 
 #omOs {
@@ -419,9 +422,6 @@ https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */
     width: 80%;
     margin-left: 10%;
     justify-content: center;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-align: center;
-    font-size: 18px;
 }
 
 #spilleregler .knap {
