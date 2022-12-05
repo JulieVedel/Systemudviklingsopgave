@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    
+    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
     <title>Document</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
 
 <div class="theTableOne">
 
-        <table>
+        <table id="myTable ">
             <tr id="kategori" class="Kategori" >
                 <th>Alle gode ting på denne jord</th>
                 <th>Kategori 2</th>
@@ -28,44 +28,44 @@
                 <th>Kategori 6</th>
             </tr>
             <tr class="first">
-                <th>100</th>
-                <th>100</th>
-                <th>100</th>
-                <th>100</th>
-                <th>100</th>
-                <th>100</th>
+                <th value = "1">100</th>
+                <th value = "2">100</th>
+                <th value = "3">100</th>
+                <th value = "4">100</th>
+                <th value = "5">100</th>
+                <th value = "6">100</th>
             </tr>
             <tr class="second">
-                <th>200</th>
-                <th>200</th>
-                <th>200</th>
-                <th>200</th>
-                <th>200</th>
-                <th>200</th>
+                <th value = "1">200</th>
+                <th value = "2">200</th>
+                <th value = "3">200</th>
+                <th value = "4">200</th>
+                <th value = "5">200</th>
+                <th value = "6">200</th>
             </tr>
             <tr class="third">
-                <th>300</th>
-                <th>300</th>
-                <th>300</th>
-                <th>300</th>
-                <th>300</th>
-                <th>300</th>
+                <th value = "1">300</th>
+                <th value = "2">300</th>
+                <th value = "3">300</th>
+                <th value = "4">300</th>
+                <th value = "5">300</th>
+                <th value = "6">300</th>
             </tr>
             <tr class="forth">
-                <th>400</th>
-                <th>400</th>
-                <th>400</th>
-                <th>400</th>
-                <th>400</th>
-                <th>400</th>
+                <th value = "1">400</th>
+                <th value = "2">400</th>
+                <th value = "3">400</th>
+                <th value = "4">400</th>
+                <th value = "5">400</th>
+                <th value = "6">400</th>
             </tr>
             <tr class="fifth">
-                <th>500</th>
-                <th>500</th>
-                <th>500</th>
-                <th>500</th>
-                <th>500</th>
-                <th>500</th>
+                <th value = "1" >500</th>
+                <th value = "2" >500</th>
+                <th value = "3" >500</th>
+                <th value = "4" >500</th>
+                <th value = "5" >500</th>
+                <th value = "6" >500</th>
             </tr>
             
 
@@ -73,24 +73,26 @@
 
 </div>
 
+
+
     </section>
 
 
     <section class="podium">
 
-        <div class="card">
+        <div class="card" id="card1">
             <div class="points">
                 <p>0</p>
             </div>
             <div class="name">
-            <p>Name</p>
+            <p >Name</p>
             </div>
             <div class="button">
-                <p>Space</p>
+                <p></p>
             </div>
         </div> 
 
-        <div class="card">
+        <div class="card" id="card2">
             <div class="points">
                 <p>0</p>
             </div>
@@ -98,11 +100,11 @@
                 <p>Name</p>
             </div>
             <div class="button">
-                <p>Space</p>
+                <p></p>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="card3">
             <div class="points">
                 <p>0</p>
             </div>
@@ -110,11 +112,11 @@
                 <p>Name</p>
             </div>
             <div class="button">
-                <p>Space</p>
+                <p></p>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="card4">
             <div class="points">
                 <p>0</p>
             </div>
@@ -122,7 +124,7 @@
                 <p>Name</p>
             </div>
             <div class="button">
-                <p>Space</p>
+                <p></p>
             </div>
         </div>
 
@@ -131,11 +133,38 @@
 
     </section>
 
+     <!------------------------------ POPUP QUESTION ---------------------------------------------------->
+     <!-- fade background -->
+     <div id="fadeQuestion_popup_background"></div>
+     
+     <!-- <div class="maincontainer" class="question-popup" id="Question_popup">
+      <div class="thecard"> -->
 
+       <!-- maincontainer: -->
+       <div class="question-popup" id="Question_popup"> 
+        <div class="thecard" id="thecard">
 
+         <div class="thefront">
+          <br>
+          <h2 id="question_popup_H2">Spørgsmål</h2>
+          <h2 id="firstToBuzzH2"></h2>
+         </div>
+
+         <div class="theback">
+          <br>
+          <h2>Svarside</h2>
+          <div id="answerBlock" class="answerBlock100">
+           <input id=answerInput type="text" placeholder="skriv svaret her...">
+          </div>
+          <div id="numberTimeout"></div>
+         </div>
+
+        </div>
+       </div>
 
 </body>
 
+<script src="/scripts/showQuestions.js"></script>
 
 <script src="/scripts/tableCategories.js"></script>
 
