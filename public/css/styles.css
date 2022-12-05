@@ -553,55 +553,55 @@ button.knap:hover {
  background-color: rgba(255, 255, 255, 0);
 }
 
-.answerBlock {
+/* .questionBlock {
  width: 100%;
  background-color: rgba(0, 255, 0, 0.85);
 }
 
-.answerBlock100 {
+.questionBlock100 {
  width: 100%;
  background-color: rgba(25, 240, 0, 0.85);
 }
-.answerBlock90 {
+.questionBlock90 {
  width: 90%;
  background-color: rgba(50, 220, 0, 0.85);
 }
-.answerBlock80 {
+.questionBlock80 {
  width: 80%;
  background-color: rgba(75, 200, 0, 0.85);
 }
-.answerBlock70 {
+.questionBlock70 {
  width: 70%;
  background-color: rgba(100, 180, 0, 0.85);
 }
-.answerBlock60 {
+.questionBlock60 {
  width: 60%;
  background-color: rgba(125, 160, 0, 0.85);
 }
-.answerBlock50 {
+.questionBlock50 {
  width: 50%;
  background-color: rgba(150, 140, 0, 0.85);
 }
-.answerBlock40 {
+.questionBlock40 {
  width: 40%;
  background-color: rgba(175, 120, 0, 0.85);
 }
-.answerBlock30 {
+.questionBlock30 {
  width: 30%;
  background-color: rgba(200, 100, 0, 0.85);
 }
-.answerBlock20 {
+.questionBlock20 {
  width: 20%;
  background-color: rgba(225, 80, 0, 0.85);
 }
-.answerBlock10 {
+.questionBlock10 {
  width: 10%;
  background-color: rgba(250, 60, 0, 0.85);
 }
-.answerBlock0 {
+.questionBlock0 {
  width: 0%;
  background-color: rgba(255, 40, 0, 0.85);
-}
+} */
 
 #numberTimeout {
  text-align: center;
