@@ -495,6 +495,9 @@ button.knap:hover {
  color: #333;
  visibility: hidden;
  transition: transform 0.4s, top 0.4s;
+    justify-content: center;
+    text-align: center;
+    display: flex;
 }
 
 .thecard {
@@ -610,6 +613,9 @@ button.knap:hover {
  font-weight: bolder;
 }
 
+#answerButton {
+    margin-top: 30px;
+}
 
 
 

@@ -1,14 +1,17 @@
 
 const RESPONCE_TIME_IN_MILLISECONDS = 1000;
 
+
+let clue; 
+
 // row 1
 let cells =  document.querySelectorAll('.first th')      
 for (var i = 0; i < cells.length; i++) {
  cells[i].onclick = function () {  clickRow1( this.getAttribute("value")); };
 };
 async function clickRow1(i) {
- let clue = await loadQuestion(0, i);
- showQuestionPopup(clue);
+ clue = await loadQuestion(0, i);
+ showQuestionPopup();
 };
 
 // row 2
@@ -17,8 +20,8 @@ for (var i = 0; i < cells2.length; i++) {
  cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
 };
 async function clickRow2(i) {
- let clue = await loadQuestion(1, i);
- showQuestionPopup(clue);
+ clue = await loadQuestion(1, i);
+ showQuestionPopup();
 };
 
 // row 3
@@ -27,8 +30,8 @@ for (var i = 0; i < cells3.length; i++) {
  cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
 };
 async function clickRow3(i) {
- let clue = await loadQuestion(2, i);
- showQuestionPopup(clue);
+ clue = await loadQuestion(2, i);
+ showQuestionPopup();
 };
 
 // cell row 4
@@ -38,7 +41,7 @@ for (var i = 0; i < cells4.length; i++) {
 };
 async function clickRow4(i) {
  let clue = await loadQuestion(3, i);
- showQuestionPopup(clue);
+ showQuestionPopup();
 };
 
 // cell row 5
@@ -47,8 +50,8 @@ for (var i = 0; i < cells5.length; i++) {
  cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
 };
 async function clickRow5(i) {
- let clue = await loadQuestion(4 , i);
- showQuestionPopup(clue);
+ clue = await loadQuestion(4 , i);
+ showQuestionPopup();
 };
 
 
@@ -88,7 +91,7 @@ console.log(document.querySelectorAll('.first th'));
 let startTimer;
 
 
-function showQuestionPopup(clue) {
+function showQuestionPopup() {
 // ------------------------------ BUZZERS -------------------------------------------
 let firstToBuzz = "";
 document.getElementById("firstToBuzzH2").innerHTML = "";
@@ -153,6 +156,10 @@ let key4 = sessionStorage.getItem("buzzer4Label");
  startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
 
 
+
+
+
+
 };
 
 function flipCardDelay(){
@@ -206,4 +213,27 @@ function inputTimer(){
  // answerBlock.classList.add(test);
 
 };
+
+document.getElementById("answerButton").onclick = function () { 
+
+    let answerText = document.getElementById("answerInput").value;
+
+    console.log(answerText);
+    console.log(clue.answer);
+
+    console.log(checkAnswer(answerText));
+
+
+ };
+
+
+
+
+function checkAnswer(answer) {
+    return (answer.toUpperCase() == clue.answer.toUpperCase() );
+
+}
+
+
+
 // --------------------------------------------------------------------------------
