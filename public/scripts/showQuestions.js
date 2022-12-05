@@ -1,5 +1,5 @@
 
-
+const RESPONCE_TIME_IN_MILLISECONDS = 1000;
 
 // row 1
 let cells =  document.querySelectorAll('.first th')      
@@ -84,7 +84,7 @@ console.log(document.querySelectorAll('.first th'));
 
 // ------------------------------ QUESTION POPUP ------------------------------------
 
-const RESPONCE_TIME_IN_MILLISECONDS = 1000;
+
 let startTimer;
 
 
@@ -149,12 +149,17 @@ let key4 = sessionStorage.getItem("buzzer4Label");
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
 
+
+ startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
+
+
 };
 
 function flipCardDelay(){
  document.getElementById("thecard").classList.add("flipcard");
- // Countdown: (MIS)
-startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
+
+ startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
+
 }
 
 function closeQuestionPopup() {
@@ -179,14 +184,14 @@ let timer = 100;
 
 function inputTimer(){
 
- let answerBlock = document.getElementById("answerBlock");
+ // let answerBlock = document.getElementById("questionBlock");
 
- console.log(timer);
+ // console.log(timer);
 
- let test = "answerBlock" + timer;
- console.log(test);
+ // let test = "questionBlock" + timer;
+ // console.log(test);
 
- answerBlock.classList.remove(test);
+ // answerBlock.classList.remove(test);
  
  let numberTimeout = document.getElementById("numberTimeout");
 
@@ -198,7 +203,7 @@ function inputTimer(){
 
  timer = timer - 10;
 
- answerBlock.classList.add(test);
+ // answerBlock.classList.add(test);
 
 };
 // --------------------------------------------------------------------------------
