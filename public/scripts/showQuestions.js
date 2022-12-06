@@ -65,9 +65,9 @@ async function loadQuestion(value, categori) {
     categorieIDs.push(sessionStorage.getItem("cat5"));
     categorieIDs.push(sessionStorage.getItem("cat6"));
 
-    console.log(categori);
+    console.log("categori", categori);
 
-    console.log(categorieIDs);
+    console.log("categorieIDs", categorieIDs);
 
     let apiPath = `https://jservice.io/api/clues?category=${categorieIDs[categori - 1]}`;
 
