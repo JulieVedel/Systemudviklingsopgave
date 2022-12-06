@@ -22,6 +22,22 @@ function shuffle(array) {
  return array;
 };
 
+// --------------- REFAC -----------------
+// test loadC:
+//skal ha 2dim array:
+
+//12x5 array
+
+// let catArray1 = [];
+// for (i = 0; i < 5; i++){
+//  catArray1.push(cats[i]);
+// };
+
+// let catArray2 = [];
+// for (i = 5; i < 10; i++){
+//   catArray2.push(cats[i]);
+// };
+
 
 
 // Hent data fra API via JSON
@@ -140,9 +156,6 @@ async function loadCategories() {
   catArray[9].push(catArray10);
   catArray[10].push(catArray11);
   catArray[11].push(catArray12);
-  
-   // const catSel = document.getElementById(`catSelector${k}`);
-   // catSel.innerHTML += `<option value='test'>${catArray[k][0][j].title}</option>`
 
    // ------------------------ RUNDE1 -----------------------------------------------
 
@@ -151,79 +164,9 @@ async function loadCategories() {
     // Dropdown1:
     let choice1 = document.getElementById("kategori1");
     choice1.innerHTML = "";
-    // Tilføj denne til alle dropdowns?
-    // Standard: Alle har "Vælg kategori" - Men knappen Tildel tilfældige kategorier, skal fjerne overskriften "Vælg kategori"
     choice1.innerHTML += `<option value='test'>Vælg kategori</option>`;
     for (j = 0; j < 5; j++){     
-
-     
-      // ----------tilføj type="submit" til den valgte kategori, for at kunne gemme den i sessionStorage:------------------
-      choice1.innerHTML += `<option value=${catArray[0][0][j].title}>${catArray[0][0][j].title}</option>`;
-      // Og brug dette for at hente den valgte værdi:
-      // var e = document.getElementById("kategori1");
-      // var value = e.value;
-      // var text = e.options[e.selectedIndex].text;
-      // ------------------------------------------------------------------------------------------------------------------
-      
-
-      // -------------------------------tilføj custom data til option:-----------------------------------------------------
-      // data-cat_id="89"
-
-      // brug noget a la det her for at sætte værdi i sessionStorage:
-      // function addListener(){
-      //  QuestionsForm.addEventListener('submit', function(event) {
-      //   event.preventDefault();
-      //   let submitter = event.submitter;
-      //   localStorage.setItem("questionValue", submitter.value);
-      //   //WEIRD. selvom property hedder data-cat, bruges dataset.cat til at fange den igen:
-      //   //Se evt.: https://stackoverflow.com/questions/71815082/how-can-i-get-custom-data-attribute
-      
-      //   localStorage.setItem("questionCategoryId", submitter.dataset.cat_id);
-      
-      //   window.location.href = "clues.html";
-        
-      //  });
-      // };
-      // ------------------------------------------------------------------------------------------------------------------
-
-
-      // ------------------------------- opret evt clues klasse?: ---------------------------------------------------------
-      // class Clues {
-      //  constructor(_question, _answer, _value, _category){
-      //   this.question = _question
-      //   this.answer = _answer
-      //   this.value = _value
-      //   this.category = _category
-      //  }
-      // }
-      
-      // async function getQuestionTest() {
-      
-      //  try {
-      
-      //   // const response = await fetch(`https://jservice.io/api/random`);
-      
-      //   const questionValue = localStorage.getItem("questionValue");
-      //   console.log("Locally stored clicked question value: ", questionValue);
-      //   const questionCatId = localStorage.getItem("questionCategoryId");
-      //   console.log("Locally stored clicked question category: ", questionCatId);
-      
-      //   const response = await fetch(`https://jservice.io/api/clues?value=${questionValue}&category=${questionCatId}`);
-      
-      //   const data = await response.json();
-      
-      //   console.log("Raw returned data: ", data[0]);
-      
-      //   const clue = new Clues(data[0].question, data[0].answer, data[0].value, data[0].category.id);
-      
-      //   console.log("my clue object created from raw data: ", clue);
-      
-      //  } catch (e) {
-      //   console.log(e);
-      //   console.log("There was an error fetching the data");
-      //  };
-      // };
-      // ------------------------------------------------------------------------------------------------------------------
+     choice1.innerHTML += `<option value=${catArray[0][0][j].title}>${catArray[0][0][j].title}</option>`;
     };
 
     
