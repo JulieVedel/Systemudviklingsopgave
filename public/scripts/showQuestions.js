@@ -39,7 +39,7 @@ for (var i = 0; i < cells4.length; i++) {
  cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
 };
 async function clickRow4(i) {
- let clue = await loadQuestion(3, i);
+ clue = await loadQuestion(3, i);
  showQuestionPopup();
 };
 
