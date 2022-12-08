@@ -1,5 +1,7 @@
 function startGame() {
  console.log(validateCategories());
+
+ // ALT DET HER KA OGSÅ REFACTORERES!!!
  
  if (validatePlayerBuzzers() && validatePlayerNames() && validateCategories()) {
   let dd1 = document.getElementById("kategori1");
