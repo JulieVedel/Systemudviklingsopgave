@@ -1,6 +1,7 @@
 function startGame() {
+ console.log(validateCategories());
  
- if (validatePlayerBuzzers() && validatePlayerNames()) {
+ if (validatePlayerBuzzers() && validatePlayerNames() && validateCategories()) {
   let dd1 = document.getElementById("kategori1");
   sessionStorage.setItem("cat1" , dd1.value);
   sessionStorage.setItem("cat1name", dd1.options[dd1.selectedIndex].text);
@@ -60,6 +61,8 @@ function startGame() {
   window.alert("Indstil en buzzerknap for alle synlige spillere, og prøv igen.");
  } else if (!validatePlayerNames()) {
   window.alert("Udfyld navne for alle synlige spillere, og prøv igen.");
+ } else if (!validateCategories()) {
+  window.alert("Udfyld alle kategorier, og prøv igen.");
  }; 
 }; 
 
@@ -87,6 +90,7 @@ function validatePlayerBuzzers(){
  console.log("buzzer1Label:", document.getElementById('buzzer1Label').innerHTML == "");
 
  let validationOfBuzzersOK = true;
+
  if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none" && document.getElementById('buzzer1Label').innerHTML == "Buzzerknap: ") {
   validationOfBuzzersOK = false;
  };
@@ -112,6 +116,7 @@ function validatePlayerNames(){
  console.log("buzzer1Label:", document.getElementById('buzzer1Label').innerHTML == "");
 
  let validationOfNamesOK = true;
+
  if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none" && document.getElementById('spiller1').value == "") {
   validationOfNamesOK = false;
  };
@@ -131,3 +136,15 @@ function validatePlayerNames(){
 };
 
 validatePlayerNames();
+
+function validateCategories(){
+ for (let i = 1; i < 13; i++) {
+  if (document.getElementById(`kategori${i}`).value === "default") {
+   console.log(document.getElementById(`kategori${i}`).value);
+   return false;
+  };
+ };
+ return true;
+};
+
+validateCategories();
