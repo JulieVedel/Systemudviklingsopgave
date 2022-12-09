@@ -22,19 +22,18 @@ function closeHelpPopup() {
 
 // ------------------------------ BUZZER POPUP ------------------------------------
 // SMELLY CODE DETECTED!!!!!!!!!!!!!
+
+// OBS FJERN ONKEY NÅR POPUP LUKKES!!!
 function showBuzzerPopup(buzzerInputField) {
 
  document.onkeydown = function (e) {
   e = e || window.event;
-  
   var popupText = document.getElementById("popupBuzzerText");
   //Reset warning:
   popupText.innerHTML = "Vælg en knap på tastaturet!";
   popupText.style.color = 'black';
-
   //validering her:
   var buzzerLabel = document.getElementById(`${buzzerInputField}Label`);
-
   let buzzerLabels = document.getElementsByClassName("buzzerLabel");
   let buzzerAssignments = getBuzzerAssignments();
   for (let i = 0; i < buzzerAssignments.length; i++) {
@@ -44,19 +43,15 @@ function showBuzzerPopup(buzzerInputField) {
     buzzerLabel.innerText = buzzerText;
     buzzerLabels[i].innerHTML = "Buzzerknap: ";
     sessionStorage.setItem(buzzerLabel.id, e.key);
-
-
-
     closeBuzzerPopup();
+    document.onkeydown = null;
    };
-
-
-   
    //Knappen findes ikke:
    let buzzerText = "Buzzerknap: " + e.key;
    buzzerLabel.innerText = buzzerText;
    sessionStorage.setItem(buzzerLabel.id, e.key);
    closeBuzzerPopup();
+   document.onkeydown = null;
   };
 
      console.log(buzzerLabel.id);

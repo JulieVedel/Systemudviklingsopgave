@@ -1,6 +1,6 @@
 function startGame() {
  
- if (validatePlayerData()) {
+ if (validatePlayerBuzzers() && validatePlayerNames()) {
   let dd1 = document.getElementById("kategori1");
   sessionStorage.setItem("cat1" , dd1.value);
   sessionStorage.setItem("cat1name", dd1.options[dd1.selectedIndex].text);
@@ -55,10 +55,13 @@ function startGame() {
   savePlayerInSession();
 
   window.location.href = 'http://localhost:5500/tableVeiw';
- } else {
+
+ } else if (!validatePlayerBuzzers()) {
   window.alert("Indstil en buzzerknap for alle synlige spillere, og prøv igen.");
- }
-} 
+ } else if (!validatePlayerNames()) {
+  window.alert("Udfyld navne for alle synlige spillere, og prøv igen.");
+ }; 
+}; 
 
 function savePlayerInSession () {
 
@@ -79,26 +82,52 @@ function savePlayerInSession () {
     };
 };
 
-function validatePlayerData(){
+function validatePlayerBuzzers(){
 
  console.log("buzzer1Label:", document.getElementById('buzzer1Label').innerHTML == "");
 
- let validationOK = true;
+ let validationOfBuzzersOK = true;
  if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none" && document.getElementById('buzzer1Label').innerHTML == "Buzzerknap: ") {
-  validationOK = false;
+  validationOfBuzzersOK = false;
  };
 
  if (window.getComputedStyle(document.getElementById('spillerForm2')).display != "none" && document.getElementById('buzzer2Label').innerHTML == "Buzzerknap: ") {
-  validationOK = false;
+  validationOfBuzzersOK = false;
  };
 
  if (window.getComputedStyle(document.getElementById('spillerForm3')).display != "none" && document.getElementById('buzzer3Label').innerHTML == "Buzzerknap: ") {
-  validationOK = false;
+  validationOfBuzzersOK = false;
  };
 
  if (window.getComputedStyle(document.getElementById('spillerForm4')).display != "none" && document.getElementById('buzzer4Label').innerHTML == "Buzzerknap: ") {
-  validationOK = false;
+  validationOfBuzzersOK = false;
  };
- return validationOK;
+ return validationOfBuzzersOK;
 };
-validatePlayerData();
+
+validatePlayerBuzzers();
+
+function validatePlayerNames(){
+
+ console.log("buzzer1Label:", document.getElementById('buzzer1Label').innerHTML == "");
+
+ let validationOfNamesOK = true;
+ if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none" && document.getElementById('spiller1').value == "") {
+  validationOfNamesOK = false;
+ };
+
+ if (window.getComputedStyle(document.getElementById('spillerForm2')).display != "none" && document.getElementById('spiller2').value == "") {
+  validationOfNamesOK = false;
+ };
+
+ if (window.getComputedStyle(document.getElementById('spillerForm3')).display != "none" && document.getElementById('spiller3').value == "") {
+  validationOfNamesOK = false;
+ };
+
+ if (window.getComputedStyle(document.getElementById('spillerForm4')).display != "none" && document.getElementById('spiller4').value == "") {
+  validationOfNamesOK = false;
+ };
+ return validationOfNamesOK;
+};
+
+validatePlayerNames();
