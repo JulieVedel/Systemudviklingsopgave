@@ -10,12 +10,8 @@
 </head>
 <body onload="showStartingPlayerPopup()">
 
-<div id="fadeBackground" onclick="closeHelpPopup()"></div>
-<div class="popup" id="startingPlayerPopup">
-    <br><br>
-    <h2 id="startingPlayer"></h2>
-    <button type="button" onclick="closeStartingPlayerPopup()" id="closeStartingPlayerPopup">Lets go!</button>
-    </div>
+
+
 
 <div class="header">
     <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
@@ -140,6 +136,18 @@
 
     </section>
 
+
+
+    <div id="fadeBackground" onclick="closeHelpPopup()"></div>
+
+<div class="popup" id="startingPlayerPopup">
+    <br><br>
+    <h2 id="startingPlayer"></h2>
+    <button type="button" onclick="closeStartingPlayerPopup()" id="closeStartingPlayerPopup">Lets go!</button>
+</div>
+
+
+
      <!------------------------------ POPUP QUESTION ---------------------------------------------------->
      <!-- fade background -->
      <div id="fadeQuestion_popup_background"></div>
@@ -163,7 +171,7 @@
           
          </div>
 
-         <div class="theback">
+         <div class="theback" id="backQuestion">
           <br>
           <h2 id="question_popup_H2_Back">Spørgsmål</h2>
 

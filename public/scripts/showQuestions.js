@@ -101,6 +101,8 @@ function showQuestionPopup() {
 
   timer = 100;
 
+  document.getElementById("backQuestion").classList.add("hide");
+
   document.getElementById("question_popup_H2").innerHTML = "Spørgsmål";
 
   document.getElementById("thecard").classList.remove("flipcard");
@@ -111,7 +113,7 @@ function showQuestionPopup() {
   var popup = document.getElementById("fadeQuestion_popup_background");
   popup.classList.add("fade");
 
- document.getElementById("question_popup_H2").innerHTML += " til " + clue.value;
+ document.getElementById("question_popup_H2").innerHTML += " til " + currentPoints;
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
 
@@ -120,6 +122,10 @@ function showQuestionPopup() {
 };
 
 function flipCardDelay(){
+
+
+  document.getElementById("backQuestion").classList.remove("hide");
+
  document.getElementById("thecard").classList.add("flipcard");
  startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
 
@@ -138,7 +144,7 @@ function flipCardDelay(){
 
 
 
-  document.getElementById("question_popup_H2_Back").innerHTML += " til " + clue.value;
+  document.getElementById("question_popup_H2_Back").innerHTML += " til " + currentPoints;
 
   document.getElementById("question_popup_H2_Back").innerHTML += "<h3>" + clue.question + "</h3>";
 
