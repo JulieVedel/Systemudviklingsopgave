@@ -530,9 +530,40 @@ button.knap:hover {
  backface-visibility: hidden;
 }
 
+h4 {
+  font-size: 22px;  
+}
+
+#afterAnwserButtons {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+}
+
+#itWasRightButton {
+    margin-right: 400px;
+    position: relative;
+    bottom: 0;
+}
+
+
+
+
+
+.hide {
+    display: none;
+}
+
+
 .theback {
- position: relative;
- top: -70%;
+    height: 100%;
+   
+ 
+ 
  /* background-color: grey; */
  backface-visibility: hidden;
  transform: rotateY(180deg);
