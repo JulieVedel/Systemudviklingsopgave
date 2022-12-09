@@ -244,9 +244,9 @@ document.getElementById("answerButton").onclick = function () {
 
   let answerText = document.getElementById("answerInput").value;
 
-  console.log(answerText);
-  console.log(clue.answer);
-  console.log(checkAnswer(answerText));
+ console.log(answerText);
+ console.log(clue.answer);
+ console.log(checkAnswer(answerText));
 
   let answerResponce = document.getElementById("answerResponce");
 
@@ -304,7 +304,9 @@ document.getElementById("itWasRightButton").onclick = function () {
 
 
 function checkAnswer(answer) {
-    return (answer.toUpperCase() == clue.answer.toUpperCase());
+ // const answerCorrected = answer.replace(/[^a-zA-Z ]/g, "");
+ // const clueCorrected = clue.answer.replace(/[^a-zA-Z ]/g, "");
+ return (answer.toUpperCase() == clue.answer.toUpperCase());
 };
 
 //--------------------------------------------------------------------------------------------------------
