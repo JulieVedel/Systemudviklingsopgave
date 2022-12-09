@@ -8,7 +8,14 @@
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
     <title>Document</title>
 </head>
-<body>
+<body onload="showStartingPlayerPopup()">
+
+<div id="fadeBackground" onclick="closeHelpPopup()"></div>
+<div class="popup" id="startingPlayerPopup">
+    <br><br>
+    <h2 id="startingPlayer"></h2>
+    <button type="button" onclick="closeStartingPlayerPopup()" id="closeStartingPlayerPopup">Lets go!</button>
+    </div>
 
 <div class="header">
     <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
@@ -183,11 +190,13 @@
         </div>
        </div>
 
+    
+
 </body>
 
 <script src="/scripts/showQuestions.js"></script>
-
 <script src="/scripts/tableCategories.js"></script>
+<script src="/scripts/popup.js"></script>
 
 
 </html>
