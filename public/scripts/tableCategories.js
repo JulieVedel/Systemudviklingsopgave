@@ -62,11 +62,47 @@ function getBuzzerKeys() {
 
 }
 
+function getPlayerPoints() {
+    let playerPoints = [];
+
+    for (let i = 1; i < 5; i++) {
+        if (sessionStorage.getItem("pointsPlayer" + i) != null) {
+            playerPoints.push(sessionStorage.getItem("pointsPlayer" + i));
+        }
+    };
+
+    console.log("playerPoints", playerPoints);
+
+    return playerPoints;
+}
+
+function getPlayers() {
+    let playerNames = getPlayerNames();
+    let buzzerKeys = getBuzzerKeys();
+    let playerPoints = getPlayerPoints();
+
+    let players = [];
+
+    for (let i = 0; i < playerNames.length; i++) {
+        players.push({
+            id: (i + 1),
+            name: playerNames[i],
+            key: buzzerKeys[i],
+            score: playerPoints[i]
+        });
+    }
+
+    
+    return players;
+}
+
+
 
 function pupulatePlayerNamesAndStartSelectPlayer() {
     
-    let playernames = getPlayerNames()
+    let playernames = getPlayerNames();
     let buzzerKeys = getBuzzerKeys();
+    let playerPoints = getPlayerPoints();
 
     let names = [];
 
@@ -86,7 +122,6 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
 
     for (let i = 0; i < cards.length; i++) {
         cards[i].classList.add("card-hide");
-        
     }
 
     buzzers = [];
@@ -96,15 +131,23 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
     buzzers[2] = document.querySelector("#card3 .button p")
     buzzers[3] = document.querySelector("#card4 .button p")
 
+    let points = [];
+
+    points[0] = document.querySelector("#card1 .points p")
+    points[1] = document.querySelector("#card2 .points p")
+    points[2] = document.querySelector("#card3 .points p")
+    points[3] = document.querySelector("#card4 .points p")
+
     for (let i = 0; i < playernames.length; i++) {
 
         cards[i].classList.remove("card-hide");
         names[i].innerHTML = playernames[i];
+        points[i].innerHTML = playerPoints[i];
         if(typeof buzzerKeys[i] !== "undefined"){
          buzzers[i].innerHTML = buzzerKeys[i].toUpperCase();
         }
-
     }
+    
 
     const randomNumber = Math.round(Math.random() * (getPlayerNames().length - 1));
     cards[randomNumber].classList.add("card-selected");

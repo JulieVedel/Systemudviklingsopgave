@@ -72,18 +72,22 @@ function savePlayerInSession () {
 
     if (window.getComputedStyle(document.getElementById('spillerForm1')).display != "none") {
         sessionStorage.setItem("player1", document.getElementById("spiller1").value);
+        sessionStorage.setItem('pointsPlayer1', '0');
     };
     
     if (window.getComputedStyle(document.getElementById('spillerForm2')).display != "none") {
         sessionStorage.setItem("player2", document.getElementById("spiller2").value);
+        sessionStorage.setItem('pointsPlayer2', '0');
     };
 
     if (window.getComputedStyle(document.getElementById('spillerForm3')).display != "none") {
         sessionStorage.setItem("player3", document.getElementById("spiller3").value);
+        sessionStorage.setItem('pointsPlayer3', '0');
     };
 
     if (window.getComputedStyle(document.getElementById('spillerForm4')).display != "none") {
         sessionStorage.setItem("player4", document.getElementById("spiller4").value);
+        sessionStorage.setItem('pointsPlayer4', '0');
     };
 };
 
