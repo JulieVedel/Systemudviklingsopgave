@@ -110,7 +110,7 @@ function showQuestionPopup() {
     var popup = document.getElementById("fadeQuestion_popup_background");
     popup.classList.add("fade");
 
- document.getElementById("question_popup_H2").innerHTML += " til " + clue.value;
+ document.getElementById("question_popup_H2").innerHTML += " til " + currentPoints;
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
 
@@ -141,7 +141,7 @@ function flipCardDelay(){
 
 
 
-  document.getElementById("question_popup_H2_Back").innerHTML += " til " + clue.value;
+  document.getElementById("question_popup_H2_Back").innerHTML += " til " + currentPoints;
 
   document.getElementById("question_popup_H2_Back").innerHTML += "<h3>" + clue.question + "</h3>";
 
