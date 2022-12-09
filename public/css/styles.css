@@ -222,8 +222,23 @@ img.playerButton:hover {
  padding-top: 50px;
 }
 
+/* Rename: */
 #test-knap{
  font-size: 20px;
+}
+
+#closeHelp{
+ float: right;
+ height: 80px;
+ width: 200px;
+ border-radius: 40px;
+ border-color: orangered;
+ background-color: orange;
+ font-weight: bold;
+ color: white;
+ font-size: 30px;
+ border-width: 5px;
+ cursor: pointer;
 }
 
 
@@ -530,12 +545,14 @@ button.knap:hover {
 }
 
 /* Fade background */
+
+/* VI HAR TO FADES!!! */
 .fade{
  /* viewport width: */
  width: 100vw;
  /* viewport height: */
  height: 100vh;
- top: 0px;
+ top: -100px;
  left: 0;
  background: rgba(33, 33, 33, 0.5);
  position: absolute;
