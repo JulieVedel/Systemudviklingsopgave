@@ -1,5 +1,8 @@
 
-const RESPONCE_TIME_IN_MILLISECONDS = 1000;
+const RESPONCE_TIME_IN_MILLISECONDS = 10;
+let isAnswerCorrect = false;
+let round = 1;
+let currentPoints = 0; 
 
 let clue; 
 
@@ -16,6 +19,7 @@ async function clickRow1(i) {
 // row 2
 let cells2 = document.querySelectorAll('.second th');
 for (var i = 0; i < cells2.length; i++) {
+
  cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
 };
 async function clickRow2(i) {
@@ -55,6 +59,8 @@ async function clickRow5(i) {
 
 
 async function loadQuestion(value, categori) {
+
+    currentPoints = (value + 1) * (round * 100);
 
     let categorieIDs = [];
 
@@ -107,6 +113,14 @@ function showQuestionPopup() {
 function flipCardDelay(){
  document.getElementById("thecard").classList.add("flipcard");
  startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
+
+  document.getElementById("frontQuestion").classList.add("hide")
+
+
+  document.getElementById("question_popup_H2_Back").innerHTML += " til " + clue.value;
+
+  document.getElementById("question_popup_H2_Back").innerHTML += "<h3>" + clue.question + "</h3>";
+
 };
 
 function closeQuestionPopup() {
@@ -115,6 +129,9 @@ function closeQuestionPopup() {
 
  var popup = document.getElementById("fadeQuestion_popup_background");
  popup.classList.remove("fade");
+
+  document.getElementById("frontQuestion").classList.remove("hide")
+
 };
 // --------------------------------------------------------------------------------
 
@@ -200,13 +217,63 @@ function playBuzzer() {
 //------------SVAR KNAP CLICK OG VALIDERING---------------------------------------------------------------
 document.getElementById("answerButton").onclick = function () { 
 
+
+  document.getElementById("answerButton").classList.add("hide");
+  document.getElementById("answerInput").readOnly = true;
+
   let answerText = document.getElementById("answerInput").value;
 
   console.log(answerText);
   console.log(clue.answer);
   console.log(checkAnswer(answerText));
 
+  let answerResponce = document.getElementById("answerResponce");
+
+
+
+  if (checkAnswer(answerText)) {
+    answerResponce.innerText = "Tillykke du svarede rigtigt!"; 
+    document.getElementById("continueButton").classList.remove("hide");
+    document.getElementById("continueButton").classList.add("knap");
+
+    isAnswerCorrect = true;
+
+  } else {
+    answerResponce.innerText = "Det rigtige svar er: " + clue.answer; 
+    document.getElementById("continueButton").classList.remove("hide");
+    document.getElementById("continueButton").classList.add("knap");
+
+    document.getElementById("itWasRightButton").classList.remove("hide");
+    document.getElementById("itWasRightButton").classList.add("knap");
+
+    isAnswerCorrect = false;
+
+  }
+
+  console.log(currentPoints);
+
 };
+
+document.getElementById("continueButton").onclick = function () {
+  clusePopUpAndContinueGame();
+}
+
+document.getElementById("itWasRightButton").onclick = function () {
+  isAnswerCorrect = true;
+  clusePopUpAndContinueGame();
+}
+
+  function clusePopUpAndContinueGame(params) {
+    
+
+
+
+
+  }
+
+
+
+
 
 function checkAnswer(answer) {
     return (answer.toUpperCase() == clue.answer.toUpperCase());
