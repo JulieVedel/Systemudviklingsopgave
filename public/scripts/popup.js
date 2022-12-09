@@ -11,7 +11,7 @@ function showHelpPopup() {
 
 function closeHelpPopup() {
 
- var popup = document.getElementById("popup");
+ var popup = document.getElementById("startingPlayerPopup");
  popup.classList.remove("open-popup");
 
  var popup = document.getElementById("fadeBackground");
