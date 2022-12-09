@@ -208,6 +208,7 @@ function activateBuzzers(){
    playBuzzer();
    document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!";
    window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player1"));
    
   };
   
@@ -217,6 +218,7 @@ function activateBuzzers(){
    playBuzzer();
    document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!";
    window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player2"));
   };
 
   if (firstToBuzz == "" && e.key == key3) {
@@ -225,6 +227,7 @@ function activateBuzzers(){
    playBuzzer();
    document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!";
    window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player3"));
   };
 
   if (firstToBuzz == "" && e.key == key4) {
@@ -233,6 +236,7 @@ function activateBuzzers(){
    playBuzzer();
    document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!";
    window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player4"));
   };
  };
 };
@@ -267,7 +271,7 @@ document.getElementById("answerButton").onclick = function () {
     document.getElementById("continueButton").classList.add("knap");
 
     isAnswerCorrect = true;
-
+    
   } else {
     answerResponce.innerText = "Det rigtige svar er: " + clue.answer; 
     document.getElementById("continueButton").classList.remove("hide");
@@ -277,10 +281,13 @@ document.getElementById("answerButton").onclick = function () {
     document.getElementById("itWasRightButton").classList.add("knap");
 
     isAnswerCorrect = false;
-
+    
   }
 
   console.log(currentPoints);
+
+  window.isAnswerCorrect = isAnswerCorrect;
+  window.currentPoints = currentPoints;
 
 };
 
@@ -289,7 +296,7 @@ document.getElementById("continueButton").onclick = function () {
 }
 
 document.getElementById("itWasRightButton").onclick = function () {
-  isAnswerCorrect = true;
+  window.isAnswerCorrect = true;
   closePopUpAndContinueGame();
 }
 
@@ -304,6 +311,8 @@ document.getElementById("itWasRightButton").onclick = function () {
     firstToBuzz = "";
     document.onkeydown = null;
 
+    adjustScore();
+
     removeQuestion()
 
     closeQuestionPopup();
@@ -316,6 +325,41 @@ function checkAnswer(answer) {
  // const clueCorrected = clue.answer.replace(/[^a-zA-Z ]/g, "");
  return (answer.toUpperCase() == clue.answer.toUpperCase());
 };
+
+function adjustScore() {
+  console.log("players", getPlayers());
+
+  const players = getPlayers();
+  const playerAnswering = sessionStorage.getItem("playerAnswering");
+  let player;
+  let newPlayerScore;
+
+  if (playerAnswering) {
+    player = players.find(player => player.name === playerAnswering);
+  }
+
+  console.log("adjustScore: ", sessionStorage.getItem("pointsPlayer" + player.id));
+  sessionStorage.getItem("pointsPlayer" + player.id)
+
+  if (window.isAnswerCorrect) {
+    const currentPlayerScore = parseInt(sessionStorage.getItem("pointsPlayer" + player.id));
+    newPlayerScore = currentPlayerScore + window.currentPoints;
+
+    sessionStorage.setItem("pointsPlayer" + player.id, newPlayerScore.toString());
+
+  } else {
+    const currentPlayerScore = parseInt(sessionStorage.getItem("pointsPlayer" + player.id));
+    newPlayerScore = currentPlayerScore - window.currentPoints;
+
+    sessionStorage.setItem("pointsPlayer" + player.id, newPlayerScore.toString());
+  }
+  
+  player.score = newPlayerScore;
+
+  document.querySelector(`#card${player.id} > div.points > p`).innerHTML = player.score;
+
+}
+
 
 function removeQuestion() {
   
