@@ -1,9 +1,9 @@
 
-const RESPONCE_TIME_IN_MILLISECONDS = 10;
+const RESPONCE_TIME_IN_MILLISECONDS = 100;
 let isAnswerCorrect = false;
 let round = 1;
 let currentPoints = 0; 
-
+let timer = 100;
 let clue; 
 
 // row 1
@@ -96,11 +96,17 @@ let startTimer;
 
 function showQuestionPopup() {
 
- var popup = document.getElementById("Question_popup");
- popup.classList.add("question-open-popup");
+  timer = 100;
 
- var popup = document.getElementById("fadeQuestion_popup_background");
- popup.classList.add("fade");
+  document.getElementById("question_popup_H2").innerHTML = "Spørgsmål";
+
+  document.getElementById("thecard").classList.remove("flipcard");
+
+  var popup = document.getElementById("Question_popup");
+  popup.classList.add("question-open-popup");
+
+    var popup = document.getElementById("fadeQuestion_popup_background");
+    popup.classList.add("fade");
 
  document.getElementById("question_popup_H2").innerHTML += " til " + clue.value;
 
@@ -115,6 +121,18 @@ function flipCardDelay(){
  startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
 
   document.getElementById("frontQuestion").classList.add("hide")
+
+  document.getElementById("question_popup_H2_Back").innerHTML = "Spørgsmål"
+
+  document.getElementById("answerButton").classList.remove("hide");
+  document.getElementById("answerInput").readOnly = false;
+  document.getElementById("answerInput").value = "";
+  answerResponce.innerText = "";
+  document.getElementById("continueButton").classList.add("hide");
+  document.getElementById("itWasRightButton").classList.add("hide");
+
+
+
 
 
   document.getElementById("question_popup_H2_Back").innerHTML += " til " + clue.value;
@@ -136,7 +154,7 @@ function closeQuestionPopup() {
 // --------------------------------------------------------------------------------
 
 // ------------------------------ TIMER -------------------------------------------
-let timer = 100;
+
 
 function inputTimer(){
 
@@ -144,7 +162,7 @@ function inputTimer(){
 
  numberTimeout.innerHTML = timer/10 * RESPONCE_TIME_IN_MILLISECONDS/1000 + " sekunder..."
 
- if (timer == 0) {
+ if (timer <= 0) {
   clearTimeout(startTimer);
   console.log("tiden er udløbet og der må svares...");
   activateBuzzers();
@@ -169,6 +187,8 @@ function activateBuzzers(){
 
   console.log(e.key);
 
+   console.log(key1);
+
   if (e.key !== key1 && e.key !== key2 && e.key !== key3 && e.key !== key4) {
     return;
   };
@@ -179,6 +199,7 @@ function activateBuzzers(){
    playBuzzer();
    document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!";
    window.setTimeout(flipCardDelay, 1000);
+   
   };
   
   if (firstToBuzz == "" && e.key == key2) {
@@ -255,19 +276,26 @@ document.getElementById("answerButton").onclick = function () {
 };
 
 document.getElementById("continueButton").onclick = function () {
-  clusePopUpAndContinueGame();
+  closePopUpAndContinueGame();
 }
 
 document.getElementById("itWasRightButton").onclick = function () {
   isAnswerCorrect = true;
-  clusePopUpAndContinueGame();
+  closePopUpAndContinueGame();
 }
 
-  function clusePopUpAndContinueGame(params) {
+  function closePopUpAndContinueGame() {
     
+    document.getElementById("firstToBuzzH2").innerHTML = "";
+    document.getElementById("numberTimeout").innerHTML = "";
 
 
+    document.getElementById("frontQuestion").classList.remove("hide")
 
+    firstToBuzz = "";
+    document.onkeydown = null;
+
+    closeQuestionPopup();
 
   }
 
