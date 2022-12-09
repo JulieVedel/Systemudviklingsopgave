@@ -98,6 +98,8 @@ function showQuestionPopup() {
 
   timer = 100;
 
+  document.getElementById("backQuestion").classList.add("hide");
+
   document.getElementById("question_popup_H2").innerHTML = "Spørgsmål";
 
   document.getElementById("thecard").classList.remove("flipcard");
@@ -117,6 +119,10 @@ function showQuestionPopup() {
 };
 
 function flipCardDelay(){
+
+
+  document.getElementById("backQuestion").classList.remove("hide");
+
  document.getElementById("thecard").classList.add("flipcard");
  startTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
 
