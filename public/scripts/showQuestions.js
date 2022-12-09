@@ -75,6 +75,9 @@ async function loadQuestion(value, categori) {
 
     console.log("categorieIDs", categorieIDs);
 
+    sessionStorage.setItem("activeCategory", categori - 1);
+    sessionStorage.setItem("activeQuestion", (value + 1));
+
     let apiPath = `https://jservice.io/api/clues?category=${categorieIDs[categori - 1]}`;
 
     const response = await fetch(apiPath);
@@ -105,8 +108,8 @@ function showQuestionPopup() {
   var popup = document.getElementById("Question_popup");
   popup.classList.add("question-open-popup");
 
-    var popup = document.getElementById("fadeQuestion_popup_background");
-    popup.classList.add("fade");
+  var popup = document.getElementById("fadeQuestion_popup_background");
+  popup.classList.add("fade");
 
  document.getElementById("question_popup_H2").innerHTML += " til " + clue.value;
 
@@ -295,12 +298,11 @@ document.getElementById("itWasRightButton").onclick = function () {
     firstToBuzz = "";
     document.onkeydown = null;
 
+    removeQuestion()
+
     closeQuestionPopup();
 
   }
-
-
-
 
 
 function checkAnswer(answer) {
@@ -308,5 +310,41 @@ function checkAnswer(answer) {
  // const clueCorrected = clue.answer.replace(/[^a-zA-Z ]/g, "");
  return (answer.toUpperCase() == clue.answer.toUpperCase());
 };
+
+function removeQuestion() {
+  
+
+  if (sessionStorage.getItem("activeQuestion") == 1) {
+    sessionStorage.setItem("activeQuestion", "first");
+  } 
+
+  if (sessionStorage.getItem("activeQuestion") == 2) {
+    sessionStorage.setItem("activeQuestion", "second");
+  } 
+
+  if (sessionStorage.getItem("activeQuestion") == 3) {
+    sessionStorage.setItem("activeQuestion", "third");
+  } 
+
+  if (sessionStorage.getItem("activeQuestion") == 4) {
+    sessionStorage.setItem("activeQuestion", "fourth");
+  }  
+
+  if (sessionStorage.getItem("activeQuestion") == 5) {
+    sessionStorage.setItem("activeQuestion", "fifth");
+  } 
+
+  console.log("knap skal fjernes");
+  console.log(sessionStorage.getItem("activeCategory"), sessionStorage.getItem("activeQuestion"));
+
+  // console.log(document.getElementsByClassName("first").getElementByTagName('th')[0]);
+
+  console.log(document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory")]);
+
+  const cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory")];
+
+  cell.classList.add("removedCell");
+  
+}
 
 //--------------------------------------------------------------------------------------------------------
