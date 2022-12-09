@@ -34,6 +34,7 @@ function showBuzzerPopup(buzzerInputField) {
 
   //validering her:
   var buzzerLabel = document.getElementById(`${buzzerInputField}Label`);
+
   let buzzerLabels = document.getElementsByClassName("buzzerLabel");
   let buzzerAssignments = getBuzzerAssignments();
   for (let i = 0; i < buzzerAssignments.length; i++) {
@@ -43,14 +44,23 @@ function showBuzzerPopup(buzzerInputField) {
     buzzerLabel.innerText = buzzerText;
     buzzerLabels[i].innerHTML = "Buzzerknap: ";
     sessionStorage.setItem(buzzerLabel.id, e.key);
+
+
+
     closeBuzzerPopup();
    };
+
+
+   
    //Knappen findes ikke:
    let buzzerText = "Buzzerknap: " + e.key;
    buzzerLabel.innerText = buzzerText;
    sessionStorage.setItem(buzzerLabel.id, e.key);
    closeBuzzerPopup();
   };
+
+     console.log(buzzerLabel.id);
+
  };
 
  var popup = document.getElementById("popupBuzzer");

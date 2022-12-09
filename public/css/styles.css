@@ -249,7 +249,13 @@ img.playerButton:hover {
     text-align: center;
     color: white;
     box-sizing: content-box;
+    cursor: pointer;
+    user-select: none;
 }
+
+
+
+
 
 .table .Kategori th {
     text-align: center;
@@ -279,6 +285,19 @@ img.playerButton:hover {
     background-color: #9D5D00;
 }
 
+
+.table th:hover {
+    background-color: #714400;
+
+    cursor: pointer;
+}
+
+.table .Kategori th:hover {
+    background-color: #FFFDEA;
+    cursor: default;
+}
+
+
 .podium {
     margin-top: 500px;
     justify-content: center;
@@ -292,7 +311,26 @@ img.playerButton:hover {
     align-items: center;
     margin-right: 3%;
     margin-left: 3%;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #464646;
+    border-width: 3.5px;
 }
+
+
+.card-selected {
+    border-color: #ff0000;
+}
+
+
+.card-hide {
+    justify-content: center;
+    align-items: center;
+    margin-right: 3%;
+    margin-left: 3%;
+    display: none;
+}
+
 
 .points {
     position: relative;
@@ -319,9 +357,17 @@ img.playerButton:hover {
     height: 100px;
     color: white;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 2.2vmin;
+
     border-radius: 0 0 10px 10px;
 }
+
+.name p {
+    overflow-wrap: break-word;
+    max-width: 150px;
+}
+
+
 
 .button {
     position: absolute;
@@ -403,6 +449,7 @@ https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */
 /* -------------------------------------------------------------------------------------- */
 
 
+
 #forsideBeholder {
     width: 100%;
     position: relative;
@@ -432,3 +479,144 @@ https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */
 button.knap:hover {
     transform: scale(1.1);
 }
+/* ------------------------------- QUESTION_POPUP: ---------------------------------------*/
+
+.question-popup{
+ width: 1000px;
+ height: 700px;
+ background: #fff;
+ border-radius: 6px;
+ position: absolute;
+ top: 0;
+ left: 50%;
+ transform: translate(-50%, -50%) scale(0.1);
+ text-align: left;
+ padding: 0 30px 30px;
+ color: #333;
+ visibility: hidden;
+ transition: transform 0.4s, top 0.4s;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.thecard {
+ width: 100%;
+ height: 100%;
+ transform-style: preserve-3d;
+ transition: all 0.5s ease;
+}
+
+.flipcard {
+ transform: rotateY(180deg);
+}
+
+.thefront {
+ backface-visibility: hidden;
+}
+
+.theback {
+ position: relative;
+ top: -70%;
+ /* background-color: grey; */
+ backface-visibility: hidden;
+ transform: rotateY(180deg);
+}
+
+.question-open-popup{
+ visibility: visible;
+ top: 50%;
+ transform: translate(-50%, -50%) scale(1);
+}
+
+/* Fade background */
+.fade{
+ /* viewport width: */
+ width: 100vw;
+ /* viewport height: */
+ height: 100vh;
+ top: 0px;
+ left: 0;
+ background: rgba(33, 33, 33, 0.5);
+ position: absolute;
+}
+
+.question-popup h2 {
+ font-size: 80px;
+}
+
+.question-popup h3 {
+ font-size: 50px;
+}
+
+#answerInput {
+ height: 80px;
+ font-size: 50px;
+ width: 1000px;
+ background-color: rgba(255, 255, 255, 0);
+}
+
+/* .questionBlock {
+ width: 100%;
+ background-color: rgba(0, 255, 0, 0.85);
+}
+
+.questionBlock100 {
+ width: 100%;
+ background-color: rgba(25, 240, 0, 0.85);
+}
+.questionBlock90 {
+ width: 90%;
+ background-color: rgba(50, 220, 0, 0.85);
+}
+.questionBlock80 {
+ width: 80%;
+ background-color: rgba(75, 200, 0, 0.85);
+}
+.questionBlock70 {
+ width: 70%;
+ background-color: rgba(100, 180, 0, 0.85);
+}
+.questionBlock60 {
+ width: 60%;
+ background-color: rgba(125, 160, 0, 0.85);
+}
+.questionBlock50 {
+ width: 50%;
+ background-color: rgba(150, 140, 0, 0.85);
+}
+.questionBlock40 {
+ width: 40%;
+ background-color: rgba(175, 120, 0, 0.85);
+}
+.questionBlock30 {
+ width: 30%;
+ background-color: rgba(200, 100, 0, 0.85);
+}
+.questionBlock20 {
+ width: 20%;
+ background-color: rgba(225, 80, 0, 0.85);
+}
+.questionBlock10 {
+ width: 10%;
+ background-color: rgba(250, 60, 0, 0.85);
+}
+.questionBlock0 {
+ width: 0%;
+ background-color: rgba(255, 40, 0, 0.85);
+} */
+
+#numberTimeout {
+ text-align: center;
+ font-size: 30px;
+ margin-top: 30px;
+ font-weight: bolder;
+}
+
+#answerButton {
+    margin-top: 30px;
+}
+
+
+
+/* -------------------------------------------------------------------------------------- */
