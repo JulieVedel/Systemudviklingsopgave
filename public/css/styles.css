@@ -272,6 +272,8 @@ img.playerButton:hover {
 
 
 
+
+
 .table .Kategori th {
     text-align: center;
     font-size: 1vw;
@@ -672,6 +674,66 @@ h4 {
 
 /* -------------------------------------------------------------------------------------- */
 
+
+/* --------------------------------- SCOREBOARD ----------------------------------------- */
+table{
+ border-spacing: 0px;
+}
+
+#scoreboard{
+border-style: solid;
+border-width: 20px;
+border-color: #D4CB79;
+border-radius: 15px;
+background-color: orange;
+color: white;
+
+}
+
+
+
+#scoreboard td{
+ text-align: center;
+ font-size: 16px;
+ font-weight: bold;
+ width: 140px;
+ height: 40px;
+ border: 1px solid;
+ border-color: rgba(212, 203, 121, 0.5);
+}
+
+#scoreboard_overskrifter{
+ background-color: white;
+ color: orange;
+ height: 30px;
+ font-size: 20px;
+}
+
+.scoreboard_table_container{
+ width: 980px;
+ margin: 0 auto;
+ margin-top: 60px;
+}
+
+.highlight{
+ background-color: darkorange;
+ box-shadow: 0px 0px 3px 3px rgb(202, 48, 9, 0.5);
+ animation: grow_and_shrink 2s linear infinite alternate;
+ animation-fill-mode: forwards;
+}
+
+@keyframes grow_and_shrink {
+ 100% {
+  transform: scale(1.02, 1.02);
+ }
+ 0% {
+  transform: scale(1, 1);
+ }
+}
+
+/* -------------------------------------------------------------------------------------- */
+
 tr .removedCell {
     visibility: hidden;
 }
+

@@ -57,7 +57,7 @@ function startGame() {
 
   savePlayerInSession();
 
-  window.location.href = 'http://localhost:5500/tableVeiw';
+  window.location.href = 'http://localhost:3000/tableVeiw';
 
  } else if (!validatePlayerBuzzers()) {
   window.alert("Indstil en buzzerknap for alle synlige spillere, og prøv igen.");
