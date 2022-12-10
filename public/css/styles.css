@@ -434,8 +434,8 @@ https://dev.to/webdeasy/top-20-css-buttons-animations-f41 */
  /* viewport width: */
  width: 100vw;
  /* viewport height: */
+ top: 0;
  height: 100vh;
- top: -100px;
  left: 0;
  background: rgba(33, 33, 33, 0.5);
  position: absolute;
@@ -532,9 +532,40 @@ button.knap:hover {
  backface-visibility: hidden;
 }
 
+h4 {
+  font-size: 22px;  
+}
+
+#afterAnwserButtons {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+}
+
+#itWasRightButton {
+    margin-right: 400px;
+    position: relative;
+    bottom: 0;
+}
+
+
+
+
+
+.hide {
+    display: none;
+}
+
+
 .theback {
- position: relative;
- top: -70%;
+    height: 100%;
+   
+ 
+ 
  /* background-color: grey; */
  backface-visibility: hidden;
  transform: rotateY(180deg);
@@ -544,20 +575,6 @@ button.knap:hover {
  visibility: visible;
  top: 50%;
  transform: translate(-50%, -50%) scale(1);
-}
-
-/* Fade background */
-
-/* VI HAR TO FADES!!! */
-.fade{
- /* viewport width: */
- width: 100vw;
- /* viewport height: */
- height: 100vh;
- top: -100px;
- left: 0;
- background: rgba(33, 33, 33, 0.5);
- position: absolute;
 }
 
 .question-popup h2 {
@@ -636,9 +653,27 @@ button.knap:hover {
     margin-top: 30px;
 }
 
+#closeStartingPlayerPopup{
+    height: 80px;
+    width: 200px;
+    border-radius: 40px;
+    border-color: orangered;
+    background-color: orange;
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+    border-width: 5px;
+    cursor: pointer;
+    margin: 30px;
+   }
 
+   #startingPlayerPopup {
+    text-align: center;
+    width: 600px;
+   }
 
 /* -------------------------------------------------------------------------------------- */
+
 
 /* --------------------------------- SCOREBOARD ----------------------------------------- */
 table{
@@ -697,3 +732,8 @@ color: white;
 }
 
 /* -------------------------------------------------------------------------------------- */
+
+tr .removedCell {
+    visibility: hidden;
+}
+

@@ -11,7 +11,7 @@ function showHelpPopup() {
 
 function closeHelpPopup() {
 
- var popup = document.getElementById("popup");
+ var popup = document.getElementById("startingPlayerPopup");
  popup.classList.remove("open-popup");
 
  var popup = document.getElementById("fadeBackground");
@@ -88,3 +88,23 @@ function getBuzzerAssignments(){
  return buzzerAssignments;
 };
 // --------------------------------------------------------------------------------
+
+function showStartingPlayerPopup() {
+
+    var popup = document.getElementById("startingPlayerPopup");
+    popup.classList.add("open-popup");
+   
+    var popup = document.getElementById("fadeBackground");
+    popup.classList.add("fade");
+   
+   };
+   
+   function closeStartingPlayerPopup() {
+   
+    var popup = document.getElementById("startingPlayerPopup");
+    popup.classList.remove("open-popup");
+   
+    var popup = document.getElementById("fadeBackground");
+    popup.classList.remove("fade");
+   
+   };
