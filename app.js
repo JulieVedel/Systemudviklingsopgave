@@ -172,18 +172,18 @@ async function addUser(users){
 // addUser();
 
 // DELETE ALL USERS:
-async function deleteAllUsers(){
+// async function deleteAllUsers(){
 
- try {
-  let result = await User.remove({points: {$gt: 1}});
-   // return JSON.stringify(result);
-   // console.log(result);
-   // return result;
- } catch(err) {
-   console.log(err);
- };
-};
-deleteAllUsers();
+//  try {
+//   let result = await User.remove({points: {$gt: 1}});
+//    // return JSON.stringify(result);
+//    // console.log(result);
+//    // return result;
+//  } catch(err) {
+//    console.log(err);
+//  };
+// };
+// deleteAllUsers();
 
 async function getTop10Users(){
  try {
@@ -229,7 +229,8 @@ async function checkIfCurrentPlayerIsInTop10(){
    };
    place++;
   });
-   return result;
+   // return result;
+   return places
  } catch (e) {
   console.log(e);
  };
@@ -250,9 +251,17 @@ app.get('/gamemenu', (req, res) => {
 });
 
 app.get('/scoreboardInfo', async function(req, res) {
+ // const data = await checkIfCurrentPlayerIsInTop10();
+ const data = await getTop10Users();
+ res.status(200).json(data);
+});
+
+app.get('/playerRanks', async function(req, res) {
+ // const data = await checkIfCurrentPlayerIsInTop10();
  const data = await checkIfCurrentPlayerIsInTop10();
  res.status(200).json(data);
 });
+
 
 // TEST:
 app.post('/savePlayerData', async function(req, res) {

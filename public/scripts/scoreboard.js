@@ -13,7 +13,7 @@ async function savePlayerDataToMongoDB() {
 
  console.log("savePlayerDataToMongoDB");
  const user1 = new User(
-  'sofus',
+  'Sofus',
   150,
   'Thomas',
   'Julie',
@@ -21,7 +21,7 @@ async function savePlayerDataToMongoDB() {
  );
  
  const user2 = new User(
-  'jakob',
+  'Jakob',
   250,
   'Thomas',
   'Julie',
@@ -44,6 +44,8 @@ async function savePlayerDataToMongoDB() {
   body: JSON.stringify(users)
  });
 };
+
+
 
 async function getTop10() {
 
@@ -105,7 +107,7 @@ async function getTop10() {
 
 // class="highlight"
   let userFields = `
- <tr>
+ <tr id="rank${i}">
   <td>${adjustedRank}</td>
   <td>${element.username}</td>
   <td>${adjustedPoints}</td>
@@ -117,6 +119,25 @@ async function getTop10() {
 
  document.getElementById("scoreboard").innerHTML += userFields;
  i++;
+ });
+};
+
+async function getPlayerRanks() {
+
+ console.log("running getTop10");
+
+ const res = await fetch('http://localhost:3000/playerRanks', {
+  method: 'GET'
+ });
+
+ console.log("res",res);
+
+ const data = await res.json();
+ console.log("data",data);
+
+ data.forEach(element => {
+  console.log(element);
+  document.getElementById(`rank${element}`).classList.add("highlight");
  });
 };
 
@@ -134,3 +155,4 @@ function showScoreBoardData(){
 
 showScoreBoardData();
 getTop10();
+getPlayerRanks();
