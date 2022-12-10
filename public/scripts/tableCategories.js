@@ -158,7 +158,6 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
     cards[randomNumber].classList.add("card-selected");
 
 
-};
 
     
     startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML)
