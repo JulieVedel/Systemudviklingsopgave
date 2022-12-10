@@ -5,6 +5,8 @@ let round = 1;
 let currentPoints = 0; 
 let timer = 100;
 let clue; 
+let questionsFinished = 29;
+
 
 // row 1
 let cells =  document.querySelectorAll('.first th');    
@@ -12,7 +14,9 @@ for (var i = 0; i < cells.length; i++) {
  cells[i].onclick = function () {  clickRow1( this.getAttribute("value")); };
 };
 async function clickRow1(i) {
- clue = await loadQuestion(0, i);
+
+ clue = await loadQuestion(0, (parseInt(i) + ((round - 1) * 6  )));
+
  showQuestionPopup();
 };
 
@@ -23,7 +27,7 @@ for (var i = 0; i < cells2.length; i++) {
  cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
 };
 async function clickRow2(i) {
- clue = await loadQuestion(1, i);
+ clue = await loadQuestion(1, i );
  showQuestionPopup();
 };
 
@@ -33,7 +37,7 @@ for (var i = 0; i < cells3.length; i++) {
  cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
 };
 async function clickRow3(i) {
- clue = await loadQuestion(2, i);
+ clue = await loadQuestion(2, i );
  showQuestionPopup();
 };
 
@@ -43,7 +47,7 @@ for (var i = 0; i < cells4.length; i++) {
  cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
 };
 async function clickRow4(i) {
- clue = await loadQuestion(3, i);
+ clue = await loadQuestion(3, i );
  showQuestionPopup();
 };
 
@@ -53,12 +57,14 @@ for (var i = 0; i < cells5.length; i++) {
  cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
 };
 async function clickRow5(i) {
- clue = await loadQuestion(4 , i);
+ clue = await loadQuestion(4 , i );
  showQuestionPopup();
 };
 
 
 async function loadQuestion(value, categori) {
+
+  console.log(categori);
 
     currentPoints = (value + 1) * (round * 100);
 
@@ -70,6 +76,13 @@ async function loadQuestion(value, categori) {
     categorieIDs.push(sessionStorage.getItem("cat4"));
     categorieIDs.push(sessionStorage.getItem("cat5"));
     categorieIDs.push(sessionStorage.getItem("cat6"));
+    categorieIDs.push(sessionStorage.getItem("cat7"));
+    categorieIDs.push(sessionStorage.getItem("cat8"));
+    categorieIDs.push(sessionStorage.getItem("cat9"));
+    categorieIDs.push(sessionStorage.getItem("cat10"));
+    categorieIDs.push(sessionStorage.getItem("cat11"));
+    categorieIDs.push(sessionStorage.getItem("cat12"));
+    
 
     console.log("categori", categori);
 
@@ -317,6 +330,15 @@ document.getElementById("itWasRightButton").onclick = function () {
 
     closeQuestionPopup();
 
+    questionsFinished += 1;
+
+    console.log(questionsFinished);
+
+
+    if (questionsFinished == 30 ) {
+      startRoundTwo();
+    }
+
   }
 
 
@@ -391,10 +413,32 @@ function removeQuestion() {
 
   console.log(document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory")]);
 
-  const cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory")];
+  let cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory")];
+
+  console.log(cell);
 
   cell.classList.add("removedCell");
   
+}
+
+
+
+function startRoundTwo() {
+    round = 2;
+
+  document.getElementById("firstTable").classList.add("hide");
+  document.getElementById("secondTable").classList.remove("hide");
+  document.getElementById("secondTable").classList.add("theTableOne");
+
+
+
+
+
+
+
+
+
+
 }
 
 //--------------------------------------------------------------------------------------------------------
