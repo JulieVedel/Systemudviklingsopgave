@@ -8,12 +8,12 @@ function getSessionCategories() {
 
     let categorie = [];
 
-    categorie.push(sessionStorage.getItem("cat1name"))
-    categorie.push(sessionStorage.getItem("cat2name"))
-    categorie.push(sessionStorage.getItem("cat3name"))
-    categorie.push(sessionStorage.getItem("cat4name"))
-    categorie.push(sessionStorage.getItem("cat5name"))
-    categorie.push(sessionStorage.getItem("cat6name"))
+    categorie.push(sessionStorage.getItem("cat1name"));
+    categorie.push(sessionStorage.getItem("cat2name"));
+    categorie.push(sessionStorage.getItem("cat3name"));
+    categorie.push(sessionStorage.getItem("cat4name"));
+    categorie.push(sessionStorage.getItem("cat5name"));
+    categorie.push(sessionStorage.getItem("cat6name"));
 
     console.log(categorie);
 
@@ -38,7 +38,7 @@ function getPlayerNames() {
     for (let i = 1; i < 5; i++) {
         if (sessionStorage.getItem("player" + i) != null){
             playerNames.push(sessionStorage.getItem("player" + i));
-        }
+        };
     };
 
     console.log(playerNames);
@@ -53,36 +53,36 @@ function getBuzzerKeys() {
     for (let i = 1; i < 5; i++) {
         if (sessionStorage.getItem("buzzer" + i + "Label") != null) {
             buzzerKeys.push(sessionStorage.getItem("buzzer" + i + "Label"));
-        }
+        };
     };
 
 
     
     return buzzerKeys;
 
-}
+};
 
 
 function pupulatePlayerNamesAndStartSelectPlayer() {
     
-    let playernames = getPlayerNames()
+    let playernames = getPlayerNames();
     let buzzerKeys = getBuzzerKeys();
 
     let names = [];
 
     // -------- refactor eksempel --------// 
 
-    names[0] = document.querySelector("#card1 .name p")
-    names[1] = document.querySelector("#card2 .name p")
-    names[2] = document.querySelector("#card3 .name p")
-    names[3] = document.querySelector("#card4 .name p")
+    names[0] = document.querySelector("#card1 .name p");
+    names[1] = document.querySelector("#card2 .name p");
+    names[2] = document.querySelector("#card3 .name p");
+    names[3] = document.querySelector("#card4 .name p");
 
-    let cards = []
+    let cards = [];
 
-    cards[0] = document.getElementById("card1")
-    cards[1] = document.getElementById("card2")
-    cards[2] = document.getElementById("card3")
-    cards[3] = document.getElementById("card4")
+    cards[0] = document.getElementById("card1");
+    cards[1] = document.getElementById("card2");
+    cards[2] = document.getElementById("card3");
+    cards[3] = document.getElementById("card4");
 
     for (let i = 0; i < cards.length; i++) {
         cards[i].classList.add("card-hide");
@@ -102,18 +102,25 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
         names[i].innerHTML = playernames[i];
         if(typeof buzzerKeys[i] !== "undefined"){
          buzzers[i].innerHTML = buzzerKeys[i].toUpperCase();
-        }
+        };
 
-    }
+    };
 
     const randomNumber = Math.round(Math.random() * (getPlayerNames().length - 1));
     cards[randomNumber].classList.add("card-selected");
 
-}
+};
 
 
 getSessionCategories();
 pupulatePlayerNamesAndStartSelectPlayer();
 
+//test:
+// function showScoreBoardData(){
 
 
+
+// };
+
+
+sessionStorage.setItem("preventScoreboardRefresh", 0);
