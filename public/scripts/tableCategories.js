@@ -151,8 +151,7 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
     };
 
         }
-    }
-
+    
 
     const randomNumber = Math.round(Math.random() * (getPlayerNames().length - 1));
     cards[randomNumber].classList.add("card-selected");
@@ -163,7 +162,7 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
     startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML)
     
     
-}
+
 
 
 
