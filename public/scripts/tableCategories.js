@@ -1,6 +1,3 @@
-
-
-
 function getSessionCategories() {
     
     console.log(sessionStorage.getItem("cat1"));
@@ -16,8 +13,6 @@ function getSessionCategories() {
     categorie.push(sessionStorage.getItem("cat6name"));
 
     console.log(categorie);
-
-
 
     let catH = document.getElementById("kategori");
 
@@ -40,11 +35,8 @@ function getPlayerNames() {
             playerNames.push(sessionStorage.getItem("player" + i));
         };
     };
-
     console.log(playerNames);
-
     return playerNames;
-
 }
 
 function getBuzzerKeys() {
@@ -55,24 +47,18 @@ function getBuzzerKeys() {
             buzzerKeys.push(sessionStorage.getItem("buzzer" + i + "Label"));
         };
     };
-
-
-    
     return buzzerKeys;
 
 };
 
 function getPlayerPoints() {
     let playerPoints = [];
-
     for (let i = 1; i < 5; i++) {
         if (sessionStorage.getItem("pointsPlayer" + i) != null) {
             playerPoints.push(sessionStorage.getItem("pointsPlayer" + i));
         }
     };
-
     console.log("playerPoints", playerPoints);
-
     return playerPoints;
 }
 
@@ -91,8 +77,6 @@ function getPlayers() {
             score: playerPoints[i]
         });
     }
-
-    
     return players;
 }
 
@@ -126,17 +110,17 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
 
     buzzers = [];
 
-    buzzers[0] = document.querySelector("#card1 .button p")
-    buzzers[1] = document.querySelector("#card2 .button p")
-    buzzers[2] = document.querySelector("#card3 .button p")
-    buzzers[3] = document.querySelector("#card4 .button p")
+    buzzers[0] = document.querySelector("#card1 .button p");
+    buzzers[1] = document.querySelector("#card2 .button p");
+    buzzers[2] = document.querySelector("#card3 .button p");
+    buzzers[3] = document.querySelector("#card4 .button p");
 
     let points = [];
 
-    points[0] = document.querySelector("#card1 .points p")
-    points[1] = document.querySelector("#card2 .points p")
-    points[2] = document.querySelector("#card3 .points p")
-    points[3] = document.querySelector("#card4 .points p")
+    points[0] = document.querySelector("#card1 .points p");
+    points[1] = document.querySelector("#card2 .points p");
+    points[2] = document.querySelector("#card3 .points p");
+    points[3] = document.querySelector("#card4 .points p");
 
     for (let i = 0; i < playernames.length; i++) {
 
@@ -145,44 +129,21 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
         points[i].innerHTML = playerPoints[i];
         if(typeof buzzerKeys[i] !== "undefined"){
          buzzers[i].innerHTML = buzzerKeys[i].toUpperCase();
-
         };
 
     };
 
-        }
-    }
-
-
     const randomNumber = Math.round(Math.random() * (getPlayerNames().length - 1));
     cards[randomNumber].classList.add("card-selected");
-
-
+    
+startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML);
 };
-
-    
-    startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML)
-    
-    
-}
-
-
 
 getSessionCategories();
 pupulatePlayerNamesAndStartSelectPlayer();
 
-
-//test:
-// function showScoreBoardData(){
-
-
-
-// };
-
 function startingPlayer(player) {
     document.getElementById('startingPlayer').innerHTML = player + " starter spillet!";
-}
-
-
+};
 
 sessionStorage.setItem("preventScoreboardRefresh", 0);
