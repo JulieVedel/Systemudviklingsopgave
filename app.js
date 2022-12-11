@@ -44,26 +44,6 @@ app.use(express.json());
 
 // USER FUNCTIONS:
 
-// Add via side:
-// app.get('/add-user', (req, res) => {
-//  const user = new User({
-//    username: 'test',
-//    points: 4444,
-//    opponent1: 'Thomas',
-//    opponent2: 'Julie',
-//    opponent3: 'Daniel'
-//  });
-//  // Brug insertMany i stedet for save:
-//  User.insertMany(user)
-//  // user.save()
-//  .then((result) => {
-//   res.send(result)
-//  })
-//  .catch((err) => {
-//   console.log(err);
-//  });
-// });
-
 
 // ADD 20 TEST USERS:
 // async function add20TestUsers(){
@@ -103,26 +83,31 @@ let player1ID;
 let player2ID;
 let player3ID;
 let player4ID;
-// ADD SINGLE USER:
+
 //rename til AddPlayers?
 async function addUser(users){
 
  console.log("incomming users:", users);
 
- // Her skal vi finde en måde at hente kun aktive spillere og tilføje kun dem til array "users" !:
-
  let user1 = new User(users[0]);
  let user2 = new User(users[1]);
  let user3 = new User(users[2]);
  let user4 = new User(users[3]);
- 
- console.log("user1:", user1);
 
  let usersObj = [];
- usersObj.push(user1);
- usersObj.push(user2);
- usersObj.push(user3);
- usersObj.push(user4);
+
+ if (user1.username != null) {
+  usersObj.push(user1);
+ };
+ if (user2.username != null) {
+  usersObj.push(user2);
+ };
+ if (user3.username != null) {
+  usersObj.push(user3);
+ };
+ if (user4.username != null) {
+  usersObj.push(user4);
+ };
 
  console.log("usersObj:", usersObj);
 
@@ -132,8 +117,6 @@ async function addUser(users){
   let result = await User.insertMany(usersObj);
 
   result.forEach(element => {
-   console.log("New Users:", element); 
-   console.log("New users id:",element._id);
    if (i == 1) {
     player1ID = element._id;
    };
@@ -153,35 +136,29 @@ async function addUser(users){
    console.log(err);
  };
 };
-// addUser();
 
-// DELETE ALL USERS:
-async function deleteAllUsers(){
+// // DELETE ALL USERS:
+// async function deleteAllUsers(){
 
- try {
-  let result = await User.remove({points: {$gt: 1}});
-   // return JSON.stringify(result);
-   // console.log(result);
-   // return result;
- } catch(err) {
-   console.log(err);
- };
-};
-deleteAllUsers();
+//  try {
+//   let result = await User.remove({points: {$gt: 1}});
+//    // return JSON.stringify(result);
+//    // console.log(result);
+//    // return result;
+//  } catch(err) {
+//    console.log(err);
+//  };
+// };
+// deleteAllUsers();
 
 async function getTop10Users(){
  try {
-  // let player1 = await addUser();
   let result = await User.find().sort({points: -1}).limit(10);
-
-  // console.log("TOP10:", result);
-  
   return result;
  } catch(err) {
   console.log(err);
  };
 };
-// getTop10Users();
 
 async function checkIfCurrentPlayerIsInTop10(){
  let place = 1;
@@ -189,27 +166,18 @@ async function checkIfCurrentPlayerIsInTop10(){
 
  try {
   let result = await getTop10Users();
-  console.log("top 10:",result);
   result.forEach(element => {
 
    if (element._id.equals(player1ID)) {
-    console.log("Player 1 er blandt de 10 bedste:", element._id);
-    console.log("Player 1 er på plads nr:", place);
     places[0] = place;
    };
    if (element._id.equals(player2ID)) {
-    console.log("Player 2 er blandt de 10 bedste:", element._id);
-    console.log("Player 2 er på plads nr:", place);
     places[1] = place;
    };
    if (element._id.equals(player3ID)) {
-    console.log("Player 3 er blandt de 10 bedste:", element._id);
-    console.log("Player 3 er på plads nr:", place);
     places[2] = place;
    };
    if (element._id.equals(player4ID)) {
-    console.log("Player 4 er blandt de 10 bedste:", element._id);
-    console.log("Player 4 er på plads nr:", place);
     places[3] = place;
    };
    place++;
@@ -218,7 +186,53 @@ async function checkIfCurrentPlayerIsInTop10(){
  } catch (e) {
   console.log(e);
  };
- console.log(places);
+};
+
+async function getAllUsers(){
+ try {
+  let result = await User.find({points: {$gt: 0}}).sort({points: -1});
+  return result;
+ } catch(err) {
+  console.log(err);
+ };
+};
+
+async function checkCurrentPlayerRanks(){
+ let place = 1;
+ let placesAndUsersObj = [];
+
+ try {
+  let result = await getAllUsers();
+
+  result.forEach(element => {
+
+   if (element._id.equals(player1ID)) {
+    console.log("Player 1 er blandt de 10 bedste:", element._id);
+    console.log("Player 1 er på plads nr:", place);
+    placesAndUsersObj[0] = {place: place, user: element};
+   };
+   if (element._id.equals(player2ID)) {
+    console.log("Player 2 er blandt de 10 bedste:", element._id);
+    console.log("Player 2 er på plads nr:", place);
+    placesAndUsersObj[1] = {place: place, user: element};
+   };
+   if (element._id.equals(player3ID)) {
+    console.log("Player 3 er blandt de 10 bedste:", element._id);
+    console.log("Player 3 er på plads nr:", place);
+    placesAndUsersObj[2] = {place: place, user: element};
+   };
+   if (element._id.equals(player4ID)) {
+    console.log("Player 4 er blandt de 10 bedste:", element._id);
+    console.log("Player 4 er på plads nr:", place);
+    placesAndUsersObj[3] = {place: place, user: element};
+   };
+   place++;
+  });
+   return placesAndUsersObj;
+
+ } catch (e) {
+  console.log(e);
+ };
 };
  
 app.get('/', (req, res) => {
@@ -240,6 +254,11 @@ app.get('/scoreboardInfo', async function(req, res) {
 
 app.get('/playerRanks', async function(req, res) {
  const data = await checkIfCurrentPlayerIsInTop10();
+ res.status(200).json(data);
+});
+
+app.get('/allPlayerRanks', async function(req, res) {
+ const data = await checkCurrentPlayerRanks();
  res.status(200).json(data);
 });
 

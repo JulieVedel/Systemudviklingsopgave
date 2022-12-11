@@ -59,7 +59,7 @@ async function savePlayerDataToMongoDB() {
    player4
   );
   users.push(user1);
- }
+ };
   
  if (player2 != "") {
   const user2 = new User(
@@ -70,7 +70,7 @@ async function savePlayerDataToMongoDB() {
    player4
   );
   users.push(user2);
- }
+ };
 
  if (player3 != "") {
   const user3 = new User(
@@ -81,7 +81,7 @@ async function savePlayerDataToMongoDB() {
    player4
   );
   users.push(user3);
- }
+ };
 
  if (player4 != "") {
   const user4 = new User(
@@ -92,43 +92,7 @@ async function savePlayerDataToMongoDB() {
    player3
   );
   users.push(user4);
- }
-
- // const user1 = new User(
- //  sessionStorage.getItem("player1"),
- //  1550,
- //  sessionStorage.getItem("player2"),
- //  sessionStorage.getItem("player3"),
- //  sessionStorage.getItem("player4")
- // );
- 
- // const user2 = new User(
- //  sessionStorage.getItem("player2"),
- //  1275,
- //  sessionStorage.getItem("player1"),
- //  sessionStorage.getItem("player3"),
- //  sessionStorage.getItem("player4")
- // );
-
- // const user3 = new User(
- //  sessionStorage.getItem("player3"),
- //  500,
- //  sessionStorage.getItem("player1"),
- //  sessionStorage.getItem("player2"),
- //  sessionStorage.getItem("player4")
- // );
-
- // const user4 = new User(
- //  sessionStorage.getItem("player4"),
- //  450,
- //  sessionStorage.getItem("player1"),
- //  sessionStorage.getItem("player2"),
- //  sessionStorage.getItem("player3")
- // );
- 
- // console.log("user1", user1);
- 
-
+ };
 
  console.log("Sending these users to POST:", users);
 
@@ -145,16 +109,11 @@ async function savePlayerDataToMongoDB() {
 
 async function getTop10() {
 
- console.log("running getTop10");
-
  const res = await fetch('http://localhost:3000/scoreboardInfo', {
   method: 'GET'
  });
 
- console.log("res",res);
-
  const data = await res.json();
- console.log("data",data);
 
  document.getElementById("rank1").innerHTML = "";
  document.getElementById("scoreboard").innerHTML = "";
@@ -180,7 +139,6 @@ async function getTop10() {
   } else {
    adjustedPoints = element.points;
   };
-  // console.log(element.points);
   if(playDate == "2022-12-09") {
    playDate = "";
   };
@@ -213,6 +171,8 @@ async function getTop10() {
  document.getElementById("scoreboard").innerHTML += userFields;
  i++;
  });
+ // TODO add playesr outside top10 her?:
+
 };
 
 async function getPlayerRanks() {
@@ -229,12 +189,51 @@ async function getPlayerRanks() {
  console.log("data",data);
 
  data.forEach(element => {
-  console.log(element);
+  console.log("rank{element}:", `rank${element}`);
   document.getElementById(`rank${element}`).classList.add("highlight");
  });
 };
 
-console.log("preventScoreboardRefresh", sessionStorage.getItem("preventScoreboardRefresh"));
+async function getAllPlayerRanks() {
+
+ console.log("running getAllPlayerRanks");
+
+ const res = await fetch('http://localhost:3000/allPlayerRanks', {
+  method: 'GET'
+ });
+
+ console.log("res",res);
+
+ const data = await res.json();
+ console.log("getAllPlayerRanks() scoreboards.js allplayers:", data);
+ 
+ data.forEach(element => {
+  console.log("element:", element);
+  
+  console.log("element.user:", element.user);
+  console.log("element.place:", element.place);
+  
+  if (element.place > 10) {
+   console.log("en spiller landede uden for top 10 - på plads:", element.place);
+   console.log("document.getElementById('scoreboard').innerHTML FØR:",document.getElementById("scoreboard").innerHTML);
+   let playDate = element.user.createdAt.substring(0,10);
+   let userFields = `
+   <tr id="rank${element.place}" class="highlight">
+    <td>${element.place}</td>
+    <td>${element.user.username}</td>
+    <td>${element.user.points}</td>
+    <td>${playDate}</td>
+    <td>${element.user.opponent1}</td>
+    <td>${element.user.opponent2}</td>
+    <td>${element.user.opponent3}</td>
+   </tr>`
+  
+  document.getElementById("scoreboard").innerHTML += userFields;
+  console.log("document.getElementById('scoreboard').innerHTML EFTER:",document.getElementById("scoreboard").innerHTML)
+  };
+   
+ });
+};
 
 function showScoreBoardData(){
  if (sessionStorage.getItem("preventScoreboardRefresh") == 0) {
@@ -245,9 +244,10 @@ function showScoreBoardData(){
  return;
 };
 
-
 showScoreBoardData();
-getTop10();
-getPlayerRanks();
+
+await getTop10();
+await getPlayerRanks();
+await getAllPlayerRanks();
 
 //HUSK AT CLEANE sessionStorage her:
