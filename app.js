@@ -110,35 +110,19 @@ async function addUser(users){
  console.log("incomming users:", users);
 
  // Her skal vi finde en måde at hente kun aktive spillere og tilføje kun dem til array "users" !:
- // const user1 = new User({
- //  username: "sofus",
- //  points: 150,
- //  opponent1: 'Thomas',
- //  opponent2: 'Julie',
- //  opponent3: 'Daniel'
- // });
- // const user2 = new User({
- //  username: "jakob",
- //  points: 250,
- //  opponent1: 'Thomas',
- //  opponent2: 'Julie',
- //  opponent3: 'Daniel'
- // });
-
- // const users = [];
- // users.push(user1);
- // users.push(user2);
 
  let user1 = new User(users[0]);
- // user1 = [users[0]];
  let user2 = new User(users[1]);
- // user1 = [users[1]];
+ let user3 = new User(users[2]);
+ let user4 = new User(users[3]);
  
  console.log("user1:", user1);
 
  let usersObj = [];
  usersObj.push(user1);
  usersObj.push(user2);
+ usersObj.push(user3);
+ usersObj.push(user4);
 
  console.log("usersObj:", usersObj);
 
@@ -171,7 +155,7 @@ async function addUser(users){
 };
 // addUser();
 
-// DELETE ALL USERS:
+// // DELETE ALL USERS:
 // async function deleteAllUsers(){
 
 //  try {
@@ -202,6 +186,7 @@ async function getTop10Users(){
 async function checkIfCurrentPlayerIsInTop10(){
  let place = 1;
  let places = [];
+
  try {
   let result = await getTop10Users();
   console.log("top 10:",result);
@@ -229,14 +214,12 @@ async function checkIfCurrentPlayerIsInTop10(){
    };
    place++;
   });
-   // return result;
    return places
  } catch (e) {
   console.log(e);
  };
  console.log(places);
 };
-// checkIfCurrentPlayerIsInTop10();
  
 app.get('/', (req, res) => {
  res.render('index', {title: 'Forside'});
@@ -251,28 +234,19 @@ app.get('/gamemenu', (req, res) => {
 });
 
 app.get('/scoreboardInfo', async function(req, res) {
- // const data = await checkIfCurrentPlayerIsInTop10();
  const data = await getTop10Users();
  res.status(200).json(data);
 });
 
 app.get('/playerRanks', async function(req, res) {
- // const data = await checkIfCurrentPlayerIsInTop10();
  const data = await checkIfCurrentPlayerIsInTop10();
  res.status(200).json(data);
 });
 
-
-// TEST:
 app.post('/savePlayerData', async function(req, res) {
  if(!req.body) {
   res.status(400).send({status: 'failed'});
  };
-
- console.log("app.js POST recieving req.body:",req.body);
- // let usersToSave = JSON.parse(req.body);
- // console.log("usersToSave:",usersToSave);
- // addUser(usersToSave);
  await addUser(req.body);
  res.status(200).send({status: 'recieved'});
 });
@@ -280,10 +254,6 @@ app.post('/savePlayerData', async function(req, res) {
 app.get('/scoreboard', (req, res) => {
  res.render('scoreboard', {title: 'scoreboard'});
 });
-
-// app.get('/temp', (req, res) => {
-//  res.render('temp', {title: 'temp'});
-// });
 
 // Denne bruges når ingen andre sider matches med ovenstående: (skal derfor stå til sidst.)
 app.use((req, res) => {
