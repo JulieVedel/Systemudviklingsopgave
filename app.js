@@ -155,19 +155,19 @@ async function addUser(users){
 };
 // addUser();
 
-// // DELETE ALL USERS:
-// async function deleteAllUsers(){
+// DELETE ALL USERS:
+async function deleteAllUsers(){
 
-//  try {
-//   let result = await User.remove({points: {$gt: 1}});
-//    // return JSON.stringify(result);
-//    // console.log(result);
-//    // return result;
-//  } catch(err) {
-//    console.log(err);
-//  };
-// };
-// deleteAllUsers();
+ try {
+  let result = await User.remove({points: {$gt: 1}});
+   // return JSON.stringify(result);
+   // console.log(result);
+   // return result;
+ } catch(err) {
+   console.log(err);
+ };
+};
+deleteAllUsers();
 
 async function getTop10Users(){
  try {

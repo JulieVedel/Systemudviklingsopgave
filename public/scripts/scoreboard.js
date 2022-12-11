@@ -12,53 +12,121 @@ class User {
 async function savePlayerDataToMongoDB() {
 
  // player name null fix: (undgå at tabellen viser "null" for ikke eksisterende spillere.)
- for (let i = 1; i < 5; i++) {
-  if (sessionStorage.getItem(`player${i}`) == null) {
-   sessionStorage.setItem(`player${i}`, '');
-  };
- };
+ // for (let i = 1; i < 5; i++) {
+ //  if (sessionStorage.getItem(`player${i}`) == null) {
+ //   sessionStorage.setItem(`player${i}`, '');
+ //  };
+ // };
 
 // TODO: brug player points fra sessionStorage, når de er tilgængelige:
  console.log("savePlayerDataToMongoDB");
- const user1 = new User(
-  sessionStorage.getItem("player1"),
-  1550,
-  sessionStorage.getItem("player2"),
-  sessionStorage.getItem("player3"),
-  sessionStorage.getItem("player4")
- );
+ let player1;
+ let player2;
+ let player3;
+ let player4;
  
- const user2 = new User(
-  sessionStorage.getItem("player2"),
-  1275,
-  sessionStorage.getItem("player1"),
-  sessionStorage.getItem("player3"),
-  sessionStorage.getItem("player4")
- );
+  if (sessionStorage.getItem("player1") == null) {
+   player1 = "";
+  } else {
+   player1 = sessionStorage.getItem("player1");
+  };
+  if (sessionStorage.getItem("player2") == null) {
+   player2 = "";
+  } else {
+   player2 = sessionStorage.getItem("player2");
+  };
+  if (sessionStorage.getItem("player3") == null) {
+   player3 = "";
+  } else {
+   player3 = sessionStorage.getItem("player3");
+  };
+  if (sessionStorage.getItem("player4") == null) {
+   player4 = "";
+  } else {
+   player4 = sessionStorage.getItem("player4");
+  };
 
- const user3 = new User(
-  sessionStorage.getItem("player3"),
-  500,
-  sessionStorage.getItem("player1"),
-  sessionStorage.getItem("player2"),
-  sessionStorage.getItem("player4")
- );
+  const users = [];
 
- const user4 = new User(
-  sessionStorage.getItem("player4"),
-  450,
-  sessionStorage.getItem("player1"),
-  sessionStorage.getItem("player2"),
-  sessionStorage.getItem("player3")
- );
+  if (player1 != "") {
+  const user1 = new User(
+   player1,
+   1550,
+   player2,
+   player3,
+   player4
+  );
+  users.push(user1);
+ }
+  
+ if (player2 != "") {
+  const user2 = new User(
+   player2,
+   1275,
+   player1,
+   player3,
+   player4
+  );
+  users.push(user2);
+ }
+
+ if (player3 != "") {
+  const user3 = new User(
+   player3,
+   500,
+   player1,
+   player2,
+   player4
+  );
+  users.push(user3);
+ }
+
+ if (player4 != "") {
+  const user4 = new User(
+   player4,
+   450,
+   player1,
+   player2,
+   player3
+  );
+  users.push(user4);
+ }
+
+ // const user1 = new User(
+ //  sessionStorage.getItem("player1"),
+ //  1550,
+ //  sessionStorage.getItem("player2"),
+ //  sessionStorage.getItem("player3"),
+ //  sessionStorage.getItem("player4")
+ // );
  
- console.log("user1", user1);
+ // const user2 = new User(
+ //  sessionStorage.getItem("player2"),
+ //  1275,
+ //  sessionStorage.getItem("player1"),
+ //  sessionStorage.getItem("player3"),
+ //  sessionStorage.getItem("player4")
+ // );
+
+ // const user3 = new User(
+ //  sessionStorage.getItem("player3"),
+ //  500,
+ //  sessionStorage.getItem("player1"),
+ //  sessionStorage.getItem("player2"),
+ //  sessionStorage.getItem("player4")
+ // );
+
+ // const user4 = new User(
+ //  sessionStorage.getItem("player4"),
+ //  450,
+ //  sessionStorage.getItem("player1"),
+ //  sessionStorage.getItem("player2"),
+ //  sessionStorage.getItem("player3")
+ // );
  
- const users = [];
- users.push(user1);
- users.push(user2);
- users.push(user3);
- users.push(user4);
+ // console.log("user1", user1);
+ 
+
 
  console.log("Sending these users to POST:", users);
 
