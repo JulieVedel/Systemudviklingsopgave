@@ -9,6 +9,8 @@ class User {
  };
 };
 
+console.log(sessionStorage.getItem("player1TotalScore"));
+
 async function savePlayerDataToMongoDB() {
 
  // player name null fix: (undgå at tabellen viser "null" for ikke eksisterende spillere.)
@@ -51,7 +53,7 @@ async function savePlayerDataToMongoDB() {
   if (player1 != "") {
   const user1 = new User(
    player1,
-   1550,
+   sessionStorage.getItem("pointsPlayer1"),
    player2,
    player3,
    player4
@@ -62,7 +64,7 @@ async function savePlayerDataToMongoDB() {
  if (player2 != "") {
   const user2 = new User(
    player2,
-   1275,
+   sessionStorage.getItem("pointsPlayer2"),
    player1,
    player3,
    player4
@@ -73,7 +75,7 @@ async function savePlayerDataToMongoDB() {
  if (player3 != "") {
   const user3 = new User(
    player3,
-   500,
+   sessionStorage.getItem("pointsPlayer3"),
    player1,
    player2,
    player4
@@ -84,7 +86,7 @@ async function savePlayerDataToMongoDB() {
  if (player4 != "") {
   const user4 = new User(
    player4,
-   450,
+   sessionStorage.getItem("pointsPlayer4"),
    player1,
    player2,
    player3
