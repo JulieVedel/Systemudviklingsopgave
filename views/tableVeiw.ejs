@@ -8,7 +8,10 @@
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
     <title>Document</title>
 </head>
-<body>
+<body onload="showStartingPlayerPopup()">
+
+
+
 
 <div class="header">
     <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
@@ -27,7 +30,7 @@
                 <th>Kategori 5</th>
                 <th>Kategori 6</th>
             </tr>
-            <tr class="first">
+            <tr class="first" id="first">
                 <th value = "1">100</th>
                 <th value = "2">100</th>
                 <th value = "3">100</th>
@@ -35,7 +38,7 @@
                 <th value = "5">100</th>
                 <th value = "6">100</th>
             </tr>
-            <tr class="second">
+            <tr class="second" id="second">
                 <th value = "1">200</th>
                 <th value = "2">200</th>
                 <th value = "3">200</th>
@@ -43,7 +46,7 @@
                 <th value = "5">200</th>
                 <th value = "6">200</th>
             </tr>
-            <tr class="third">
+            <tr class="third" id="third">
                 <th value = "1">300</th>
                 <th value = "2">300</th>
                 <th value = "3">300</th>
@@ -51,7 +54,7 @@
                 <th value = "5">300</th>
                 <th value = "6">300</th>
             </tr>
-            <tr class="forth">
+            <tr class="forth" id="fourth">
                 <th value = "1">400</th>
                 <th value = "2">400</th>
                 <th value = "3">400</th>
@@ -59,7 +62,7 @@
                 <th value = "5">400</th>
                 <th value = "6">400</th>
             </tr>
-            <tr class="fifth">
+            <tr class="fifth" id="fifth">
                 <th value = "1" >500</th>
                 <th value = "2" >500</th>
                 <th value = "3" >500</th>
@@ -82,7 +85,7 @@
 
         <div class="card" id="card1">
             <div class="points">
-                <p>0</p>
+                <p></p>
             </div>
             <div class="name">
             <p >Name</p>
@@ -94,7 +97,7 @@
 
         <div class="card" id="card2">
             <div class="points">
-                <p>0</p>
+                <p></p>
             </div>
             <div class="name">
                 <p>Name</p>
@@ -106,7 +109,7 @@
 
         <div class="card" id="card3">
             <div class="points">
-                <p>0</p>
+                <p></p>
             </div>
             <div class="name">
                 <p>Name</p>
@@ -118,7 +121,7 @@
 
         <div class="card" id="card4">
             <div class="points">
-                <p>0</p>
+                <p></p>
             </div>
             <div class="name">
                 <p>Name</p>
@@ -133,6 +136,18 @@
 
     </section>
 
+
+
+    <div id="fadeBackground" onclick="closeHelpPopup()"></div>
+
+<div class="popup" id="startingPlayerPopup">
+    <br><br>
+    <h2 id="startingPlayer"></h2>
+    <button type="button" onclick="closeStartingPlayerPopup()" id="closeStartingPlayerPopup">Lets go!</button>
+</div>
+
+
+
      <!------------------------------ POPUP QUESTION ---------------------------------------------------->
      <!-- fade background -->
      <div id="fadeQuestion_popup_background"></div>
@@ -144,7 +159,7 @@
        <div class="question-popup" id="Question_popup"> 
         <div class="thecard" id="thecard">
 
-         <div class="thefront">
+         <div class="thefront" id="frontQuestion">
           <br>
           <h2 id="question_popup_H2">Spørgsmål</h2>
           <div id="questionBlock" class="questionBlock100">
@@ -156,12 +171,28 @@
           
          </div>
 
-         <div class="theback">
+         <div class="theback" id="backQuestion">
           <br>
-          <h2>Svarside</h2>
+          <h2 id="question_popup_H2_Back">Spørgsmål</h2>
+
           <div id="answerBlock" class="answerBlock100">
-           <input id=answerInput type="text" placeholder="skriv svaret her...">
-           <button id="answerButton" class="knap">Svar</button>
+
+           <input id=answerInput type="text" placeholder="skriv svaret her..." autocomplete="off">
+           <button id="answerButton" class="knap" >Svar</button>
+
+          </div>
+
+          <h4 class="answerBlock100" id="answerResponce"></h4>
+
+          <div id="afterAnwserButtons">
+            <div>
+            <button id="itWasRightButton" class="hide" class="knap">Svar var rigtigt</button>
+            </div>
+            <div>
+            <button id="continueButton" class="hide" class="knap">Fortsæt</button>
+            </div>
+
+
           </div>
 
          </div>
@@ -170,11 +201,13 @@
        </div>
        <a href="http://localhost:3000/scoreboard">se scores</a>
 
+    
+
 </body>
 
 <script src="/scripts/showQuestions.js"></script>
-
 <script src="/scripts/tableCategories.js"></script>
+<script src="/scripts/popup.js"></script>
 
 
 </html>
