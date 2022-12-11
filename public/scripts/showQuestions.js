@@ -5,7 +5,7 @@ let round = 1;
 let currentPoints = 0; 
 let timer = 100;
 let clue; 
-let questionsFinished = 29;
+let questionsFinished = 0;
 
 
 // row 1
@@ -27,7 +27,7 @@ for (var i = 0; i < cells2.length; i++) {
  cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
 };
 async function clickRow2(i) {
- clue = await loadQuestion(1, i );
+  clue = await loadQuestion(1, (parseInt(i) + ((round - 1) * 6)) );
  showQuestionPopup();
 };
 
@@ -37,7 +37,7 @@ for (var i = 0; i < cells3.length; i++) {
  cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
 };
 async function clickRow3(i) {
- clue = await loadQuestion(2, i );
+  clue = await loadQuestion(2, (parseInt(i) + ((round - 1) * 6)) );
  showQuestionPopup();
 };
 
@@ -47,7 +47,7 @@ for (var i = 0; i < cells4.length; i++) {
  cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
 };
 async function clickRow4(i) {
- clue = await loadQuestion(3, i );
+  clue = await loadQuestion(3, (parseInt(i) + ((round - 1) * 6)) );
  showQuestionPopup();
 };
 
@@ -57,7 +57,7 @@ for (var i = 0; i < cells5.length; i++) {
  cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
 };
 async function clickRow5(i) {
- clue = await loadQuestion(4 , i );
+  clue = await loadQuestion(4, (parseInt(i) + ((round - 1) * 6)) );
  showQuestionPopup();
 };
 
@@ -387,23 +387,23 @@ function removeQuestion() {
   
 
   if (sessionStorage.getItem("activeQuestion") == 1) {
-    sessionStorage.setItem("activeQuestion", "first");
+    sessionStorage.setItem("activeQuestion", "first" + round);
   } 
 
   if (sessionStorage.getItem("activeQuestion") == 2) {
-    sessionStorage.setItem("activeQuestion", "second");
+    sessionStorage.setItem("activeQuestion", "second" + round);
   } 
 
   if (sessionStorage.getItem("activeQuestion") == 3) {
-    sessionStorage.setItem("activeQuestion", "third");
+    sessionStorage.setItem("activeQuestion", "third" + round);
   } 
 
   if (sessionStorage.getItem("activeQuestion") == 4) {
-    sessionStorage.setItem("activeQuestion", "fourth");
+    sessionStorage.setItem("activeQuestion", "fourth" + round);
   }  
 
   if (sessionStorage.getItem("activeQuestion") == 5) {
-    sessionStorage.setItem("activeQuestion", "fifth");
+    sessionStorage.setItem("activeQuestion", "fifth" + round);
   } 
 
   console.log("knap skal fjernes");
@@ -411,9 +411,9 @@ function removeQuestion() {
 
   // console.log(document.getElementsByClassName("first").getElementByTagName('th')[0]);
 
-  console.log(document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory")]);
+  console.log(document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory") - ((round - 1 ) * 6) ]);
 
-  let cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory")];
+  let cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory") - ((round - 1) * 6) ];
 
   console.log(cell);
 
@@ -422,22 +422,14 @@ function removeQuestion() {
 }
 
 
-
 function startRoundTwo() {
     round = 2;
 
   document.getElementById("firstTable").classList.add("hide");
   document.getElementById("secondTable").classList.remove("hide");
   document.getElementById("secondTable").classList.add("theTableOne");
-
-
-
-
-
-
-
-
-
+  document.getElementById("startingRoundTwo").classList.add("open-popup");
+  document.getElementById("fadeBackground").classList.add("fade");
 
 }
 

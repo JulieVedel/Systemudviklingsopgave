@@ -14,6 +14,8 @@ function closeHelpPopup() {
  var popup = document.getElementById("startingPlayerPopup");
  popup.classList.remove("open-popup");
 
+document.getElementById("startingRoundTwo").classList.remove("open-popup");
+
  var popup = document.getElementById("fadeBackground");
  popup.classList.remove("fade");
 
@@ -96,6 +98,8 @@ function showStartingPlayerPopup() {
    
     var popup = document.getElementById("fadeBackground");
     popup.classList.add("fade");
+
+
    
    };
    
@@ -106,5 +110,9 @@ function showStartingPlayerPopup() {
    
     var popup = document.getElementById("fadeBackground");
     popup.classList.remove("fade");
-   
+    
+    document.getElementById("startingRoundTwo").classList.remove("open-popup");
    };
+
+
+
