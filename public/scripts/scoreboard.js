@@ -11,21 +11,45 @@ class User {
 
 async function savePlayerDataToMongoDB() {
 
+ // player name null fix: (undgå at tabellen viser "null" for ikke eksisterende spillere.)
+ for (let i = 1; i < 5; i++) {
+  if (sessionStorage.getItem(`player${i}`) == null) {
+   sessionStorage.setItem(`player${i}`, '');
+  };
+ };
+
+// TODO: brug player points fra sessionStorage, når de er tilgængelige:
  console.log("savePlayerDataToMongoDB");
  const user1 = new User(
-  'Sofus',
-  150,
-  'Thomas',
-  'Julie',
-  'Daniel'
+  sessionStorage.getItem("player1"),
+  1550,
+  sessionStorage.getItem("player2"),
+  sessionStorage.getItem("player3"),
+  sessionStorage.getItem("player4")
  );
  
  const user2 = new User(
-  'Jakob',
-  250,
-  'Thomas',
-  'Julie',
-  'Daniel'
+  sessionStorage.getItem("player2"),
+  1275,
+  sessionStorage.getItem("player1"),
+  sessionStorage.getItem("player3"),
+  sessionStorage.getItem("player4")
+ );
+
+ const user3 = new User(
+  sessionStorage.getItem("player3"),
+  500,
+  sessionStorage.getItem("player1"),
+  sessionStorage.getItem("player2"),
+  sessionStorage.getItem("player4")
+ );
+
+ const user4 = new User(
+  sessionStorage.getItem("player4"),
+  450,
+  sessionStorage.getItem("player1"),
+  sessionStorage.getItem("player2"),
+  sessionStorage.getItem("player3")
  );
  
  console.log("user1", user1);
@@ -33,6 +57,8 @@ async function savePlayerDataToMongoDB() {
  const users = [];
  users.push(user1);
  users.push(user2);
+ users.push(user3);
+ users.push(user4);
 
  console.log("Sending these users to POST:", users);
 
@@ -70,9 +96,6 @@ async function getTop10() {
  <th>Dato</th>
  <th colspan="3">Modstandere</th>
 </tr>`
-
-{/* <th>Modstandere2</th>
- <th>Modstandere3</th> */}
 
  let i = 1;
  let adjustedPoints;
@@ -156,3 +179,5 @@ function showScoreBoardData(){
 showScoreBoardData();
 getTop10();
 getPlayerRanks();
+
+//HUSK AT CLEANE sessionStorage her:

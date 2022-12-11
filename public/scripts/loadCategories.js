@@ -41,7 +41,7 @@ async function loadCategories() {
    for (j = 0; j < 5; j++){
     let counter = (j)+i*5;
     choice.innerHTML += `<option value=${categories[counter].id}>${categories[counter].title}</option>`;
-    console.log(counter);
+    // console.log(counter);
     console.log();
    };
   };
