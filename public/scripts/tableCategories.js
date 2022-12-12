@@ -128,7 +128,11 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
         names[i].innerHTML = playernames[i];
         points[i].innerHTML = playerPoints[i];
         if(typeof buzzerKeys[i] !== "undefined"){
-         buzzers[i].innerHTML = buzzerKeys[i].toUpperCase();
+         if (buzzerKeys[i] == " ") {
+          buzzers[i].innerHTML = "Space";
+         } else {
+          buzzers[i].innerHTML = buzzerKeys[i].toUpperCase();
+         }
         };
 
     };

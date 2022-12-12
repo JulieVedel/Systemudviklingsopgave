@@ -39,10 +39,15 @@ function showBuzzerPopup(buzzerInputFieldID) {
   let buzzerLabels = document.getElementsByClassName("buzzerLabel");
   let buzzerAssignments = getBuzzerAssignments();
   for (let i = 0; i < buzzerAssignments.length; i++) {
+   
    //Knappen findes for en anden spiller:
    if (e.key == buzzerAssignments[i]){
     let buzzerText = "Buzzerknap: " + e.key;
-    buzzerLabel.innerText = buzzerText;
+    if (e.key == " "){
+     buzzerLabel.innerText = buzzerText + "Space";
+    } else {
+     buzzerLabel.innerText = buzzerText;
+    };
     buzzerLabels[i].innerHTML = "Buzzerknap: ";
     sessionStorage.setItem(buzzerLabel.id, e.key);
     closeBuzzerPopup();
@@ -50,7 +55,11 @@ function showBuzzerPopup(buzzerInputFieldID) {
    };
    //Knappen findes ikke:
    let buzzerText = "Buzzerknap: " + e.key;
-   buzzerLabel.innerText = buzzerText;
+   if (e.key == " "){
+    buzzerLabel.innerText = buzzerText + "Space";
+   } else {
+    buzzerLabel.innerText = buzzerText;
+   };
    sessionStorage.setItem(buzzerLabel.id, e.key);
    closeBuzzerPopup();
    document.onkeydown = null;
