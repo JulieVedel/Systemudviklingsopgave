@@ -1,5 +1,5 @@
 
-const RESPONCE_TIME_IN_MILLISECONDS = 100;
+const RESPONCE_TIME_IN_MILLISECONDS = 1000;
 let isAnswerCorrect = false;
 let round = 1;
 let currentPoints = 0; 
@@ -167,15 +167,27 @@ function closeQuestionPopup() {
 
 function inputTimer(){
 
- let numberTimeout = document.getElementById("numberTimeout");
+ //TODO:
+ //Lav css countdown animation + div:
 
- numberTimeout.innerHTML = timer/10 * RESPONCE_TIME_IN_MILLISECONDS/1000 + " sekunder..."
+
+
+ let numberTimeout = document.getElementById("numberTimeout");
+ let textTimeout = document.getElementById("textTimeout");
+
+ numberTimeout.classList.add("numberTimeout");
+ textTimeout.classList.add("textTimeout");
+
+ timeleft = RESPONCE_TIME_IN_MILLISECONDS;
+
+ numberTimeout.innerHTML = (timer/10 * timeleft/1000) + " sekunder...";
 
  if (timer <= 0) {
   clearTimeout(startTimer);
   console.log("tiden er udløbet og der må svares...");
   activateBuzzers();
-  document.getElementById("numberTimeout").innerHTML = "DER MÅ NU BUZZES !!!";
+
+  numberTimeout.innerHTML = "DER MÅ NU BUZZES !!!";
  };
 
  timer = timer - 10;
