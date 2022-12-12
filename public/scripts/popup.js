@@ -24,7 +24,9 @@ function closeHelpPopup() {
 // SMELLY CODE DETECTED!!!!!!!!!!!!!
 
 // OBS FJERN ONKEY NÅR POPUP LUKKES!!!
-function showBuzzerPopup(buzzerInputField) {
+function showBuzzerPopup(buzzerInputFieldID) {
+
+ let buzzerInputField = buzzerInputFieldID.substring(0,7);
 
  document.onkeydown = function (e) {
   e = e || window.event;
