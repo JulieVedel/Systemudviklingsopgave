@@ -13,7 +13,7 @@ let countPlayers = 0;
 
 async function savePlayerDataToMongoDB() {
 
-// TODO: brug player points fra sessionStorage, når de er tilgængelige:
+ //-------------------------------REFACTOR DET HER:-------------------------------------
  console.log("savePlayerDataToMongoDB");
  let player1;
  let player2;
@@ -86,6 +86,7 @@ async function savePlayerDataToMongoDB() {
   );
   users.push(user4);
  };
+ //-------------------------------------------------------------------------------------
 
  console.log("Sending these users to POST:", users);
 
@@ -120,18 +121,12 @@ async function getTop10() {
 countPlayers = data.length;
 
  let i = 1;
- // let adjustedPoints;
  let adjustedRank;
 
  data.forEach(element => {
   let playDate = element.createdAt + "";
   playDate = playDate.substring(0,10);
 
-  // if(element.points == null) {
-  //  adjustedPoints = "";
-  // } else {
-  //  adjustedPoints = element.points;
-  // };
   if(playDate == "2022-12-09") {
    playDate = "";
   };
@@ -176,13 +171,10 @@ function fillRestOfTable(){
 
 
 async function getPlayerRanks() {
- // console.log("running getTop10");
  const res = await fetch('http://localhost:3000/playerRanks', {
   method: 'GET'
  });
- // console.log("res",res);
  const data = await res.json();
- // console.log("data",data);
  data.forEach(element => {
   console.log("rank{element}:", `rank${element}`);
   document.getElementById(`rank${element}`).classList.add("highlight");
@@ -191,13 +183,9 @@ async function getPlayerRanks() {
 
 async function getAllPlayerRanks() {
 
- console.log("running getAllPlayerRanks");
-
  const res = await fetch('http://localhost:3000/allPlayerRanks', {
   method: 'GET'
  });
-
- console.log("res",res);
 
  const data = await res.json();
  console.log("getAllPlayerRanks() scoreboards.js allplayers:", data);
@@ -235,16 +223,12 @@ function showScoreBoardData(){
  if (sessionStorage.getItem("preventScoreboardRefresh") == 0) {
    sessionStorage.setItem("preventScoreboardRefresh", 1);
    savePlayerDataToMongoDB();
-
  };
  return;
 };
 
 showScoreBoardData();
-
 await getTop10();
 fillRestOfTable();
 await getPlayerRanks();
 await getAllPlayerRanks();
-
-//HUSK AT CLEANE sessionStorage her:
