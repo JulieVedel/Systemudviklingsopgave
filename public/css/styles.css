@@ -85,7 +85,6 @@ h2 {
 .spillerAvatar {
 height: 40px;
 margin: 10px;
-cursor: pointer;
 }
 
 .formFormat {
@@ -119,6 +118,7 @@ cursor: pointer;
  display: flex;
  justify-content: center;
  align-items: center;
+ cursor: pointer;
 }
 
 form {
@@ -162,6 +162,7 @@ form {
  display: flex;
  justify-content: center;
  align-items: center;
+ cursor: pointer;
 }
 
 .plus img {
@@ -212,6 +213,7 @@ img.playerButton:hover {
  font-size: 16px;
  margin: 10px;
  margin-left:0px;
+ cursor: pointer;
 }
 
 .startknap{
