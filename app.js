@@ -93,7 +93,7 @@ async function addUser(users){
  let user2 = new User(users[1]);
  let user3 = new User(users[2]);
  let user4 = new User(users[3]);
-
+//rename:
  let usersObj = [];
 
  if (user1.username != null) {
@@ -136,15 +136,11 @@ async function addUser(users){
    console.log(err);
  };
 };
-
+// ---------------------------- BUG: Hvis du rydder databasen, SKAL du genstarte app.js - ellers virker animation i scoreboard ikke --------
 // // DELETE ALL USERS:
 // async function deleteAllUsers(){
-
 //  try {
 //   let result = await User.remove({points: {$gt: 1}});
-//    // return JSON.stringify(result);
-//    // console.log(result);
-//    // return result;
 //  } catch(err) {
 //    console.log(err);
 //  };
@@ -199,6 +195,7 @@ async function getAllUsers(){
 
 async function checkCurrentPlayerRanks(){
  let place = 1;
+ //rename når usersObj også er renamed:
  let placesAndUsersObj = [];
 
  try {

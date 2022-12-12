@@ -9,16 +9,7 @@ class User {
  };
 };
 
-console.log(sessionStorage.getItem("player1TotalScore"));
-
 async function savePlayerDataToMongoDB() {
-
- // player name null fix: (undgå at tabellen viser "null" for ikke eksisterende spillere.)
- // for (let i = 1; i < 5; i++) {
- //  if (sessionStorage.getItem(`player${i}`) == null) {
- //   sessionStorage.setItem(`player${i}`, '');
- //  };
- // };
 
 // TODO: brug player points fra sessionStorage, når de er tilgængelige:
  console.log("savePlayerDataToMongoDB");
@@ -105,8 +96,6 @@ async function savePlayerDataToMongoDB() {
  });
 };
 
-
-
 async function getTop10() {
 
  const res = await fetch('http://localhost:3000/scoreboardInfo', {
@@ -156,7 +145,6 @@ async function getTop10() {
    adjustedRank = i;
   };
 
-// class="highlight"
   let userFields = `
  <tr id="rank${i}">
   <td>${adjustedRank}</td>
@@ -171,23 +159,16 @@ async function getTop10() {
  document.getElementById("scoreboard").innerHTML += userFields;
  i++;
  });
- // TODO add playesr outside top10 her?:
-
 };
 
 async function getPlayerRanks() {
-
- console.log("running getTop10");
-
+ // console.log("running getTop10");
  const res = await fetch('http://localhost:3000/playerRanks', {
   method: 'GET'
  });
-
- console.log("res",res);
-
+ // console.log("res",res);
  const data = await res.json();
- console.log("data",data);
-
+ // console.log("data",data);
  data.forEach(element => {
   console.log("rank{element}:", `rank${element}`);
   document.getElementById(`rank${element}`).classList.add("highlight");
@@ -235,6 +216,7 @@ async function getAllPlayerRanks() {
  });
 };
 
+//rename:
 function showScoreBoardData(){
  if (sessionStorage.getItem("preventScoreboardRefresh") == 0) {
    sessionStorage.setItem("preventScoreboardRefresh", 1);
