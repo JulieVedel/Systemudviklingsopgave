@@ -11,17 +11,31 @@ function getSessionCategories() {
     categorie.push(sessionStorage.getItem("cat4name"));
     categorie.push(sessionStorage.getItem("cat5name"));
     categorie.push(sessionStorage.getItem("cat6name"));
+    categorie.push(sessionStorage.getItem("cat7name"));
+    categorie.push(sessionStorage.getItem("cat8name"));
+    categorie.push(sessionStorage.getItem("cat9name"));
+    categorie.push(sessionStorage.getItem("cat10name"));
+    categorie.push(sessionStorage.getItem("cat11name"));
+    categorie.push(sessionStorage.getItem("cat12name"));
 
     console.log(categorie);
 
     let catH = document.getElementById("kategori");
 
+    let catH2 = document.getElementById("kategoriTwo");
+
     console.log(catH);
 
     catH.innerHTML = "";
 
-    for (let i = 0; i < categorie.length; i++) {
+    for (let i = 0; i < 6; i++) {
         catH.innerHTML += `<th>${categorie[i]}</th>`;
+    };
+
+    catH2.innerHTML = "";
+
+    for (let i = 6; i < categorie.length; i++) {
+        catH2.innerHTML += `<th>${categorie[i]}</th>`;
     };
 
 }
@@ -133,11 +147,14 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
 
     };
 
+
     const randomNumber = Math.round(Math.random() * (getPlayerNames().length - 1));
     cards[randomNumber].classList.add("card-selected");
+
+    startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML)
+
+        }
     
-startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML);
-};
 
 getSessionCategories();
 pupulatePlayerNamesAndStartSelectPlayer();
