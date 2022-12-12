@@ -9,6 +9,8 @@ class User {
  };
 };
 
+let countPlayers = 0;
+
 async function savePlayerDataToMongoDB() {
 
 // TODO: brug player points fra sessionStorage, når de er tilgængelige:
@@ -115,19 +117,21 @@ async function getTop10() {
  <th colspan="3">Modstandere</th>
 </tr>`
 
+countPlayers = data.length;
+
  let i = 1;
- let adjustedPoints;
+ // let adjustedPoints;
  let adjustedRank;
 
  data.forEach(element => {
   let playDate = element.createdAt + "";
   playDate = playDate.substring(0,10);
 
-  if(element.points == null) {
-   adjustedPoints = "";
-  } else {
-   adjustedPoints = element.points;
-  };
+  // if(element.points == null) {
+  //  adjustedPoints = "";
+  // } else {
+  //  adjustedPoints = element.points;
+  // };
   if(playDate == "2022-12-09") {
    playDate = "";
   };
@@ -149,7 +153,7 @@ async function getTop10() {
  <tr id="rank${i}">
   <td>${adjustedRank}</td>
   <td>${element.username}</td>
-  <td>${adjustedPoints}</td>
+  <td>${element.points}</td>
   <td>${playDate}</td>
   <td>${element.opponent1}</td>
   <td>${element.opponent2}</td>
@@ -160,6 +164,16 @@ async function getTop10() {
  i++;
  });
 };
+
+function fillRestOfTable(){
+ let scoreTable = document.getElementById("scoreboard");
+ console.log("scoreTable.innerHTML",scoreTable.innerHTML);
+ for (let i = 0; i < (10-countPlayers); i++) {
+  scoreTable.innerHTML += "<tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>";
+  console.log("scoreTable.innerHTML",scoreTable.innerHTML);
+ };
+};
+
 
 async function getPlayerRanks() {
  // console.log("running getTop10");
@@ -229,6 +243,7 @@ function showScoreBoardData(){
 showScoreBoardData();
 
 await getTop10();
+fillRestOfTable();
 await getPlayerRanks();
 await getAllPlayerRanks();
 
