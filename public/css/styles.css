@@ -1,3 +1,8 @@
+:root {
+ --timeCountdown: 10s;
+}
+
+
 .header {
     position: relative;
     display: flex;
@@ -112,11 +117,16 @@ margin: 10px;
 .buzzerLabel {
  border-radius: 5px;
  padding-left: 10px;
- font-size: 16px;
- width: 100%;
- margin: 10px;
- margin-top: 20px;
+ font-size: 20px;
  cursor: pointer;
+/* test: */
+ background-color: white;
+ border-style: solid;
+ border-width: 2px;
+ border-color: #333;
+ width: 70%;
+ margin: 10px;
+ padding-top: 7.5px;
 }
 
 .minus{
@@ -136,6 +146,7 @@ form {
 
 .internal{
  display: flex;
+ height: 60px;
  
 }
 
@@ -187,12 +198,10 @@ img.playerButton:hover {
 
 .rundeOverskrift{
  text-align: left;
- margin-left: 30px;
+ margin-left: 50px;
 }
 
-.valg h3{
- margin-right: 10px;
-}
+
 
 .runde{
  width: 100%;
@@ -208,27 +217,42 @@ img.playerButton:hover {
 
 .valg{
  display: flex;
- margin-right: 10px;
- margin-left: 10px;
+ /* margin-right: 10px; */
+ /* margin-left: 10px; */
  width: 30%;
+ height: 60px;
 }
 
 .kategoriDropdown{
- width: 180px;
+ width: 240px;
  border-radius: 5px;
  padding-left: 10px;
  font-size: 16px;
  margin: 10px;
- margin-left:0px;
+ min-width: 160px;
+ max-width: 240px;
+ /* margin-left:0px; */
  cursor: pointer;
 }
 
 .startknap{
- float:center;
+ /* float:center; */
+ float:right;
  display: flex;
  justify-content: center;
  align-items: center;
  padding-top: 50px;
+ margin-right: 50px;
+}
+
+.kategoriknap{
+ /* float:center; */
+ float:left;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding-top: 50px;
+ margin-left: 50px;
 }
 
 /* Rename: */
@@ -357,6 +381,12 @@ img.playerButton:hover {
     display: none;
 }
 
+#countdownAnswer{
+ display: flex;
+ float: right;
+ font-size: 30px;
+ margin-top: 100px;
+}
 
 .points {
     position: relative;
@@ -680,8 +710,11 @@ h4 {
  background-color: rgba(255, 255, 255, 0);
  position: absolute;
  left: 0;
- animation: buzzerCountdown 10s linear;
+ /* TODO: */
+ /* LAV 10s TIL EN VARIABLE FRA JS: https://stackoverflow.com/questions/49402471/how-to-use-javascript-variables-in-css */
+ animation: buzzerCountdown var(--timeCountdown) linear;
 }
+
 @keyframes buzzerCountdown {
  100% {
   width: 0%;
@@ -693,7 +726,6 @@ h4 {
  0% {
   width: 100%;
   background-color: rgba(0, 225, 0, 1);
-  color: orange;
  }
 }
 
