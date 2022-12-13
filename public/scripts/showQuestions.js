@@ -301,7 +301,7 @@ function closePopUpAndContinueGame() {
  adjustScore();
  removeQuestion();
  closeQuestionPopup();
-};
+
 
     questionsFinished += 1;
 
@@ -311,7 +311,7 @@ function closePopUpAndContinueGame() {
       startRoundTwo();
     };
 
-  };
+};
 
 
 
