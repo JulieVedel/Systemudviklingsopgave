@@ -15,6 +15,7 @@ function shuffle(array) {
 };
 // Hent data fra API via JSON
 async function loadCategories() {
+ console.log("running loadCategories");
  try {
   let randomCategoryOffset = Math.round(Math.random()*8000);
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;

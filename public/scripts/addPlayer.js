@@ -1,6 +1,6 @@
 let synligeElementer = 2;
 let minusButtons;
-
+//REFAC:
 function addPlayer ()  {
         let form1 = document.getElementById('spillerForm1');
         let form2 = document.getElementById('spillerForm2');

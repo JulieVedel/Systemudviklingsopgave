@@ -26,7 +26,9 @@ document.getElementById("startingRoundTwo").classList.remove("open-popup");
 // SMELLY CODE DETECTED!!!!!!!!!!!!!
 
 // OBS FJERN ONKEY NÅR POPUP LUKKES!!!
-function showBuzzerPopup(buzzerInputField) {
+function showBuzzerPopup(buzzerInputFieldID) {
+
+ let buzzerInputField = buzzerInputFieldID.substring(0,7);
 
  document.onkeydown = function (e) {
   e = e || window.event;
@@ -39,10 +41,15 @@ function showBuzzerPopup(buzzerInputField) {
   let buzzerLabels = document.getElementsByClassName("buzzerLabel");
   let buzzerAssignments = getBuzzerAssignments();
   for (let i = 0; i < buzzerAssignments.length; i++) {
+   
    //Knappen findes for en anden spiller:
    if (e.key == buzzerAssignments[i]){
     let buzzerText = "Buzzerknap: " + e.key;
-    buzzerLabel.innerText = buzzerText;
+    if (e.key == " "){
+     buzzerLabel.innerText = buzzerText + "Space";
+    } else {
+     buzzerLabel.innerText = buzzerText;
+    };
     buzzerLabels[i].innerHTML = "Buzzerknap: ";
     sessionStorage.setItem(buzzerLabel.id, e.key);
     closeBuzzerPopup();
@@ -50,7 +57,11 @@ function showBuzzerPopup(buzzerInputField) {
    };
    //Knappen findes ikke:
    let buzzerText = "Buzzerknap: " + e.key;
-   buzzerLabel.innerText = buzzerText;
+   if (e.key == " "){
+    buzzerLabel.innerText = buzzerText + "Space";
+   } else {
+    buzzerLabel.innerText = buzzerText;
+   };
    sessionStorage.setItem(buzzerLabel.id, e.key);
    closeBuzzerPopup();
    document.onkeydown = null;

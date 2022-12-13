@@ -137,10 +137,11 @@ async function addUser(users){
  };
 };
 // ---------------------------- BUG: Hvis du rydder databasen, SKAL du genstarte app.js - ellers virker animation i scoreboard ikke --------
-// // DELETE ALL USERS:
+// DELETE ALL USERS:
 // async function deleteAllUsers(){
 //  try {
-//   let result = await User.remove({points: {$gt: 1}});
+//   // let result = await User.remove({points: {$gt: 1}});
+//   await User.remove();
 //  } catch(err) {
 //    console.log(err);
 //  };
