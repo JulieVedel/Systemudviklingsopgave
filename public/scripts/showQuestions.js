@@ -137,13 +137,14 @@ function flipCardDelay(){
  document.getElementById("answerInput").value = "";
  answerResponce.innerText = "";
 
- startAnswerTimer = window.setInterval(answerTimer, 1000);
+  startAnswerTimer = window.setInterval(answerTimer, 1000);
 
  document.getElementById("continueButton").classList.add("hide");
  document.getElementById("itWasRightButton").classList.add("hide");
  document.getElementById("question_popup_H2_Back").innerHTML += " til " + currentPoints;
  document.getElementById("question_popup_H2_Back").innerHTML += "<h3>" + clue.question + "</h3>";
  
+
 };
 
 function closeQuestionPopup() {
@@ -155,6 +156,12 @@ function closeQuestionPopup() {
  document.getElementById("frontQuestion").classList.remove("hide")
 
   timer = 5;
+
+
+
+  document.getElementById("numberTimeout").classList.remove("numberTimeout");
+  document.getElementById("textTimeout").classList.remove("textTimeout");
+
 };
 // --------------------------------------------------------------------------------
 
@@ -173,20 +180,29 @@ function inputTimer(){
   console.log("tiden er udløbet og der må svares...");
   activateBuzzers();
   numberTimeout.innerHTML = "DER MÅ NU BUZZES !!!";
+
+  
  };
  timer = timer - 1;
 };
 
 
-function answerTimer(){
-document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
- if (answerTimerInSeconds <= 0) {
-  clearTimeout(startAnswerTimer);
-  // TODO: Giv besked og luk question popup:
-  window.alert("Tiden løb ud");
+ function answerTimer(){
+ document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
+  if (answerTimerInSeconds <= 0) {
+   clearTimeout(startAnswerTimer);
+   // TODO: Giv besked og luk question popup:
+  // window.alert("Tiden løb ud");
+
+  console.log("time is over");
+
+
+
+  };
+  answerTimerInSeconds = answerTimerInSeconds - 1;
  };
- answerTimerInSeconds = answerTimerInSeconds - 1;
-};
+
+
 //------------------------------ ACTIVATE BUZZERS & SOUND ------------------------------------------------
 let firstToBuzz = "";
 function activateBuzzers(){
@@ -262,6 +278,13 @@ document.getElementById("answerButton").onclick = function () {
  let answerText = document.getElementById("answerInput").value;
  let answerResponce = document.getElementById("answerResponce");
 
+
+  window.clearInterval(answerTimer, 1000);
+  clearTimeout(startAnswerTimer);
+  answerTimerInSeconds = 30;
+
+
+
  if (checkAnswer(answerText)) {
   answerResponce.innerText = "Tillykke du svarede rigtigt!"; 
   document.getElementById("continueButton").classList.remove("hide");
@@ -320,8 +343,6 @@ function closePopUpAndContinueGame() {
     gameEnd();
   }
 
-
-};
 
    
 
