@@ -155,6 +155,7 @@ function closeQuestionPopup() {
  document.getElementById("frontQuestion").classList.remove("hide")
 
   timer = 5;
+  document.getElementById("numberTimeout").classList.remove("numberTimeout");
 };
 // --------------------------------------------------------------------------------
 
