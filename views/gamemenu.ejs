@@ -283,12 +283,14 @@
 
       </form>
 
-      <div class="startknap">
-       <button class="knap" id="start-knap" onclick="startGame()">START</button>
+      <div class="bundKnapperDiv">
+       <div class="bundKnapper"><button class="knap" id="kategori-knap" onclick="loadCategories().then()">Tilfældige kategorier</button></div>
+       <div class="bundKnapper"><button class="knap" id="start-knap" onclick="startGame()">START</button></div>
+       <div class="bundKnapper"></div>
       </div>
-      <div class="kategoriknap">
-       <button class="knap" id="kategori-knap" onclick="loadCategories().then()">Roll</button>
-      </div>
+       <!-- <div class="kategoriknap">
+        
+       </div> -->
       
 
      </div>
