@@ -135,7 +135,7 @@ margin: 10px;
  display: flex;
  justify-content: center;
  align-items: center;
- cursor: pointer;
+ 
 }
 
 form {
@@ -150,9 +150,10 @@ form {
  
 }
 
-.minusbutton {
+.minusButton {
  display: none;
  height: 60px;
+ cursor: pointer;
 }
 
 .solid {
@@ -180,7 +181,7 @@ form {
  display: flex;
  justify-content: center;
  align-items: center;
- cursor: pointer;
+ 
 }
 
 .plus img {
@@ -190,6 +191,7 @@ form {
 .playerButton {
     transition: .2s;
     height: 60px;
+    cursor: pointer;
 }
 
 img.playerButton:hover {

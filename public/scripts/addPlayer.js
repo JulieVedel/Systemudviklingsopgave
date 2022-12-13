@@ -2,6 +2,7 @@ let synligeElementer = 2;
 let minusButtons;
 //REFAC:
 function addPlayer ()  {
+    debugger
         let form1 = document.getElementById('spillerForm1');
         let form2 = document.getElementById('spillerForm2');
         let form3 = document.getElementById('spillerForm3');
@@ -52,7 +53,7 @@ function removePlayer4 (element) {
 }
 
 function checkNumberOfElements () {
-    let minusButtons = document.querySelectorAll('.minusbutton');
+    let minusButtons = document.querySelectorAll('.minusButton');
     if (synligeElementer > 2) {
         minusButtons.forEach(button => {
             button.style.display = "block";
