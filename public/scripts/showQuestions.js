@@ -308,9 +308,13 @@ function closePopUpAndContinueGame() {
 
   console.log(questionsFinished);
 
+
+};
+
   if (questionsFinished == 30) {
     startRoundTwo();
   };
+
 
   if (questionsFinished == 60) {
     gameEnd();
