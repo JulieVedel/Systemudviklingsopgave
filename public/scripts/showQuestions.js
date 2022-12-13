@@ -154,8 +154,11 @@ function closeQuestionPopup() {
 
  document.getElementById("frontQuestion").classList.remove("hide")
 
+
   timer = 5;
   document.getElementById("numberTimeout").classList.remove("numberTimeout");
+  document.getElementById("textTimeout").classList.remove("textTimeout");
+
 };
 // --------------------------------------------------------------------------------
 
@@ -174,6 +177,8 @@ function inputTimer(){
   console.log("tiden er udløbet og der må svares...");
   activateBuzzers();
   numberTimeout.innerHTML = "DER MÅ NU BUZZES !!!";
+
+  
  };
  timer = timer - 1;
 };
@@ -321,8 +326,6 @@ function closePopUpAndContinueGame() {
     gameEnd();
   }
 
-
-};
 
    
 
