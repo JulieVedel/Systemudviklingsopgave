@@ -11,10 +11,8 @@ function showHelpPopup() {
 
 function closeHelpPopup() {
 
- var popup = document.getElementById("startingPlayerPopup");
+ var popup = document.getElementById("popup");
  popup.classList.remove("open-popup");
-
-document.getElementById("startingRoundTwo").classList.remove("open-popup");
 
  var popup = document.getElementById("fadeBackground");
  popup.classList.remove("fade");
