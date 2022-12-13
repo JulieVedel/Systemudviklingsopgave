@@ -1,4 +1,4 @@
-let timer = 1;
+let timer = 5;
 let answerTimerInSeconds = 30;
 let isAnswerCorrect = false;
 let round = 1;
@@ -15,7 +15,7 @@ var rootStyles = getComputedStyle(root);
 var timeCountdown= rootStyles.getPropertyValue('--timeCountdown');
 console.log("timeCountdown", timeCountdown);
 
-let questionsFinished = 59;
+let questionsFinished = 0;
 
 
 // rename 'first', 'second', etc. og refac.!:
@@ -153,6 +153,8 @@ function closeQuestionPopup() {
  popup.classList.remove("fade");
 
  document.getElementById("frontQuestion").classList.remove("hide")
+
+  timer = 5;
 };
 // --------------------------------------------------------------------------------
 
