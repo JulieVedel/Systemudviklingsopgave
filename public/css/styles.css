@@ -313,7 +313,7 @@ img.playerButton:hover {
     text-align: center;
     font-size: 1vw;
     background-color: #FFFDEA;
-    color: #FF9700;
+    color: black;
     width: 200px;
     height: 30px;
     box-sizing: content-box;
@@ -632,8 +632,10 @@ h4 {
 #answerInput {
  height: 80px;
  font-size: 50px;
- width: 1000px;
+ width: 900px;
  background-color: rgba(255, 255, 255, 0);
+ padding-left: 15px;
+ padding-right: 15px;
 }
 
 /* .questionBlock {

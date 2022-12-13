@@ -1,4 +1,4 @@
-let timer = 23;
+let timer = 3;
 let answerTimerInSeconds = 30;
 let isAnswerCorrect = false;
 let round = 1;
@@ -181,7 +181,7 @@ document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
  if (answerTimerInSeconds <= 0) {
   clearTimeout(startAnswerTimer);
   // TODO: Giv besked og luk question popup:
-  window.alert("Tiden løb ud");
+  // window.alert("Tiden løb ud");
  };
  answerTimerInSeconds = answerTimerInSeconds - 1;
 };
@@ -311,7 +311,7 @@ function closePopUpAndContinueGame() {
       startRoundTwo();
     };
 
-  };
+  // };
 
 
 
