@@ -108,6 +108,9 @@ async function loadQuestion(value, categori) {
 let startQuestionTimer;
 function showQuestionPopup() {
 
+ document.getElementById("answerInput").classList.remove("hide");
+ document.getElementById("itWasRightButton").classList.remove("hide");
+
  document.getElementById("backQuestion").classList.add("hide");
  document.getElementById("question_popup_H2").innerHTML = "Spørgsmål";
  document.getElementById("thecard").classList.remove("flipcard");
@@ -152,9 +155,19 @@ function closeQuestionPopup() {
  var popup = document.getElementById("fadeQuestion_popup_background");
  popup.classList.remove("fade");
 
- document.getElementById("frontQuestion").classList.remove("hide")
+ document.getElementById("frontQuestion").classList.remove("hide");
 
   timer = 5;
+};
+
+function skipQuestion(){
+ console.log("skip!");
+ flipCardDelay();
+ isAnswerCorrect=false;
+ answerButton();
+ document.getElementById("answerInput").classList.add("hide");
+ document.getElementById("itWasRightButton").classList.add("hide");
+ clearTimeout(startAnswerTimer);
 };
 // --------------------------------------------------------------------------------
 
@@ -183,7 +196,7 @@ document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
  if (answerTimerInSeconds <= 0) {
   clearTimeout(startAnswerTimer);
   // TODO: Giv besked og luk question popup:
-  window.alert("Tiden løb ud");
+  // window.alert("Tiden løb ud");
  };
  answerTimerInSeconds = answerTimerInSeconds - 1;
 };
@@ -254,7 +267,10 @@ function playBuzzer() {
 //--------------------------------------------------------------------------------------------------------
 
 //------------SVAR KNAP CLICK OG VALIDERING---------------------------------------------------------------
-document.getElementById("answerButton").onclick = function () { 
+function answerButton() {
+// document.getElementById("answerButton").onclick = function () { 
+ clearTimeout(startAnswerTimer);
+ document.getElementById("countdownAnswer").innerHTML = "";
 
  document.getElementById("answerButton").classList.add("hide");
  document.getElementById("answerInput").readOnly = true;
@@ -280,7 +296,7 @@ document.getElementById("answerButton").onclick = function () {
  };
  window.isAnswerCorrect = isAnswerCorrect;
  window.currentPoints = currentPoints;
-};
+
 
 document.getElementById("continueButton").onclick = function () {
  closePopUpAndContinueGame();
@@ -289,6 +305,8 @@ document.getElementById("continueButton").onclick = function () {
 document.getElementById("itWasRightButton").onclick = function () {
  window.isAnswerCorrect = true;
  closePopUpAndContinueGame();
+};
+
 };
 
 function closePopUpAndContinueGame() {
@@ -308,9 +326,6 @@ function closePopUpAndContinueGame() {
 
   console.log(questionsFinished);
 
-
-};
-
   if (questionsFinished == 30) {
     startRoundTwo();
   };
@@ -319,9 +334,12 @@ function closePopUpAndContinueGame() {
   if (questionsFinished == 60) {
     gameEnd();
   }
-
-
 };
+
+
+
+
+
 
    
 

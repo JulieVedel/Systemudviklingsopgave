@@ -255,6 +255,16 @@ img.playerButton:hover {
  /* margin-right: 50px; */
 }
 
+#skipButton{
+ position: absolute;
+ right: 0;
+ bottom: 0;
+   /* float:right; */
+   /* display: inline-block; */
+ /* display: flex; */
+ /* margin-top: 200px;  */
+}
+
 /* .kategoriknap{ */
  /* display: inline-block;
  justify-content: center;
@@ -754,6 +764,9 @@ h4 {
 
 #firstToBuzzH2{
  position: relative;
+ /* display: flex; */
+ /* float: right; */
+ /* display: inline-block; */
  top: 80px;
 }
 
