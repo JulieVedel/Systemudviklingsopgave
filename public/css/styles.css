@@ -772,6 +772,24 @@ h4 {
     margin: 30px;
 }
 
+#gameFinishedMoveToHighScore{
+    height: 80px;
+    width: 200px;
+    border-radius: 40px;
+    border-color: orangered;
+    background-color: orange;
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+    border-width: 5px;
+    cursor: pointer;
+    margin: 30px;
+}
+
+
+#gameFinished h1 {
+    font-size: 72px;
+}
 
    #startingPlayerPopup {
     text-align: center;
@@ -780,6 +798,11 @@ h4 {
 
 
    #startingRoundTwo {
+    text-align: center;
+    width: 600px;
+   }
+
+   #gameFinished {
     text-align: center;
     width: 600px;
    }
