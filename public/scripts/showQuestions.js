@@ -1,4 +1,4 @@
-let timer = 3;
+let timer = 5;
 let answerTimerInSeconds = 30;
 let isAnswerCorrect = false;
 let round = 1;
@@ -153,6 +153,8 @@ function closeQuestionPopup() {
  popup.classList.remove("fade");
 
  document.getElementById("frontQuestion").classList.remove("hide")
+
+  timer = 5;
 };
 // --------------------------------------------------------------------------------
 
@@ -301,18 +303,27 @@ function closePopUpAndContinueGame() {
  adjustScore();
  removeQuestion();
  closeQuestionPopup();
+
+  questionsFinished += 1;
+
+  console.log(questionsFinished);
+
+
 };
 
-    questionsFinished += 1;
+  if (questionsFinished == 30) {
+    startRoundTwo();
+  };
 
-    console.log(questionsFinished);
 
-    if (questionsFinished == 30 ) {
-      startRoundTwo();
-    };
+  if (questionsFinished == 60) {
+    gameEnd();
+  }
 
-  // };
 
+
+
+   
 
 
 function checkAnswer(answer) {
@@ -384,7 +395,7 @@ function removeQuestion() {
 
 
 function startRoundTwo() {
-    round = 2;
+  round = 2;
 
   document.getElementById("firstTable").classList.add("hide");
   document.getElementById("secondTable").classList.remove("hide");
@@ -393,5 +404,44 @@ function startRoundTwo() {
   document.getElementById("fadeBackground").classList.add("fade");
 
 }
+
+
+function gameEnd() {
+
+  document.getElementById("gameFinished").classList.add("open-popup");
+
+  document.getElementById("winnerName").innerHTML = findWinner();
+
+}
+
+function findWinner() {
+  
+  const players = getPlayers();
+
+  let scores = [];
+
+  for (let i = 0; i < players.length; i++) {
+
+    scores.push(parseInt(sessionStorage.getItem("pointsPlayer" + players[i].id)));
+    
+  }
+
+  let highest = scores[0];
+  let highestIndex = 0;
+
+  for (let i = 0; i < scores.length; i++) {
+    if (scores[i] > highest ) {
+      highestIndex = i;
+      highest = scores[i];
+    }
+
+    return players[highestIndex].name;
+
+  }
+
+
+}
+
+
 
 //--------------------------------------------------------------------------------------------------------
