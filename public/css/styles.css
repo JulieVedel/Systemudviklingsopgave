@@ -2,6 +2,9 @@
  --timeCountdown: 10s;
 }
 
+.hide {
+ display: none;
+}
 
 .header {
     position: relative;
@@ -255,14 +258,12 @@ img.playerButton:hover {
  /* margin-right: 50px; */
 }
 
-#skipButton{
+
+
+#OKButtonSkip{
  position: absolute;
- right: 0;
  bottom: 0;
-   /* float:right; */
-   /* display: inline-block; */
- /* display: flex; */
- /* margin-top: 200px;  */
+ right: 0;
 }
 
 /* .kategoriknap{ */
@@ -623,13 +624,12 @@ h4 {
 
 
 
+#skipButton{
+ position: absolute;
+ right: 0;
+ bottom: 0;
 
-
-.hide {
-    display: none;
 }
-
-
 
 
 

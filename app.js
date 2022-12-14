@@ -33,7 +33,8 @@ mongoose.connect(dbURI)
  .catch((err) => console.log(err));
 // eller:
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnitiedTopology: true});
-
+// mongoose.set('strictQuery', false);
+// mongoose.set('strictQuery', true);
 //listen for req: (localhost assumed)
 // app.listen(5500);
 

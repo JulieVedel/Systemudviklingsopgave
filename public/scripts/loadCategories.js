@@ -1,3 +1,4 @@
+// let data;
 let showCategoriHeading = true;
 //Stjålet fra: https://bost.ocks.org/mike/shuffle/ og https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
@@ -14,13 +15,14 @@ function shuffle(array) {
  return array;
 };
 // Hent data fra API via JSON
+// tilføj categoriNumbers
 async function loadCategories() {
  console.log("running loadCategories");
  try {
   let randomCategoryOffset = Math.round(Math.random()*8000);
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
-  const data = await response.json();
+  let data = await response.json();
   console.log("Raw data, categories:", data);
   // Test for tomme kategorier og byg categories med 60 kategorier:
   let categories = [];
@@ -52,4 +54,55 @@ async function loadCategories() {
   console.log("There was an error fetching the data");
  };
 };
+
 loadCategories();
+
+// console.log(data);
+
+// if (data == "undefined") {
+//  console.log("running fix");
+//  showCategoriHeading = true;
+//  loadCategories();
+// }
+
+
+// async function loadRemainingCategories() {
+//  console.log("running loadRemainingCategories");
+//  try {
+//   let randomCategoryOffset = Math.round(Math.random()*8000);
+//   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
+//   const response = await fetch(apiPath);
+//   const data = await response.json();
+//   console.log("Raw data, categories:", data);
+//   // Test for tomme kategorier og byg categories med 60 kategorier:
+//   let categories = [];
+//   for (i = 0; categories.length < 60; i++){
+//    //4068 er "name that artist" og burde vist indeholde billeder. Så den er sorteret fra her.
+//     if (data[i].clues_count > 4 && data.id != 4068){
+//      categories.push(data[i]);
+//     };
+//   };
+//   //Randomize categories array:
+//   shuffle(categories);
+//    // Load dropdowns:
+//   for (let i = 0; i < 12; i++) {
+//    let choice = document.getElementById(`kategori${i+1}`);
+//    if (choice.value == "default") {
+//     console.log("Dttne kategorifelt mangler udfyldning:", choice);
+//     // choice.innerHTML = "";
+//    };
+   
+   
+   
+//    // for (j = 0; j < 5; j++){
+//    //  let counter = (j)+i*5;
+//    //  choice.innerHTML += `<option value=${categories[counter].id}>${categories[counter].title}</option>`;
+//    //  // console.log(counter);
+//    //  console.log();
+//    // };
+//   };
+//  } catch (e) {
+//   console.log(e);
+//   console.log("There was an error fetching the data");
+//  };
+// };
