@@ -249,7 +249,7 @@ function inputTimer(){
 
  function answerTimer(){
 
- if (!document.getElementById("countdownAnswer").contains("hide")) {
+ if (!document.getElementById("countdownAnswer").classList.contains("hide")) {
   document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
  };
 

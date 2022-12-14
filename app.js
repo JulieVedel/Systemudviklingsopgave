@@ -32,7 +32,7 @@ mongoose.connect(dbURI)
  //"app.listen": autosets Header and status codes and content types
  .catch((err) => console.log(err));
 // eller:
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnitiedTopology: true});
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnitiedTopology: true});
 // mongoose.set('strictQuery', false);
 // mongoose.set('strictQuery', true);
 //listen for req: (localhost assumed)

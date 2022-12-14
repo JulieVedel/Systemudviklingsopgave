@@ -57,14 +57,6 @@ async function loadCategories() {
 
 loadCategories();
 
-// console.log(data);
-
-// if (data == "undefined") {
-//  console.log("running fix");
-//  showCategoriHeading = true;
-//  loadCategories();
-// }
-
 
 // async function loadRemainingCategories() {
 //  console.log("running loadRemainingCategories");
