@@ -26,11 +26,17 @@ async function loadCategories() {
   console.log("Raw data, categories:", data);
   // Test for tomme kategorier og byg categories med 60 kategorier:
   let categories = [];
-  for (i = 0; categories.length < 60; i++){
-   //4068 er "name that artist" og burde vist indeholde billeder. Så den er sorteret fra her.
-    if (data[i].clues_count > 4 && data.id != 4068){
-     categories.push(data[i]);
-    };
+
+  try {
+   for (i = 0; categories.length < 60; i++){
+    //4068 er "name that artist" og burde vist indeholde billeder. Så den er sorteret fra her.
+     if (data[i].clues_count > 4 && data.id != 4068){
+      categories.push(data[i]);
+     };
+   };
+  } catch (e) {
+   console.log(e);
+   loadCategories();
   };
   //Randomize categories array:
   shuffle(categories);
@@ -67,12 +73,17 @@ async function randomCategories() {
   console.log("Raw data, categories:", data);
 
   let categories = [];
-  for (i = 0; categories.length < 60; i++){
+  try {
+   for (i = 0; categories.length < 60; i++){
 
-    if (data[i].clues_count > 4 && data.id != 4068){
-     // denne skal ændres:
-     categories.push(data[i]);
-    };
+     if (data[i].clues_count > 4 && data.id != 4068){
+      // denne skal ændres:
+      categories.push(data[i]);
+     };
+   };
+  } catch (e) {
+   console.log(e);
+   randomCategories();
   };
 
   shuffle(categories);
