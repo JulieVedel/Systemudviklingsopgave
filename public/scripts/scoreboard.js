@@ -232,3 +232,4 @@ await getTop10();
 fillRestOfTable();
 await getPlayerRanks();
 await getAllPlayerRanks();
+

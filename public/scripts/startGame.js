@@ -1,19 +1,8 @@
 async function startGame() {
  if (validatePlayerBuzzers() && validatePlayerNames()){
-  // randomize ALLE kategorier, hvis én ikke er valgt:
-  if (document.getElementById(`kategori1`).value == "default") {
-   await window.loadCategories();
-  };
-  // for (let i = 1; i < 13; i++) {
-  //  sessionStorage.setItem(`cat${i}` , document.getElementById(`kategori${i}`).value);
-  //  sessionStorage.setItem(`cat${i}name`, document.getElementById(`kategori${i}`).options[document.getElementById(`kategori${i}`).selectedIndex].text);
-  // };
   for (let i = 1; i < 13; i++) {
    let randNum = Math.floor(Math.random()*5);
    if (document.getElementById(`kategori${i}`).value == "default") {
-    // console.log("running default:", document.getElementById(`kategori${i}`).value);
-    // console.log("ID:",document.getElementById(`kategori${i}`).options[randNum].value);
-    // console.log("Name:", document.getElementById(`kategori${i}`).options[randNum].text);
     sessionStorage.setItem(`cat${i}` , document.getElementById(`kategori${i}`).options[randNum].value);
     sessionStorage.setItem(`cat${i}name`, document.getElementById(`kategori${i}`).options[randNum].text);
    } else {
