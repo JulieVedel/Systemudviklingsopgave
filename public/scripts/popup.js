@@ -7,6 +7,8 @@ function showHelpPopup() {
  var popup = document.getElementById("fadeBackground");
  popup.classList.add("fade");
 
+ document.querySelector("#menuToggle > input[type=checkbox]").checked = false;
+
 };
 
 function closeHelpPopup() {

@@ -10,9 +10,26 @@
 </head>
 <body>
 
-<div class="header">
- <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
-</div>
+<nav role='navigation'>
+    <div class="header">
+        <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
+    </div>
+
+    <div id="menuToggle">
+        <input type="checkbox" />
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <ul id="menu">
+        <a href="http://localhost:3000/"><li>Forside</li></a>
+        <!-- <a href="http://localhost:3000/scoreboard"><li>Leaderboard</li></a> -->
+        <!-- <a href="javascript:showHelpPopup()"><li>Hjælp</li></a> -->
+        <a href="http://localhost:3000/gamemenu"><li>Nyt spil</li></a>
+        </ul>
+    </div>
+</nav>
 
  <section class="scoreboard_table_section">
 

@@ -12,11 +12,26 @@
 <body onload="showStartingPlayerPopup()">
 
 
+    <nav role='navigation'>
+        <div class="header">
+            <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
+        </div>
 
+        <div id="menuToggle">
+          <input type="checkbox" />
 
-<div class="header">
-    <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
-</div>
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu">
+            <a href="http://localhost:3000/"><li>Forside</li></a>
+            <a href="http://localhost:3000/scoreboard"><li>Leaderboard</li></a>
+            <a href="javascript:showHelpPopup()"><li>Hjælp</li></a>
+            <a href="http://localhost:3000/gamemenu"><li>Nyt spil</li></a>
+          </ul>
+        </div>
+    </nav>
 
     <section class="table">
 
@@ -285,6 +300,26 @@
        <!-- <a href="http://localhost:3000/scoreboard">se scores</a> -->
        <button class="knap" onclick="gotoScoreboard()">Scoreboard</button>
 
+
+       <!------------------------------ POPUP REGLER OG FADE BAGGRUND ---------------------------------------------------->
+     <!-- fade background -->
+     <div id="fadeBackground" onclick="closeHelpPopup()"></div>
+
+     <div>
+      <!-- popup button -->
+      <!-- <button type="submit" class="knap" onclick="showHelpPopup()">Hjælp</button> -->
+      <!-- popup msg -->
+      <div class="popup" id="popup">
+       <br>
+       <h2>HJÆLP</h2>
+       <p>For at vælge et spørgsmål, skal du klikke på det felt du ønsker i tabellen.</p>
+       <p>Kategorierne står øverst og pointene står i hvert felt under. Sværhedsgraden af spørgsmålet stiger i takt med mængden af point.</p>
+       <p>Når et spørgsmål er valgt vil en timer tælle ned indtil spillere kan buzze ind. Det er kun den spiller som buzzer ind først som får lov til at svare.</p>
+       <p>Indtast dit svar i inputfeltet. Hvis computeren siger at dit svar var forkert, men det i virkeligheden er rigtigt, kan man benytte knappen "Svar var rigtigt" for at overtrumfe dette</p>
+       <button type="button" onclick="closeHelpPopup()" id="closeHelp">OK</button>
+      </div>
+
+     </div>
        
 
 </body>
