@@ -83,6 +83,7 @@ async function randomCategories() {
    };
   } catch (e) {
    console.log(e);
+   //tilføj await?!?!!?!?
    randomCategories();
   };
 

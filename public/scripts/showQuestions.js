@@ -22,15 +22,18 @@ let questionsFinished = 0;
 
 // rename 'first', 'second', etc. og refac.!:
 // row 1
+
+//TODO: TILFØJ TRY CATCH TIL ALLE DE HER:
 let cells =  document.querySelectorAll('.first th');    
 for (var i = 0; i < cells.length; i++) {
  cells[i].onclick = function () {  clickRow1( this.getAttribute("value")); };
 };
 async function clickRow1(i) {
-
- clue = await loadQuestion(0, (parseInt(i) + ((round - 1) * 6  )));
-
- showQuestionPopup();
+ try {
+  clue = await loadQuestion(0, (parseInt(i) + ((round - 1) * 6  )));
+  showQuestionPopup();
+ } catch (error) {
+ }
 };
 
 // row 2
@@ -39,8 +42,11 @@ for (var i = 0; i < cells2.length; i++) {
  cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
 };
 async function clickRow2(i) {
+ try {
   clue = await loadQuestion(1, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 // row 3
@@ -49,8 +55,11 @@ for (var i = 0; i < cells3.length; i++) {
  cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
 };
 async function clickRow3(i) {
+ try {
   clue = await loadQuestion(2, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 // row 4
@@ -59,8 +68,11 @@ for (var i = 0; i < cells4.length; i++) {
  cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
 };
 async function clickRow4(i) {
+ try {
   clue = await loadQuestion(3, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 // row 5
@@ -69,8 +81,11 @@ for (var i = 0; i < cells5.length; i++) {
  cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
 };
 async function clickRow5(i) {
+ try {
   clue = await loadQuestion(4, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 async function loadQuestion(value, categori) {
@@ -98,11 +113,16 @@ async function loadQuestion(value, categori) {
     sessionStorage.setItem("activeQuestion", (value + 1));
 
     let apiPath = `https://jservice.io/api/clues?category=${categorieIDs[categori - 1]}`;
-
-    const response = await fetch(apiPath);
-    const data = await response.json();
-
-    return data[value];
+    try {
+     const response = await fetch(apiPath);
+     const data = await response.json();
+     return data[value];
+    } catch(e) {
+     console.log(e);
+     // Tilføj await?!?!!??!:
+     // loadQuestion();
+    };
+    
 };
 
 // ------------------------------ QUESTION POPUP ------------------------------------

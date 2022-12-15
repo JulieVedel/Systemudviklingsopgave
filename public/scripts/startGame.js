@@ -1,7 +1,19 @@
 async function startGame() {
  if (validatePlayerBuzzers() && validatePlayerNames()){
+  
+  // if (document.getElementById(`kategori1`).value == "default") {
+   try {
+       await window.randomCategories();
+   } catch (error) {
+    
+   }
+
+  // };
+
   for (let i = 1; i < 13; i++) {
-   let randNum = Math.floor(Math.random()*5);
+   let randNum = Math.floor(Math.random()*4) + 1;
+   console.log("randNum", randNum);
+
    if (document.getElementById(`kategori${i}`).value == "default") {
     sessionStorage.setItem(`cat${i}` , document.getElementById(`kategori${i}`).options[randNum].value);
     sessionStorage.setItem(`cat${i}name`, document.getElementById(`kategori${i}`).options[randNum].text);

@@ -56,13 +56,21 @@ body {
 #gotoScoreboardButton{
  position: absolute;
  right: 80px;
- bottom: 80px;;
+ bottom: 80px;
+ z-index: -1;
 }
 
 #playAgainButton{
  position: absolute;
  right: 80px;
  bottom: 80px;;
+}
+
+#clearScoreboard{
+
+ position: absolute;
+ right: 80px;
+ bottom: 180px;;
 }
 
 .beholder {
