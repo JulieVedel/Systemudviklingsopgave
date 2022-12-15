@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>Document</title>
 </head>
 <body onload="showStartingPlayerPopup()">
@@ -241,16 +242,13 @@
                       
            <div id="textTimeout"></div>
            <div id="numberTimeout"></div>
-
-
-           <!-- <div id="colorTimeout"></div> -->
-
-
+           <h2 id="firstToBuzzH2"></h2>
+           <button id="skipButton" class="knap" onclick="skipQuestion()">Skip</button>
           </div>
 
+           <!-- <h2 id="firstToBuzzH2"></h2> -->
 
-
-           <h2 id="firstToBuzzH2"></h2>
+           
           
          </div>
 
@@ -261,7 +259,7 @@
           <div id="answerBlock" class="answerBlock100">
 
            <input id=answerInput type="text" placeholder="skriv svaret her..." autocomplete="off">
-           <button id="answerButton" class="knap" >Svar</button>
+           <button id="answerButton" class="knap" onclick="answerButton()">Svar</button>
 
           </div>
 

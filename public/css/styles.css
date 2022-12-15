@@ -44,6 +44,8 @@ body {
     position: absolute;
 }
 
+
+
 #highscore-knap {
     margin-left: 800px;
     margin-top: 60px;
@@ -237,24 +239,52 @@ img.playerButton:hover {
  cursor: pointer;
 }
 
-.startknap{
- /* float:center; */
- float:right;
- display: flex;
+.bundKnapperDiv{
  justify-content: center;
  align-items: center;
- padding-top: 50px;
- margin-right: 50px;
+ display: flex;
 }
 
-.kategoriknap{
- /* float:center; */
- float:left;
+.bundKnapper{
+  /* float:left; */
+ /* float:right; */
  display: flex;
  justify-content: center;
- align-items: center;
- padding-top: 50px;
- margin-left: 50px;
+ width: 200px;
+ height: 60px;
+ /* padding-top: 50px; */
+ margin: 50px;
+ /* margin-right: 50px; */
+}
+
+#skipButton{
+ position: absolute;
+ right: 0;
+ bottom: 0;
+   /* float:right; */
+   /* display: inline-block; */
+ /* display: flex; */
+ /* margin-top: 200px;  */
+}
+
+/* .kategoriknap{ */
+ /* display: inline-block;
+ justify-content: center;
+ align-items: center; */
+ /* padding-top: 50px; */
+ /* margin-left: 100px; */
+ /* margin-left: 50px; */
+/* } */
+
+#kategori-knap {
+ border-radius: 30px;
+ font-size: 15px;
+ color: rgb(0, 0, 0);
+ width: 100px;
+ border-color: rgb(56, 56, 56);
+ background-color: rgb(162, 162, 162);
+ margin-left: 40px;
+ /* margin-right: 100px; */
 }
 
 /* Rename: */
@@ -738,6 +768,9 @@ h4 {
 
 #firstToBuzzH2{
  position: relative;
+ /* display: flex; */
+ /* float: right; */
+ /* display: inline-block; */
  top: 80px;
 }
 
