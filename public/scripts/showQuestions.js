@@ -1,5 +1,5 @@
 let timer = 5;
-let answerTimerInSeconds = 30;
+let answerTimerInSeconds = 10;
 let isAnswerCorrect = false;
 let round = 1;
 let currentPoints = 0; 
@@ -208,6 +208,31 @@ function inputTimer(){
    // TODO: Giv besked og luk question popup:
   // window.alert("Tiden løb ud");
   console.log("time is over");
+
+    isAnswerCorrect = false;
+
+    window.clearInterval(answerTimer, 1000);
+    clearTimeout(startAnswerTimer);
+    answerTimerInSeconds = 30;
+
+    document.getElementById("countdownAnswer").innerHTML = "";
+    document.getElementById("answerButton").classList.add("hide");
+    document.getElementById("answerInput").readOnly = true;
+
+    answerResponce.innerText = "Tiden løb ud, det rigtige svar er: " + clue.answer; 
+    document.getElementById("continueButton").classList.remove("hide");
+    document.getElementById("continueButton").classList.add("knap");
+
+    window.isAnswerCorrect = isAnswerCorrect;
+    window.currentPoints = currentPoints;
+
+    document.getElementById("continueButton").onclick = function () {
+      closePopUpAndContinueGame();
+    };
+
+
+
+
   };
   answerTimerInSeconds = answerTimerInSeconds - 1;
  };
