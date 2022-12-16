@@ -15,6 +15,7 @@ function shuffle(array) {
 // Hent data fra API via JSON
 // tilføj categoriNumbers
 async function loadCategories() {
+ sessionStorage.clear();
  console.log("running loadCategories");
  try {
   let randomCategoryOffset = Math.round(Math.random()*8000);
