@@ -155,6 +155,8 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
     const randomNumber = Math.round(Math.random() * (getPlayerNames().length - 1));
     cards[randomNumber].classList.add("card-selected");
 
+    sessionStorage.setItem("currentPlayersTurn" , randomNumber);
+
     startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML)
 
         }
