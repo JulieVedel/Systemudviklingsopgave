@@ -209,6 +209,7 @@
 
 
 
+
     <div id="fadeBackground" onclick="closeHelpPopup()"></div>
 
 <div class="popup" id="startingPlayerPopup">
@@ -240,6 +241,7 @@
 
 
      <!------------------------------ POPUP QUESTION ---------------------------------------------------->
+     
      <!-- fade background -->
      <div id="fadeQuestion_popup_background"></div>
      
@@ -258,7 +260,7 @@
            <div id="textTimeout"></div>
            <div id="numberTimeout"></div>
            <h2 id="firstToBuzzH2"></h2>
-           <button id="skipButton" class="knap" onclick="skipQuestion()">Skip</button>
+           <button id="skipButton" class="hide" class="knap" onclick="skipQuestion()">Skip</button>
           </div>
 
            <!-- <h2 id="firstToBuzzH2"></h2> -->
@@ -275,7 +277,7 @@
 
            <input id=answerInput type="text" placeholder="skriv svaret her..." autocomplete="off">
            <button id="answerButton" class="knap" onclick="answerButton()">Svar</button>
-
+           <button id="OKButtonSkip" class="knap" class="hide" onclick="OKButtonSkip()">OK</button>
           </div>
 
           <div id="countdownAnswer"></div>
@@ -297,8 +299,8 @@
 
         </div>
        </div>
-       <!-- <a href="http://localhost:3000/scoreboard">se scores</a> -->
-       <button class="knap" onclick="gotoScoreboard()">Scoreboard</button>
+       
+       <button id="gotoScoreboardButton" class="knap" onclick="gotoScoreboard()">Scoreboard</button>
 
 
        <!------------------------------ POPUP REGLER OG FADE BAGGRUND ---------------------------------------------------->

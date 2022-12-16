@@ -1,13 +1,28 @@
 async function startGame() {
  if (validatePlayerBuzzers() && validatePlayerNames()){
-  // randomize ALLE kategorier, hvis én ikke er valgt:
-  if (document.getElementById(`kategori1`).value == "default") {
-   await window.loadCategories();
-  };
+  
+  // if (document.getElementById(`kategori1`).value == "default") {
+   try {
+       await window.randomCategories();
+   } catch (error) {
+    
+   }
+
+  // };
+
   for (let i = 1; i < 13; i++) {
-   sessionStorage.setItem(`cat${i}` , document.getElementById(`kategori${i}`).value);
-   sessionStorage.setItem(`cat${i}name`, document.getElementById(`kategori${i}`).options[document.getElementById(`kategori${i}`).selectedIndex].text);
+   let randNum = Math.floor(Math.random()*4) + 1;
+   console.log("randNum", randNum);
+
+   if (document.getElementById(`kategori${i}`).value == "default") {
+    sessionStorage.setItem(`cat${i}` , document.getElementById(`kategori${i}`).options[randNum].value);
+    sessionStorage.setItem(`cat${i}name`, document.getElementById(`kategori${i}`).options[randNum].text);
+   } else {
+    sessionStorage.setItem(`cat${i}` , document.getElementById(`kategori${i}`).value);
+    sessionStorage.setItem(`cat${i}name`, document.getElementById(`kategori${i}`).options[document.getElementById(`kategori${i}`).selectedIndex].text);
+   };
   };
+
   savePlayerInSession();
   window.location.href = 'http://localhost:3000/tableVeiw';
  } else if (!validatePlayerBuzzers()) {

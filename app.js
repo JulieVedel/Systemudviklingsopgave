@@ -32,8 +32,9 @@ mongoose.connect(dbURI)
  //"app.listen": autosets Header and status codes and content types
  .catch((err) => console.log(err));
 // eller:
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnitiedTopology: true});
-
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnitiedTopology: true});
+// mongoose.set('strictQuery', false);
+// mongoose.set('strictQuery', true);
 //listen for req: (localhost assumed)
 // app.listen(5500);
 
@@ -136,17 +137,15 @@ async function addUser(users){
    console.log(err);
  };
 };
-// ---------------------------- BUG: Hvis du rydder databasen, SKAL du genstarte app.js - ellers virker animation i scoreboard ikke --------
+
 // DELETE ALL USERS:
-// async function deleteAllUsers(){
-//  try {
-//   // let result = await User.remove({points: {$gt: 1}});
-//   await User.remove();
-//  } catch(err) {
-//    console.log(err);
-//  };
-// };
-// deleteAllUsers();
+async function deleteAllUsers(){
+ try {
+  await User.remove();
+ } catch(err) {
+   console.log(err);
+ };
+};
 
 async function getTop10Users(){
  try {
@@ -271,6 +270,13 @@ app.post('/savePlayerData', async function(req, res) {
 app.get('/scoreboard', (req, res) => {
  res.render('scoreboard', {title: 'scoreboard'});
 });
+
+app.get('/clearScoreboard', async function(req, res) {
+ console.log("running clear on server");
+ await deleteAllUsers();
+ // + refresh hvis man er på scoreboard-siden, når man vælger at cleare?
+});
+
 
 // Denne bruges når ingen andre sider matches med ovenstående: (skal derfor stå til sidst.)
 app.use((req, res) => {

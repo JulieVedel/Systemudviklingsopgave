@@ -89,7 +89,7 @@ async function savePlayerDataToMongoDB() {
  //-------------------------------------------------------------------------------------
 
  console.log("Sending these users to POST:", users);
-
+//mangler try catch:
  const res = await fetch('http://localhost:3000/savePlayerData', {
   method: 'POST',
   headers: {
@@ -232,3 +232,4 @@ await getTop10();
 fillRestOfTable();
 await getPlayerRanks();
 await getAllPlayerRanks();
+

@@ -2,6 +2,9 @@
  --timeCountdown: 10s;
 }
 
+.hide {
+ display: none;
+}
 
 .header {
     position: relative;
@@ -45,12 +48,30 @@ body {
     position: absolute;
 }
 
-
-
 #highscore-knap {
     margin-left: 800px;
     margin-top: 60px;
     position: absolute;
+}
+
+#gotoScoreboardButton{
+ position: absolute;
+ right: 80px;
+ bottom: 80px;
+ z-index: -1;
+}
+
+#playAgainButton{
+ position: absolute;
+ right: 80px;
+ bottom: 80px;;
+}
+
+#clearScoreboard{
+
+ position: absolute;
+ right: 80px;
+ bottom: 180px;;
 }
 
 .beholder {
@@ -258,14 +279,12 @@ img.playerButton:hover {
  /* margin-right: 50px; */
 }
 
-#skipButton{
+
+
+#OKButtonSkip{
  position: absolute;
- right: 0;
  bottom: 0;
-   /* float:right; */
-   /* display: inline-block; */
- /* display: flex; */
- /* margin-top: 200px;  */
+ right: 0;
 }
 
 /* .kategoriknap{ */
@@ -626,13 +645,12 @@ h4 {
 
 
 
+#skipButton{
+ position: absolute;
+ right: 0;
+ bottom: 0;
 
-
-.hide {
-    display: none;
 }
-
-
 
 
 

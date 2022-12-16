@@ -1,11 +1,11 @@
-let timer = 5;
-let answerTimerInSeconds = 10;
+const BUZZER_TIMER_COUNTDOWN = 5
+let timer = BUZZER_TIMER_COUNTDOWN;
+const ANSWER_TIMER_COUNTDOWN = 30;
+let answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
 let isAnswerCorrect = false;
 let round = 1;
 let currentPoints = 0; 
-
 let clue;
-
 // // set css timeCountdown:
 var root = document.querySelector(':root');
 let seconds = timer + 's';
@@ -20,15 +20,18 @@ let questionsFinished = 0;
 
 // rename 'first', 'second', etc. og refac.!:
 // row 1
+
+//TODO: TILFØJ TRY CATCH TIL ALLE DE HER:
 let cells =  document.querySelectorAll('.first th');    
 for (var i = 0; i < cells.length; i++) {
  cells[i].onclick = function () {  clickRow1( this.getAttribute("value")); };
 };
 async function clickRow1(i) {
-
- clue = await loadQuestion(0, (parseInt(i) + ((round - 1) * 6  )));
-
- showQuestionPopup();
+ try {
+  clue = await loadQuestion(0, (parseInt(i) + ((round - 1) * 6  )));
+  showQuestionPopup();
+ } catch (error) {
+ }
 };
 
 // row 2
@@ -37,8 +40,11 @@ for (var i = 0; i < cells2.length; i++) {
  cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
 };
 async function clickRow2(i) {
+ try {
   clue = await loadQuestion(1, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 // row 3
@@ -47,8 +53,11 @@ for (var i = 0; i < cells3.length; i++) {
  cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
 };
 async function clickRow3(i) {
+ try {
   clue = await loadQuestion(2, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 // row 4
@@ -57,8 +66,11 @@ for (var i = 0; i < cells4.length; i++) {
  cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
 };
 async function clickRow4(i) {
+ try {
   clue = await loadQuestion(3, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 // row 5
@@ -67,8 +79,11 @@ for (var i = 0; i < cells5.length; i++) {
  cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
 };
 async function clickRow5(i) {
+ try {
   clue = await loadQuestion(4, (parseInt(i) + ((round - 1) * 6)) );
- showQuestionPopup();
+  showQuestionPopup();
+ } catch (error) {
+ };
 };
 
 async function loadQuestion(value, categori) {
@@ -96,17 +111,33 @@ async function loadQuestion(value, categori) {
     sessionStorage.setItem("activeQuestion", (value + 1));
 
     let apiPath = `https://jservice.io/api/clues?category=${categorieIDs[categori - 1]}`;
-
-    const response = await fetch(apiPath);
-    const data = await response.json();
-    // console.log(data[value]);
-    return data[value];
+    try {
+     const response = await fetch(apiPath);
+     const data = await response.json();
+     return data[value];
+    } catch(e) {
+     console.log(e);
+     // Tilføj await?!?!!??!:
+     // loadQuestion();
+    };
+    
 };
-// console.log(document.querySelectorAll('.first th'));
 
 // ------------------------------ QUESTION POPUP ------------------------------------
 let startQuestionTimer;
 function showQuestionPopup() {
+ // TEST:
+ clearTimeout(startAnswerTimer);
+ timer = BUZZER_TIMER_COUNTDOWN;
+ window.clearInterval(answerTimer, 1000);
+ clearTimeout(startAnswerTimer);
+ answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
+
+ document.getElementById("skipButton").classList.add("hide");
+ document.getElementById("skipButton").classList.remove("knap");
+
+
+ document.getElementById("OKButtonSkip").classList.add("hide");
 
  document.getElementById("answerInput").classList.remove("hide");
  document.getElementById("itWasRightButton").classList.remove("hide");
@@ -131,8 +162,6 @@ let startAnswerTimer;
 function flipCardDelay(){
  document.getElementById("backQuestion").classList.remove("hide");
  document.getElementById("thecard").classList.add("flipcard");
- // bagside=?:
- // startQuestionTimer = window.setInterval(inputTimer, RESPONCE_TIME_IN_MILLISECONDS);
  document.getElementById("frontQuestion").classList.add("hide")
  document.getElementById("question_popup_H2_Back").innerHTML = "Spørgsmål"
  document.getElementById("answerButton").classList.remove("hide");
@@ -140,7 +169,7 @@ function flipCardDelay(){
  document.getElementById("answerInput").value = "";
  answerResponce.innerText = "";
 
-  startAnswerTimer = window.setInterval(answerTimer, 1000);
+ startAnswerTimer = window.setInterval(answerTimer, 1000);
 
  document.getElementById("continueButton").classList.add("hide");
  document.getElementById("itWasRightButton").classList.add("hide");
@@ -158,24 +187,59 @@ function closeQuestionPopup() {
 
  document.getElementById("frontQuestion").classList.remove("hide");
 
-  timer = 5;
+ timer = BUZZER_TIMER_COUNTDOWN;
 
-
-
-  document.getElementById("numberTimeout").classList.remove("numberTimeout");
-  document.getElementById("textTimeout").classList.remove("textTimeout");
+ document.getElementById("numberTimeout").classList.remove("numberTimeout");
+ document.getElementById("textTimeout").classList.remove("textTimeout");
 
 };
 
 function skipQuestion(){
  console.log("skip!");
  flipCardDelay();
- isAnswerCorrect=false;
- answerButton();
+ let answerText = document.getElementById("answerResponce")
+ answerText.classList.remove("hide");
+ answerText.innerHTML = clue.answer;
+
+ let answerButton = document.getElementById("answerButton");
+ answerButton.classList.add("hide");
+ 
  document.getElementById("answerInput").classList.add("hide");
  document.getElementById("itWasRightButton").classList.add("hide");
- clearTimeout(startAnswerTimer);
+
+ let OKButtonSkip = document.getElementById("OKButtonSkip");
+ OKButtonSkip.classList.remove("hide");
+
+ let countdownAnswer = document.getElementById("countdownAnswer");
+ countdownAnswer.classList.add("hide");
+
 };
+
+function OKButtonSkip(){
+  document.getElementById("firstToBuzzH2").innerHTML = "";
+  document.getElementById("numberTimeout").innerHTML = "";
+  document.getElementById("frontQuestion").classList.remove("hide");
+  firstToBuzz = "";
+  document.onkeydown = null;
+  removeQuestion();
+  closeQuestionPopup();
+   questionsFinished += 1;
+   console.log(questionsFinished);
+   if (questionsFinished == 30) {
+     startRoundTwo();
+   };
+   if (questionsFinished == 60) {
+     gameEnd();
+   };
+
+   // TEST:
+   clearTimeout(startAnswerTimer);
+   timer = BUZZER_TIMER_COUNTDOWN;
+   window.clearInterval(answerTimer, 1000);
+   clearTimeout(startAnswerTimer);
+   answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
+
+}
 // --------------------------------------------------------------------------------
 
 // ------------------------------ TIMER -------------------------------------------
@@ -185,8 +249,6 @@ function inputTimer(){
  let textTimeout = document.getElementById("textTimeout");
  numberTimeout.classList.add("numberTimeout");
  textTimeout.classList.add("textTimeout");
- // timeleft bruges ikke?:
- // timeleft = RESPONCE_TIME_IN_MILLISECONDS;
  numberTimeout.innerHTML = timer + " sekunder...";
  if (timer <= 0) {
   clearTimeout(startQuestionTimer);
@@ -194,7 +256,9 @@ function inputTimer(){
   activateBuzzers();
   numberTimeout.innerHTML = "DER MÅ NU BUZZES !!!";
 
-  
+  document.getElementById("skipButton").classList.remove("hide");
+  document.getElementById("skipButton").classList.add("knap");
+
  };
  timer = timer - 1;
 };
@@ -202,8 +266,12 @@ function inputTimer(){
 
 
  function answerTimer(){
- document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
-  if (answerTimerInSeconds <= 0) {
+
+ if (!document.getElementById("countdownAnswer").classList.contains("hide")) {
+  document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
+ };
+
+ if (answerTimerInSeconds <= 0) {
    clearTimeout(startAnswerTimer);
    // TODO: Giv besked og luk question popup:
   // window.alert("Tiden løb ud");
