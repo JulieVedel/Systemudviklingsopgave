@@ -7,14 +7,14 @@ function showHelpPopup() {
  var popup = document.getElementById("fadeBackground");
  popup.classList.add("fade");
 
+ document.querySelector("#menuToggle > input[type=checkbox]").checked = false;
+
 };
 
 function closeHelpPopup() {
 
- var popup = document.getElementById("startingPlayerPopup");
+ var popup = document.getElementById("popup");
  popup.classList.remove("open-popup");
-
-document.getElementById("startingRoundTwo").classList.remove("open-popup");
 
  var popup = document.getElementById("fadeBackground");
  popup.classList.remove("fade");

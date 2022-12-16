@@ -5,9 +5,7 @@ let answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
 let isAnswerCorrect = false;
 let round = 1;
 let currentPoints = 0; 
-
 let clue;
-
 // // set css timeCountdown:
 var root = document.querySelector(':root');
 let seconds = timer + 's';
@@ -278,6 +276,28 @@ function inputTimer(){
    // TODO: Giv besked og luk question popup:
   // window.alert("Tiden løb ud");
   console.log("time is over");
+
+    isAnswerCorrect = false;
+
+    window.clearInterval(answerTimer, 1000);
+    clearTimeout(startAnswerTimer);
+    answerTimerInSeconds = 30;
+
+    document.getElementById("countdownAnswer").innerHTML = "";
+    document.getElementById("answerButton").classList.add("hide");
+    document.getElementById("answerInput").readOnly = true;
+
+    answerResponce.innerText = "Tiden løb ud, det rigtige svar er: " + clue.answer; 
+    document.getElementById("continueButton").classList.remove("hide");
+    document.getElementById("continueButton").classList.add("knap");
+
+    window.isAnswerCorrect = isAnswerCorrect;
+    window.currentPoints = currentPoints;
+
+    document.getElementById("continueButton").onclick = function () {
+      closePopUpAndContinueGame();
+    };
+
   };
   answerTimerInSeconds = answerTimerInSeconds - 1;
  };
@@ -285,6 +305,7 @@ function inputTimer(){
 
 //------------------------------ ACTIVATE BUZZERS & SOUND ------------------------------------------------
 let firstToBuzz = "";
+let playerWhoBussedFirst = -1;
 function activateBuzzers(){
 
  document.onkeydown = function (e) {
@@ -310,7 +331,7 @@ function activateBuzzers(){
   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!";
   window.setTimeout(flipCardDelay, 1000);
   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player1"));
-  
+   playerWhoBussedFirst = 0;
  };
   
  if (firstToBuzz == "" && e.key == key2) {
@@ -320,6 +341,7 @@ function activateBuzzers(){
   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!";
   window.setTimeout(flipCardDelay, 1000);
   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player2"));
+   playerWhoBussedFirst = 1;
  };
 
  if (firstToBuzz == "" && e.key == key3) {
@@ -329,6 +351,7 @@ function activateBuzzers(){
   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!";
   window.setTimeout(flipCardDelay, 1000);
   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player3"));
+   playerWhoBussedFirst = 2;
  };
 
  if (firstToBuzz == "" && e.key == key4) {
@@ -338,6 +361,7 @@ function activateBuzzers(){
   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!";
   window.setTimeout(flipCardDelay, 1000);
   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player4"));
+   playerWhoBussedFirst = 3;
  };
  };
 };
@@ -374,6 +398,8 @@ function answerButton() {
   document.getElementById("continueButton").classList.add("knap");
 
   isAnswerCorrect = true;
+
+  playerWhoAnsweredRightGetsToPick();
    
  } else {
   answerResponce.innerText = "Det rigtige svar er: " + clue.answer; 
@@ -383,6 +409,12 @@ function answerButton() {
   document.getElementById("itWasRightButton").classList.add("knap");
 
   isAnswerCorrect = false;
+
+   newPlyaerPickQuestionIfAnswerIsWrong();
+
+
+
+
  };
  window.isAnswerCorrect = isAnswerCorrect;
  window.currentPoints = currentPoints;
@@ -393,8 +425,9 @@ document.getElementById("continueButton").onclick = function () {
 };
 
 document.getElementById("itWasRightButton").onclick = function () {
- window.isAnswerCorrect = true;
- closePopUpAndContinueGame();
+  window.isAnswerCorrect = true;
+  playerWhoAnsweredRightGetsToPick();
+  closePopUpAndContinueGame();
 };
 
 };
@@ -539,6 +572,59 @@ function findWinner() {
 
   }
 
+
+}
+
+
+
+function newPlyaerPickQuestionIfAnswerIsWrong() {
+
+  let cards = [];
+
+  cards[0] = document.getElementById("card1");
+  cards[1] = document.getElementById("card2");
+  cards[2] = document.getElementById("card3");
+  cards[3] = document.getElementById("card4");
+
+  let currentPlayersTurn = parseInt(sessionStorage.getItem("currentPlayersTurn"));
+
+  let totalPlayers = getPlayerNames().length;
+
+  if ((currentPlayersTurn + 1) == totalPlayers) {
+    currentPlayersTurn = 0;
+  } else {
+    currentPlayersTurn += 1;
+  }
+
+  for (let i = 0; i < totalPlayers; i++) {
+     cards[i].classList.remove("card-selected");
+  }
+
+  console.log(currentPlayersTurn);
+
+  cards[currentPlayersTurn].classList.add("card-selected");
+
+  sessionStorage.setItem("currentPlayersTurn" , currentPlayersTurn);
+
+}
+
+
+function playerWhoAnsweredRightGetsToPick() {
+  
+  let cards = [];
+
+  cards[0] = document.getElementById("card1");
+  cards[1] = document.getElementById("card2");
+  cards[2] = document.getElementById("card3");
+  cards[3] = document.getElementById("card4");
+
+  for (let i = 0; i < getPlayerNames().length; i++) {
+    cards[i].classList.remove("card-selected");
+  }
+
+  cards[playerWhoBussedFirst].classList.add("card-selected");
+
+  sessionStorage.setItem("currentPlayersTurn" , playerWhoBussedFirst);
 
 }
 

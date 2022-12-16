@@ -13,11 +13,28 @@
     
 </head>
 <body>
-    <div class="header">
-        <button class="knap" id="spil-knap">SPIL</button>
-        <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
-        <button class="knap" id="highscore-knap">HIGHSCORE</button>
-    </div>
+    
+    <nav role='navigation'>
+        <div class="header">
+            <img class="logo" src="/images/logo.png" alt="Jeopardy logo">
+        </div>
+
+        <div id="menuToggle">
+          <input type="checkbox" />
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu">
+            <a href="http://localhost:3000/"><li>Forside</li></a>
+            <a href="http://localhost:3000/scoreboard"><li>Leaderboard</li></a>
+            <a href="javascript:showHelpPopup()"><li>Hjælp</li></a>
+            <a href="http://localhost:3000/gamemenu"><li>Nyt spil</li></a>
+          </ul>
+        </div>
+    </nav>
+    
 
     <div class="beholder">
 
@@ -42,7 +59,7 @@
        </div>
 
        <div class="minus">
-        <img class="playerButton" src="/images/minus.png" alt="" onclick="removePlayer(spillerForm1, dividerForm1)">
+        <!-- <img class="minusButton" src="/images/minus.png" alt="" onclick="removePlayer(spillerForm1, dividerForm1)"> -->
        </div>
 
       </form>
@@ -67,7 +84,7 @@
        </div>
 
        <div class="minus">
-        <img class="playerButton" src="/images/minus.png" alt="" onclick="removePlayer(spillerForm2, dividerForm2)">
+        <!-- <img class="minusButton" src="/images/minus.png" alt="" onclick="removePlayer(spillerForm2, dividerForm2)"> -->
        </div>
 
       </form>
@@ -92,7 +109,7 @@
        </div>
 
        <div class="minus">
-        <img class="playerButton" src="/images/minus.png" alt="" onclick="removePlayer(spillerForm3, dividerForm3)">
+        <img class="playerButton minusButton" src="/images/minus.png" alt="" onclick="removePlayer(spillerForm3, dividerForm3)">
        </div>
 
       </form>
@@ -116,7 +133,7 @@
        </div>
 
        <div class="minus">
-        <img class="playerButton" src="/images/minus.png" alt="" onclick="removePlayer4(spillerForm4)">
+        <img class="playerButton minusButton" src="/images/minus.png" alt="" onclick="removePlayer4(spillerForm4)">
        </div>
 
       </form>
@@ -124,7 +141,7 @@
       <hr class="solid" id="dividerForm4" style="display: none;">
      
       <div class="plus" id="plusknap">
-       <img class="playerButton" src="/images/plus.png" onclick="addPlayer()">
+       <img class="playerButton plusButton" src="/images/plus.png" onclick="addPlayer()">
       </div>
       
       <h2 id="plusOverskrift">Tilføj spiller</h2>
@@ -302,7 +319,7 @@
 
      <div>
       <!-- popup button -->
-      <button type="submit" class="knap" onclick="showHelpPopup()">Hjælp</button>
+      <!-- <button type="submit" class="knap" onclick="showHelpPopup()">Hjælp</button> -->
       <!-- popup msg -->
       <div class="popup" id="popup">
        <br>
