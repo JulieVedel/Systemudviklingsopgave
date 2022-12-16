@@ -11,7 +11,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,9 @@
     "url": "https://github.com/JulieVedel/Systemudviklingsopgave/issues"
   },
   "homepage": "https://github.com/JulieVedel/Systemudviklingsopgave#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.3.1",
+    "puppeteer": "^19.4.0"
+  }
 }

@@ -2,7 +2,7 @@ let synligeElementer = 2;
 let minusButtons;
 //REFAC:
 function addPlayer ()  {
-    debugger
+    
         let form1 = document.getElementById('spillerForm1');
         let form2 = document.getElementById('spillerForm2');
         let form3 = document.getElementById('spillerForm3');
@@ -34,8 +34,8 @@ function addPlayer ()  {
             synligeElementer += 1;
             console.log("elementer: ", synligeElementer);
             checkNumberOfElements();
-        }
-}
+        };
+};
 
 function removePlayer (element, divider) {
     element.style.display = "none";
@@ -43,14 +43,14 @@ function removePlayer (element, divider) {
     synligeElementer -= 1;
     console.log("elementer: ", synligeElementer);
     checkNumberOfElements();
-}
+};
 
 function removePlayer4 (element) {
     element.style.display = "none";
     synligeElementer -= 1;
     console.log("elementer: ", synligeElementer);
     checkNumberOfElements();
-}
+};
 
 function checkNumberOfElements () {
     let minusButtons = document.querySelectorAll('.minusButton');
@@ -58,22 +58,22 @@ function checkNumberOfElements () {
         minusButtons.forEach(button => {
             button.style.display = "block";
         });
-    } 
+    };
 
     if (synligeElementer <= 2) {
         minusButtons.forEach(button => {
             button.style.display = "none";
         });
-    }
+    };
 
     if (synligeElementer == 4) {
         document.getElementById('plusknap').style.display = "none";
         document.getElementById('plusOverskrift').style.display = "none";
-    }
+    };
 
     if (synligeElementer < 4) {
         document.getElementById('plusknap').style.display = "flex";
         document.getElementById('plusOverskrift').style.display = "block";
-    }
-}
+    };
+};
 

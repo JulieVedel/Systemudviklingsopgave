@@ -21,14 +21,10 @@ async function clearScoreboard(){
  console.log("window.location.href == 'http://localhost:3000/scoreboard'", window.location.href == 'http://localhost:3000/scoreboard');
 
  if (window.location.href == 'http://localhost:3000/scoreboard') {
- console.log("running if()") 
- window.location.reload(true);
- window.location.href = 'http://localhost:3000/scoreboard';
-  // delay(1000).then(() => {
-  //  console.log("running reload()") 
-  //  window.location.reload();
-  //  // window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'F5'}));
-  // })
+ console.log("running if()"); 
+
  };
+ window.location.reload();
+ return false;
  // window.location.reload();
 }

@@ -1,14 +1,10 @@
 async function startGame() {
  if (validatePlayerBuzzers() && validatePlayerNames()){
-  
   // if (document.getElementById(`kategori1`).value == "default") {
    try {
        await window.randomCategories();
    } catch (error) {
-    
-   }
-
-  // };
+   };
 
   for (let i = 1; i < 13; i++) {
    let randNum = Math.floor(Math.random()*4) + 1;
@@ -23,8 +19,8 @@ async function startGame() {
    };
   };
 
-  savePlayerInSession();
-  window.location.href = 'http://localhost:3000/tableVeiw';
+savePlayerInSession();
+ window.location.href = 'http://localhost:3000/tableVeiw';
  } else if (!validatePlayerBuzzers()) {
   window.alert("Indstil en buzzerknap for alle synlige spillere, og prøv igen.");
  } else if (!validatePlayerNames()) {

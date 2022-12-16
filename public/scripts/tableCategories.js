@@ -41,9 +41,7 @@ function getSessionCategories() {
 }
 
 function getPlayerNames() {
-
     let playerNames = [];
-
     for (let i = 1; i < 5; i++) {
         if (sessionStorage.getItem("player" + i) != null){
             playerNames.push(sessionStorage.getItem("player" + i));
@@ -51,7 +49,7 @@ function getPlayerNames() {
     };
     console.log(playerNames);
     return playerNames;
-}
+};
 
 function getBuzzerKeys() {
     let buzzerKeys = [];
