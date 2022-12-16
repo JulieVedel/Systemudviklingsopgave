@@ -285,7 +285,7 @@ function inputTimer(){
 
     document.getElementById("countdownAnswer").innerHTML = "";
     document.getElementById("answerButton").classList.add("hide");
-    document.getElementById("answerInput").readOnly = true;
+    document.getElementById("answerInput").classList.add("hide");
 
     answerResponce.innerText = "Tiden løb ud, det rigtige svar er: " + clue.answer; 
     document.getElementById("continueButton").classList.remove("hide");
@@ -437,6 +437,7 @@ function closePopUpAndContinueGame() {
  document.getElementById("firstToBuzzH2").innerHTML = "";
  document.getElementById("numberTimeout").innerHTML = "";
  document.getElementById("frontQuestion").classList.remove("hide");
+  document.getElementById("answerInput").classList.remove("hide");
 
  firstToBuzz = "";
  document.onkeydown = null;
