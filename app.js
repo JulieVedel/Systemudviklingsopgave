@@ -24,7 +24,7 @@ const { result } = require('lodash');
 
 // mongo database connection string:
 const dbURI = 'mongodb+srv://user1:1234@cluster0.1kjeku1.mongodb.net/test?retryWrites=true&w=majority';
-
+  
 mongoose.connect(dbURI)
  // .then((result) => console.log('connected to db'))
  // server lytter kun hvis der er oprettet forbindelse til db:
@@ -155,32 +155,10 @@ async function getTop10Users(){
  } catch(err) {
   console.log(err);
  };
- // return result.length;
+ 
 };
-
-// function myAdd(x, y) {
-//  return x + y;
-// };
-
-
-function myAdd(x, y) {
- return x+y;
-};
-
-function myMultiply(x, y) {
- return x*y;
-};
-
-function myAddAndMultiply(x, y){
- return myAdd(x,y) + myMultiply(x,y);
-};
-
-exports.myAdd = myAdd;
-exports.myMultiply = myMultiply;
-exports.myAddAndMultiply = myAddAndMultiply;
 
 exports.getTop10Users = getTop10Users;
-
 
 async function checkIfCurrentPlayerIsInTop10(){
  let place = 1;
