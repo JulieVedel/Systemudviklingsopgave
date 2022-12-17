@@ -1,4 +1,4 @@
-const BUZZER_TIMER_COUNTDOWN = 1;
+const BUZZER_TIMER_COUNTDOWN = 5;
 let timer = BUZZER_TIMER_COUNTDOWN;
 const ANSWER_TIMER_COUNTDOWN = 30;
 let answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
@@ -153,8 +153,10 @@ function showQuestionPopup() {
  popup.classList.add("fade");
 
  document.getElementById("question_popup_H2").innerHTML += " til " + currentPoints;
+
  //Fix forkerte character fra API:
  clue.question = clue.question.replace(/\â\\/g, "'");
+ clue.question = clue.question.replace("Â", "");
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
 
@@ -204,11 +206,8 @@ function skipQuestion(){
 
  //Fix forkerte character fra API:
  clue.answer = clue.answer.replace(/\â\\/g, "'");
- // console.log("answer ?", clue.answer);
- // clue.answer = clue.answer.replace(/"<i>"/g, "");
- // console.log("answer <i>", clue.answer);
- // clue.answer = clue.answer.replace(/"<\/i>"/g, "");
- // console.log("answer <i> ud", clue.answer);
+// console.log("clue.answer",clue.answer);
+
 
  answerText.innerHTML = clue.answer;
 
@@ -397,12 +396,9 @@ function answerButton() {
  let answerText = document.getElementById("answerInput").value;
  let answerResponce = document.getElementById("answerResponce");
 
-
-  window.clearInterval(answerTimer, 1000);
-  clearTimeout(startAnswerTimer);
-  answerTimerInSeconds = 30;
-
-
+ window.clearInterval(answerTimer, 1000);
+ clearTimeout(startAnswerTimer);
+ answerTimerInSeconds = 30;
 
  if (checkAnswer(answerText)) {
   answerResponce.innerHTML = "Tillykke du svarede rigtigt!"; 

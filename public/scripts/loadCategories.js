@@ -67,7 +67,6 @@ async function randomCategories() {
  console.log("running randomCategories");
  try {
   let randomCategoryOffset = Math.round(Math.random()*5400);
-  randomCategoryOffset = 200
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   let data = await response.json();
@@ -76,11 +75,8 @@ async function randomCategories() {
   let categories = [];
   try {
    for (i = 0; categories.length < 60; i++){
-     if (data[i].clues_count > 4 && data.id != 4068){
+     if (data[i].clues_count > 4 && data[i].id != 4068){
       categories.push(data[i]);
-      // if(data[i].title == "ships"){
-       
-      // }
      };
    };
   } catch (e) {
@@ -142,19 +138,26 @@ async function randomCategories() {
 
 // async function findWrongCat() {
 //  console.log("running randomCategories");
+//    let randomCategoryOffset = 0;
+//     // = Math.round(Math.random()*5400);
+//  for (let k = 0; k < 54; k++) {
+
 //  try {
-//   let randomCategoryOffset = Math.round(Math.random()*5400);
+
+  
 //   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
 //   const response = await fetch(apiPath);
 //   let data = await response.json();
-//   console.log("Raw data, categories:", data);
+//   // console.log("Raw data, categories:", data);
 
 //   try {
 //    for (i = 0; i < 100; i++){
-//      if (data[i].title == "ships"){
+//     console.log(randomCategoryOffset)
+//      if (data[i].title == "world history"){
 //       console.log("I FOUND IT!!!!!!: ",data[i]);
 //       // 260
 //       // 205
+//       // 314
 //      };
 //    };
 //   } catch (e) {
@@ -166,6 +169,8 @@ async function randomCategories() {
 //   console.log(e);
 //   console.log("There was an error fetching the data");
 //  };
+//  randomCategoryOffset += 100;
+// };
 // };
 
 // findWrongCat();
