@@ -63,13 +63,10 @@ async function loadCategories() {
  };
 };
 
-// loadCategories();
-
 async function randomCategories() {
  console.log("running randomCategories");
  try {
   let randomCategoryOffset = Math.round(Math.random()*5500);
-  randomCategoryOffset = 160;
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   let data = await response.json();
@@ -80,31 +77,22 @@ async function randomCategories() {
    for (i = 0; categories.length < 60; i++){
      if (data[i].clues_count > 4 && data.id != 4068){
       categories.push(data[i]);
-      if (data[i].title == "the old testament") {
-       console.log("its here!!!!!!!!!!!");
-       console.log(data[i]);
-      };
      };
    };
   } catch (e) {
    console.log(e);
-   //tilføj await?!?!!?!?
-   // randomCategories();
   };
 
   shuffle(categories);
 
   let remainingCategoriIDs = [];
-
   for (let i = 0; i < 12; i++) {
    let choice = document.getElementById(`kategori${i+1}`);
    
    if (choice.value == "default" || choice.value == "") {
-    // console.log("choice.id", choice.id);
     remainingCategoriIDs[i] = choice.id;
    };
   };
-  console.log("remainingCategoriIDs",remainingCategoriIDs);
   
   for (let k = 0; k < remainingCategoriIDs.length; k++) {
    let choice = document.getElementById(`kategori${k+1}`);
@@ -115,26 +103,14 @@ async function randomCategories() {
 
     for (j = 0; j < 5; j++){
      if (choice.id != remainingCategoriIDs[i]) {
-     let choice = document.getElementById(`kategori${k+1}`);
-     // console.log("choice",choice);
-     // console.log("remainingCategoriIDs[i]",remainingCategoriIDs[k]);
+      let choice = document.getElementById(`kategori${k+1}`);
 
-     //Fix forkerte character fra API:
+      //Fix forkerte character fra API:
+      let catTitle = categories[j+k*5].title;
+      catTitle = catTitle.replaceAll("â", "'");
+      catTitle = catTitle.replace(/\â|\x98|\x80/g, "");
 
-     // let myS = "sdf ân sdf";
-     // console.log(myS);
-     // let mySs = myS.replace(/\â\\/g, "'");
-     // console.log(mySs);
-
-
-     // let catTitle = categories[j+k*5].title.replace(/â/, "'").replaceAll(//,'g', "");
-     let catTitle = categories[j+k*5].title;
-
-     catTitle = catTitle.replaceAll("â", "'");
-     catTitle = catTitle.replace(/\â|\x98|\x80/g, "");
-     
-     choice.innerHTML += `<option value=${categories[j+k*5].id}>${catTitle}</option>`;
-     // choice.innerHTML += `<option value=${categories[j+k*5].id}>${categories[j+k*5].title}</option>`;
+      choice.innerHTML += `<option value=${categories[j+k*5].id}>${catTitle}</option>`;
      };
      console.log();
     };
@@ -145,46 +121,3 @@ async function randomCategories() {
   console.log("There was an error fetching the data");
  };
 };
-// function replaceAll(str, find, replace) {
-//  return str.replace(escapeRegExp(find, 'g'), replace);
-// };
-// function escapeRegExp(string) {
-//  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-// };
-// også for castArray, fx. Rock 'n roll
-
-// loadCategories();
-
-// if (data == null) {
-//   showCategoriHeading = true;
-//   loadCategories();
-// }
-
-// async function findWrongCat() {
-//  console.log("running randomCategories");
-//  try {
-//   let randomCategoryOffset = Math.round(Math.random()*5500);
-//   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
-//   const response = await fetch(apiPath);
-//   let data = await response.json();
-//   console.log("Raw data, categories:", data);
-
-//   try {
-//    for (i = 0; i < 100; i++){
-//      if (data[i].title == "the old testament"){
-//       console.log("I FOUND IT!!!!!!: ",data[i]);
-//       // 260
-//      };
-//    };
-//   } catch (e) {
-//    console.log(e);
-//   };
-
-  
-//  } catch (e) {
-//   console.log(e);
-//   console.log("There was an error fetching the data");
-//  };
-// };
-
-// findWrongCat();
