@@ -18,13 +18,8 @@ function getSessionCategories() {
     categorie.push(sessionStorage.getItem("cat11name"));
     categorie.push(sessionStorage.getItem("cat12name"));
 
-    console.log(categorie);
-
     let catH = document.getElementById("kategori");
-
     let catH2 = document.getElementById("kategoriTwo");
-
-    console.log(catH);
 
     catH.innerHTML = "";
 
@@ -165,6 +160,7 @@ pupulatePlayerNamesAndStartSelectPlayer();
 
 function startingPlayer(player) {
     document.getElementById('startingPlayer').innerHTML = player + " starter spillet!";
+
 };
 
 sessionStorage.setItem("preventScoreboardRefresh", 0);

@@ -170,7 +170,7 @@ function flipCardDelay(){
  document.getElementById("answerButton").classList.remove("hide");
  document.getElementById("answerInput").readOnly = false;
  document.getElementById("answerInput").value = "";
- answerResponce.innerText = "";
+ answerResponce.innerHTML = "";
 
  startAnswerTimer = window.setInterval(answerTimer, 1000);
 
@@ -204,7 +204,12 @@ function skipQuestion(){
 
  //Fix forkerte character fra API:
  clue.answer = clue.answer.replace(/\â\\/g, "'");
- 
+ // console.log("answer ?", clue.answer);
+ // clue.answer = clue.answer.replace(/"<i>"/g, "");
+ // console.log("answer <i>", clue.answer);
+ // clue.answer = clue.answer.replace(/"<\/i>"/g, "");
+ // console.log("answer <i> ud", clue.answer);
+
  answerText.innerHTML = clue.answer;
 
  let answerButton = document.getElementById("answerButton");
@@ -293,7 +298,8 @@ function inputTimer(){
     document.getElementById("answerButton").classList.add("hide");
     document.getElementById("answerInput").classList.add("hide");
 
-    answerResponce.innerText = "Tiden løb ud, det rigtige svar er: " + clue.answer; 
+    answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
+    answerResponce.innerHTML += clue.answer; 
     document.getElementById("continueButton").classList.remove("hide");
     document.getElementById("continueButton").classList.add("knap");
 
@@ -399,7 +405,7 @@ function answerButton() {
 
 
  if (checkAnswer(answerText)) {
-  answerResponce.innerText = "Tillykke du svarede rigtigt!"; 
+  answerResponce.innerHTML = "Tillykke du svarede rigtigt!"; 
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
 
@@ -408,7 +414,8 @@ function answerButton() {
   playerWhoAnsweredRightGetsToPick();
    
  } else {
-  answerResponce.innerText = "Det rigtige svar er: " + clue.answer; 
+  answerResponce.innerHTML = "Det rigtige svar er: " ; 
+  answerResponce.innerHTML += clue.answer;
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
   document.getElementById("itWasRightButton").classList.remove("hide");

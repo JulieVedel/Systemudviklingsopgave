@@ -18,7 +18,7 @@ async function loadCategories() {
  sessionStorage.clear();
  console.log("running loadCategories");
  try {
-  let randomCategoryOffset = Math.round(Math.random()*5500);
+  let randomCategoryOffset = Math.round(Math.random()*5400);
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   console.log("Raw response:", response);
@@ -66,7 +66,8 @@ async function loadCategories() {
 async function randomCategories() {
  console.log("running randomCategories");
  try {
-  let randomCategoryOffset = Math.round(Math.random()*5500);
+  let randomCategoryOffset = Math.round(Math.random()*5400);
+  randomCategoryOffset = 200
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   let data = await response.json();
@@ -77,6 +78,9 @@ async function randomCategories() {
    for (i = 0; categories.length < 60; i++){
      if (data[i].clues_count > 4 && data.id != 4068){
       categories.push(data[i]);
+      // if(data[i].title == "ships"){
+       
+      // }
      };
    };
   } catch (e) {
@@ -121,3 +125,47 @@ async function randomCategories() {
   console.log("There was an error fetching the data");
  };
 };
+// function replaceAll(str, find, replace) {
+//  return str.replace(escapeRegExp(find, 'g'), replace);
+// };
+// function escapeRegExp(string) {
+//  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+// };
+// også for castArray, fx. Rock 'n roll
+
+// loadCategories();
+
+// if (data == null) {
+//   showCategoriHeading = true;
+//   loadCategories();
+// }
+
+// async function findWrongCat() {
+//  console.log("running randomCategories");
+//  try {
+//   let randomCategoryOffset = Math.round(Math.random()*5400);
+//   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
+//   const response = await fetch(apiPath);
+//   let data = await response.json();
+//   console.log("Raw data, categories:", data);
+
+//   try {
+//    for (i = 0; i < 100; i++){
+//      if (data[i].title == "ships"){
+//       console.log("I FOUND IT!!!!!!: ",data[i]);
+//       // 260
+//       // 205
+//      };
+//    };
+//   } catch (e) {
+//    console.log(e);
+//   };
+
+  
+//  } catch (e) {
+//   console.log(e);
+//   console.log("There was an error fetching the data");
+//  };
+// };
+
+// findWrongCat();

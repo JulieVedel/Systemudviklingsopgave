@@ -117,7 +117,7 @@ function showStartingPlayerPopup() {
    };
    
    function closeStartingPlayerPopup() {
-   
+    closeHelpPopup();
     var popup = document.getElementById("startingPlayerPopup");
     popup.classList.remove("open-popup");
    
