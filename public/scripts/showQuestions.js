@@ -1,4 +1,4 @@
-const BUZZER_TIMER_COUNTDOWN = 5
+const BUZZER_TIMER_COUNTDOWN = 1;
 let timer = BUZZER_TIMER_COUNTDOWN;
 const ANSWER_TIMER_COUNTDOWN = 30;
 let answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
@@ -153,6 +153,9 @@ function showQuestionPopup() {
  popup.classList.add("fade");
 
  document.getElementById("question_popup_H2").innerHTML += " til " + currentPoints;
+ //Fix forkerte character fra API:
+ clue.question = clue.question.replace(/\â\\/g, "'");
+
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
 
  startQuestionTimer = window.setInterval(inputTimer, 1000);
@@ -175,7 +178,6 @@ function flipCardDelay(){
  document.getElementById("itWasRightButton").classList.add("hide");
  document.getElementById("question_popup_H2_Back").innerHTML += " til " + currentPoints;
  document.getElementById("question_popup_H2_Back").innerHTML += "<h3>" + clue.question + "</h3>";
- 
 
 };
 
@@ -199,6 +201,10 @@ function skipQuestion(){
  flipCardDelay();
  let answerText = document.getElementById("answerResponce")
  answerText.classList.remove("hide");
+
+ //Fix forkerte character fra API:
+ clue.answer = clue.answer.replace(/\â\\/g, "'");
+ 
  answerText.innerHTML = clue.answer;
 
  let answerButton = document.getElementById("answerButton");
