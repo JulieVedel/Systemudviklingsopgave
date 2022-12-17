@@ -18,11 +18,11 @@ async function loadCategories() {
  sessionStorage.clear();
  console.log("running loadCategories");
  try {
-  let randomCategoryOffset = Math.round(Math.random()*8000);
+  let randomCategoryOffset = Math.round(Math.random()*5500);
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
-
-  let data = await response.json();
+  console.log("Raw response:", response);
+  const data = await response.json();
 
   console.log("Raw data, categories:", data);
   // Test for tomme kategorier og byg categories med 60 kategorier:
@@ -37,24 +37,24 @@ async function loadCategories() {
    };
   } catch (e) {
    console.log(e);
-   loadCategories();
+   // loadCategories();
   };
   //Randomize categories array:
   shuffle(categories);
    // Load dropdowns:
-  for (let i = 0; i < 12; i++) {
-   let choice = document.getElementById(`kategori${i+1}`);
-   choice.innerHTML = "";
-   // if (showCategoriHeading) {
+  try {
+   for (let i = 0; i < 12; i++) {
+    let choice = document.getElementById(`kategori${i+1}`);
+    choice.innerHTML = "";
     choice.innerHTML += `<option value='default'>Vælg kategori</option>`;
-   // }
-   for (j = 0; j < 5; j++){
-    let counter = (j)+i*5;
-    choice.innerHTML += `<option value=${categories[counter].id}>${categories[counter].title}</option>`;
-    // console.log(counter);
-    console.log();
+    for (j = 0; j < 5; j++){
+     let counter = (j)+i*5;
+     choice.innerHTML += `<option value=${categories[counter].id}>${categories[counter].title}</option>`;
+     console.log();
+    };
    };
-
+  } catch (e) {
+   console.log(e)
   };
   // showCategoriHeading = false;
  } catch (e) {
@@ -63,12 +63,12 @@ async function loadCategories() {
  };
 };
 
-loadCategories();
+// loadCategories();
 
 async function randomCategories() {
  console.log("running randomCategories");
  try {
-  let randomCategoryOffset = Math.round(Math.random()*8000);
+  let randomCategoryOffset = Math.round(Math.random()*5500);
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   let data = await response.json();
@@ -77,16 +77,14 @@ async function randomCategories() {
   let categories = [];
   try {
    for (i = 0; categories.length < 60; i++){
-
      if (data[i].clues_count > 4 && data.id != 4068){
-      // denne skal ændres:
       categories.push(data[i]);
      };
    };
   } catch (e) {
    console.log(e);
    //tilføj await?!?!!?!?
-   randomCategories();
+   // randomCategories();
   };
 
   shuffle(categories);
@@ -127,9 +125,9 @@ async function randomCategories() {
  };
 };
 
-loadCategories();
+// loadCategories();
 
-if (data == null) {
-  showCategoriHeading = true;
-  loadCategories();
-}
+// if (data == null) {
+//   showCategoriHeading = true;
+//   loadCategories();
+// }
