@@ -99,9 +99,9 @@ async function fillRemainingDropDownsWithCategories(categories){
      let choice = document.getElementById(`kategori${k+1}`);
      //Fix forkerte character fra API:
      let catTitle = categories[j+k*5].title;
-     if(catTitle == "we suggest biography titles") {
+     if(catTitle == "inventions") {
       console.log("FOUND IT!!!!!!!!!");
-      // 3282
+      // 
      };
      catTitle = fixAsciiChars(catTitle);
      choice.innerHTML += `<option value=${categories[j+k*5].id}>${catTitle}</option>`;
@@ -136,3 +136,31 @@ function fixAsciiChars(string){
  string = string.replace(/\â|\x98|\x80/g, "");
  return string;
 };
+
+// helper - MIS.
+// async function findCat() {
+//  let randomCategoryOffset
+//  for (let x = 0; x < 55; x++) {
+//   randomCategoryOffset = x * 100;
+//   try {
+  
+//   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
+//   const response = await fetch(apiPath);
+//   const data = await response.json();
+
+//   // console.log(data);
+//   for (let i = 0; i < data.length; i++) {
+//    if (data[i].title == "inventions")
+//    console.log(data[i].title);
+//    console.log(data[i].id);
+//   }
+
+//  } catch (e) {
+//   console.log(e);
+//   console.log("There was an error fetching the data");
+//  };
+//  }
+ 
+// };
+
+// findCat();
