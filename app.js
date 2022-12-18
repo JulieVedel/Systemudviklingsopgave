@@ -55,6 +55,7 @@ async function savePlayersToMongoDB(playersObj){
   // Refac ? ID'erne er globale?? Kan ikke fanges med i.... find anden metode/struktur?
   
   players.forEach(player => {
+   console.log("player._id",player._id)
    playerIDs[i] = player._id;
    i++;
   });
@@ -62,7 +63,8 @@ async function savePlayersToMongoDB(playersObj){
  } catch(err) {
    console.log(err);
  };
-}
+ console.log("playerIDs",playerIDs)
+};
 
 async function deleteAllPlayers(){
  try {
@@ -105,7 +107,8 @@ async function checkIfCurrentPlayerIsInTop10(){
 
 async function getAllPlayers(){
  try {
-  let players = await Player.find({points: {$gt: 0}}).sort({points: -1});
+  let players = await Player.find().sort({points: -1});
+  console.log("antal spillere i db:", players.length)
   return players;
  } catch(err) {
   console.log(err);
@@ -121,10 +124,13 @@ async function checkCurrentPlayerRanks(){
   let players = await getAllPlayers();
   players.forEach(player => {
    for (let i = 0; i < 4; i++) {
+    // console.log("playerIDs[i]",playerIDs[i])
     if (player._id.equals(playerIDs[i])) {
-     placesAndPlayersObj[i] = {place: place, player: player};
+     placesAndPlayersObj[i] = {place: place, playerObj: player};
+     
     };
    };
+   console.log("placesAndPlayersObj",placesAndPlayersObj)
    place++;
   });
 

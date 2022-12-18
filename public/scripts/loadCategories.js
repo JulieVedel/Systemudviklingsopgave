@@ -33,7 +33,6 @@ async function getDataFromAPI() {
   let randomCategoryOffset = Math.round(Math.random()*5400);
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
-  console.log("Raw response:", response);
   const data = await response.json();
   return data;
  } catch (e) {
@@ -88,21 +87,6 @@ async function setupRandomCategories() {
  };
 };
 
-async function getRemainingCategoriIDs(){
- let remainingCategoriIDs = [];
- try {
-  for (let i = 0; i < 12; i++) {
-   let choice = document.getElementById(`kategori${i+1}`);
-   if (choice.value == "default" || choice.value == "") {
-    remainingCategoriIDs[i] = choice.id;
-   };
-  };
- return remainingCategoriIDs;
- } catch (error) {
-  console.log(error);
- };
-};
-
 async function fillRemainingDropDownsWithCategories(categories){
  let remainingCategoriIDs = await getRemainingCategoriIDs();
  for (let k = 0; k < remainingCategoriIDs.length; k++) {
@@ -128,9 +112,22 @@ async function fillRemainingDropDownsWithCategories(categories){
  };
 };
 
+async function getRemainingCategoriIDs(){
+ let remainingCategoriIDs = [];
+ try {
+  for (let i = 0; i < 12; i++) {
+   let choice = document.getElementById(`kategori${i+1}`);
+   if (choice.value == "default" || choice.value == "") {
+    remainingCategoriIDs[i] = choice.id;
+   };
+  };
+ return remainingCategoriIDs;
+ } catch (error) {
+  console.log(error);
+ };
+};
+
 function fixAsciiChars(string){
- //Mangler Ã³
- //Eksempel: Felipe CalderÃ³n - skal være "ó"
  string = string.replaceAll("â", "'");
  string = string.replaceAll("Ã³", "ó");
  string = string.replace(/\â|\x98|\x80/g, "");
