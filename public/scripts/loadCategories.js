@@ -31,6 +31,7 @@ async function setupCategoryDropdowns() {
 async function getDataFromAPI() {
  try {
   let randomCategoryOffset = Math.round(Math.random()*5400);
+  randomCategoryOffset = 3280;
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   console.log("Raw response:", response);
@@ -115,8 +116,9 @@ async function fillRemainingDropDownsWithCategories(categories){
      let choice = document.getElementById(`kategori${k+1}`);
      //Fix forkerte character fra API:
      let catTitle = categories[j+k*5].title;
-     if(catTitle == "act i") {
+     if(catTitle == "we suggest biography titles") {
       console.log("FOUND IT!!!!!!!!!");
+      // 3282
      };
      catTitle = fixAsciiChars(catTitle);
      choice.innerHTML += `<option value=${categories[j+k*5].id}>${catTitle}</option>`;

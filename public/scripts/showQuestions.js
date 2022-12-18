@@ -116,7 +116,7 @@ function showQuestionPopup() {
  //Tilføj de resterende fixes fra loadQuestion - og træk ud i egen funktion:
  clue.question = clue.question.replace(/\â\\/g, "'");
  clue.question = clue.question.replace("Â", "");
- clue.question = clue.question.replaceAll("Ã³", "ó");
+ clue.question = clue.question.replace("Ã³", "ó");
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
  startQuestionTimer = window.setInterval(inputTimer, 1000);
@@ -156,7 +156,7 @@ function skipQuestion(){
  answerText.classList.remove("hide");
  //Fix forkerte character fra API:
  clue.answer = clue.answer.replace(/\â\\/g, "'");
- clue.answer = clue.answer.replaceAll("Ã³", "ó");
+ clue.answer = clue.answer.replace("Ã³", "ó");
 
  answerText.innerHTML = clue.answer;
  let answerButton = document.getElementById("answerButton");
@@ -235,6 +235,11 @@ function answerTimer(){
   document.getElementById("answerButton").classList.add("hide");
   document.getElementById("answerInput").classList.add("hide");
   answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
+
+  clue.answer = clue.answer.replace(/\â\\/g, "'");
+  console.log(clue.answer);
+  clue.answer = clue.answer.replace("Ã³", "ó");
+
   answerResponce.innerHTML += clue.answer; 
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
@@ -301,7 +306,9 @@ function answerButton() {
   playerWhoAnsweredRightGetsToPick();
    
  } else {
-  answerResponce.innerHTML = "Det rigtige svar er: " ; 
+  answerResponce.innerHTML = "Det rigtige svar er: " ;
+  clue.answer = clue.answer.replace(/\â\\/g, "'");
+  clue.answer = clue.answer.replace("Ã³", "ó");
   answerResponce.innerHTML += clue.answer;
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
