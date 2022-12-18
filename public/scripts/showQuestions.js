@@ -155,6 +155,7 @@ function skipQuestion(){
  answerText.classList.remove("hide");
  //Fix forkerte character fra API:
  clue.answer = clue.answer.replace(/\â\\/g, "'");
+
  answerText.innerHTML = clue.answer;
  let answerButton = document.getElementById("answerButton");
  answerButton.classList.add("hide");
@@ -212,7 +213,7 @@ function inputTimer(){
  timer = timer - 1;
 };
 
- function answerTimer(){
+function answerTimer(){
 
  if (!document.getElementById("countdownAnswer").classList.contains("hide")) {
   document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
@@ -222,92 +223,55 @@ function inputTimer(){
   clearTimeout(startAnswerTimer);
   console.log("time is over");
 
-    isAnswerCorrect = false;
+  isAnswerCorrect = false;
 
-    window.clearInterval(answerTimer, 1000);
-    clearTimeout(startAnswerTimer);
-    answerTimerInSeconds = 30;
+  window.clearInterval(answerTimer, 1000);
+  clearTimeout(startAnswerTimer);
+  answerTimerInSeconds = 30;
 
-    document.getElementById("countdownAnswer").innerHTML = "";
-    document.getElementById("answerButton").classList.add("hide");
-    document.getElementById("answerInput").classList.add("hide");
-    answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
-    answerResponce.innerHTML += clue.answer; 
-    document.getElementById("continueButton").classList.remove("hide");
-    document.getElementById("continueButton").classList.add("knap");
+  document.getElementById("countdownAnswer").innerHTML = "";
+  document.getElementById("answerButton").classList.add("hide");
+  document.getElementById("answerInput").classList.add("hide");
+  answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
+  answerResponce.innerHTML += clue.answer; 
+  document.getElementById("continueButton").classList.remove("hide");
+  document.getElementById("continueButton").classList.add("knap");
 
-    window.isAnswerCorrect = isAnswerCorrect;
-    window.currentPoints = currentPoints;
+  window.isAnswerCorrect = isAnswerCorrect;
+  window.currentPoints = currentPoints;
 
-    document.getElementById("continueButton").onclick = function () {
-      closePopUpAndContinueGame();
-    };
+  document.getElementById("continueButton").onclick = function () {
+    closePopUpAndContinueGame();
   };
-  answerTimerInSeconds = answerTimerInSeconds - 1;
+
  };
+ answerTimerInSeconds = answerTimerInSeconds - 1;
+};
 
 //------------------------------ ACTIVATE BUZZERS & SOUND ------------------------------------------------
 let firstToBuzz = "";
 let playerWhoBussedFirst = -1;
 
 function activateBuzzers(){
-
  document.onkeydown = function (e) {
   document.getElementById("firstToBuzzH2").innerHTML = "";
-  
-  let key1 = sessionStorage.getItem("buzzer1Label");
-  let key2 = sessionStorage.getItem("buzzer2Label");
-  let key3 = sessionStorage.getItem("buzzer3Label");
-  let key4 = sessionStorage.getItem("buzzer4Label");
-
-  if (e.key !== key1 && e.key !== key2 && e.key !== key3 && e.key !== key4) {
-    return;
-  };
-
-  if (firstToBuzz == "" && e.key == key1) {
-   firstToBuzz = e.key;
-   console.log(sessionStorage.getItem("player1"), "var først!");
-   playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!";
-   window.setTimeout(flipCardDelay, 1000);
-   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player1"));
-    playerWhoBussedFirst = 0;
-  };
-   
-  if (firstToBuzz == "" && e.key == key2) {
-   firstToBuzz = e.key;
-   console.log(sessionStorage.getItem("player2"), "var først!");
-   playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!";
-   window.setTimeout(flipCardDelay, 1000);
-   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player2"));
-    playerWhoBussedFirst = 1;
-  };
-
-  if (firstToBuzz == "" && e.key == key3) {
-   firstToBuzz = e.key;
-   console.log(sessionStorage.getItem("player3"), "var først!");
-   playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!";
-   window.setTimeout(flipCardDelay, 1000);
-   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player3"));
-    playerWhoBussedFirst = 2;
-  };
-
-  if (firstToBuzz == "" && e.key == key4) {
-   firstToBuzz = e.key;
-   console.log(sessionStorage.getItem("player4"), "var først!");
-   playBuzzer();
-   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!";
-   window.setTimeout(flipCardDelay, 1000);
-   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player4"));
-    playerWhoBussedFirst = 3;
+  for (let i = 0; i < 4; i++) {
+   if (firstToBuzz == "" && e.key == sessionStorage.getItem(`buzzer${i+1}Label`)) {
+    firstToBuzz = e.key;
+    console.log(sessionStorage.getItem(`player${i+1}`), "var først!");
+    playBuzzer();
+    document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem(`player${i+1}`) + " var først!";
+    window.setTimeout(flipCardDelay, 1000);
+    sessionStorage.setItem("playerAnswering", sessionStorage.getItem(`player${i+1}`));
+     playerWhoBussedFirst = i;
+   };
   };
  };
 };
 
+// Man kunne lade det være op til spillere at vælge lyd under game setup:
 function playBuzzer() {
- var audio = new Audio("../sounds/buzz2.wav");
+ var audio = new Audio("../sounds/buzz1.mp3");
  audio.play();
 };
 
