@@ -107,7 +107,7 @@ async function checkIfCurrentPlayerIsInTop10(){
 
 async function getAllPlayers(){
  try {
-  let players = await Player.find().sort({points: -1});
+  let players = await Player.find().sort({points: 1});
   console.log("antal spillere i db:", players.length)
   return players;
  } catch(err) {

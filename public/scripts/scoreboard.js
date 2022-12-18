@@ -171,13 +171,13 @@ function fillTableWithPlayerData(rowIndex, player){
  </tr>`
  document.getElementById("scoreboard").innerHTML += playerFields;
 
- console.log(document.getElementById("scoreboard").innerHTML);
+ // console.log(document.getElementById("scoreboard").innerHTML);
  
 };
 
-function fillTableWithNonTop10Players(){
+function prepareRestOfTable(){
  let scoreTable = document.getElementById("scoreboard");
- console.log("scoreTable.innerHTML",scoreTable.innerHTML);
+ // console.log("scoreTable.innerHTML",scoreTable.innerHTML);
  for (let i = 0; i < (10-countPlayers); i++) {
   scoreTable.innerHTML += "<tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>";
   // console.log("scoreTable.innerHTML",scoreTable.innerHTML);
@@ -209,14 +209,14 @@ async function getAllPlayerRanks() {
  
  // rename element:
  players.forEach(player => {
-  console.log("player:", player);
+  // console.log("player:", player);
   
-  console.log("player.playerObj:", player.playerObj);
-  console.log("player.place:", player.place);
+  // console.log("player.playerObj:", player.playerObj);
+  // console.log("player.place:", player.place);
   
   if (player.place > 10) {
    console.log("en spiller landede uden for top 10 - på plads:", player.place);
-   console.log("document.getElementById('scoreboard').innerHTML FØR:",document.getElementById("scoreboard").innerHTML);
+   // console.log("document.getElementById('scoreboard').innerHTML FØR:",document.getElementById("scoreboard").innerHTML);
    let playDate = player.playerObj.createdAt.substring(0,10);
    let playerFields = `
    <tr id="rank${player.place}" class="highlight">
@@ -230,7 +230,7 @@ async function getAllPlayerRanks() {
    </tr>`
   
   document.getElementById("scoreboard").innerHTML += playerFields;
-  console.log("document.getElementById('scoreboard').innerHTML EFTER:",document.getElementById("scoreboard").innerHTML)
+  // console.log("document.getElementById('scoreboard').innerHTML EFTER:",document.getElementById("scoreboard").innerHTML)
   };
    
  });
@@ -247,6 +247,6 @@ function showScoreBoardData(){
 
 showScoreBoardData();
 await getTop10();
-fillTableWithNonTop10Players();
+prepareRestOfTable();
 await getPlayerRanks();
 await getAllPlayerRanks();
