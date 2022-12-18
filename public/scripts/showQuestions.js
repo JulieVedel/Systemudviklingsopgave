@@ -41,38 +41,27 @@ async function clickRow(rowIndex, columnIndex) {
   // columnIndex går fra 1-12. Vi har to tabeller. Se det som om runde 1 er kolonne 1-5, og runde 2 er kolonne 6-10.
   // så her justeret kolonneIndex baseret på runde-nummeret:
   columnIndex = parseInt(columnIndex) + ((round - 1) * 6  );
-  clue = await loadQuestion(rowIndex, columnIndex);
+  currentPoints = (rowIndex + 1) * (round * 100);
+  sessionStorage.setItem("activeCategory", columnIndex);
+  sessionStorage.setItem("activeQuestion", (rowIndex + 1));
+  let categoriID = sessionStorage.getItem(`cat${columnIndex}`)
+  clue = await getClueFromAPI(rowIndex, categoriID);
   showQuestionPopup();
  } catch (error) {
  };
 };
 
-//I virkeligheden gør den her funktion ingenting...
-async function loadQuestion(rowIndex, columnIndex) {
- //de næste 3 linjer er generelle sessionSets og globale variable. De kan sættes i forrige funktion.
- currentPoints = (rowIndex + 1) * (round * 100);
- sessionStorage.setItem("activeCategory", columnIndex);
- sessionStorage.setItem("activeQuestion", (rowIndex + 1));
- try {
-  //sessionGet og db kald kan flyttes til getQuestionFromAPI...
-  let categoriID = sessionStorage.getItem(`cat${columnIndex}`)
-  return await getQuestionFromAPI(rowIndex, categoriID);
- } catch (error) {
-  console.log(error);
- };
-};
-
-async function getQuestionFromAPI(value, categoriID){
+async function getClueFromAPI(rowIndex, categoriID){
+ let clueIndex = rowIndex;
  let apiPath = `https://jservice.io/api/clues?category=${categoriID}`;
  try {
   const response = await fetch(apiPath);
-  const data = await response.json();
-  return data[value];
+  const clue = await response.json();
+  return clue[clueIndex];
  } catch(e) {
   console.log(e);
  };
 };
-
 
 function hideElementbyID(ID){
  document.getElementById(ID).classList.add("hide");
@@ -91,11 +80,9 @@ function showQuestionPopup() {
  window.clearInterval(answerTimer, 1000);
  clearTimeout(startAnswerTimer);
  answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
-
- console.log("clue.question",clue.question);
- 
  document.getElementById("skipButton").classList.remove("knap");
 
+ // Eksempel:
  hideElementbyID("skipButton");
  hideElementbyID("OKButtonSkip");
  hideElementbyID("backQuestion");

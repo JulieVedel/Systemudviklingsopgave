@@ -31,7 +31,6 @@ async function setupCategoryDropdowns() {
 async function getDataFromAPI() {
  try {
   let randomCategoryOffset = Math.round(Math.random()*5400);
-  randomCategoryOffset = 3280;
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   console.log("Raw response:", response);
