@@ -128,8 +128,11 @@ async function getRemainingCategoriIDs(){
 };
 
 function fixAsciiChars(string){
+ //Mangler: chargÃ© d\'affaires (Fra kat: diploma"c") skal være é - ved ik med \ ?
  string = string.replaceAll("â", "'");
  string = string.replaceAll("Ã³", "ó");
+ string = string.replaceAll("Ã©", "é");
+ string = string.replaceAll("\\", "");
  string = string.replace(/\â|\x98|\x80/g, "");
  return string;
 };

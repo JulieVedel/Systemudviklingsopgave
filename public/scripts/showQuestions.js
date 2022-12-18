@@ -104,7 +104,8 @@ function showQuestionPopup() {
  clue.question = clue.question.replace(/\â\\/g, "'");
  clue.question = clue.question.replace("Â", "");
  clue.question = clue.question.replace("Ã³", "ó");
-
+ clue.question = clue.question.replace("Ã©", "é");
+ clue.question = clue.question.replace("\\", "");
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
  startQuestionTimer = window.setInterval(inputTimer, 1000);
 };
@@ -143,8 +144,10 @@ function skipQuestion(){
  answerText.classList.remove("hide");
  //Fix forkerte character fra API:
  clue.answer = clue.answer.replace(/\â\\/g, "'");
+ clue.answer = clue.answer.replace("Â", "");
  clue.answer = clue.answer.replace("Ã³", "ó");
-
+ clue.answer = clue.answer.replace("Ã©", "é");
+ clue.answer = clue.answer.replace("\\", "");
  answerText.innerHTML = clue.answer;
  let answerButton = document.getElementById("answerButton");
  answerButton.classList.add("hide");
@@ -224,9 +227,10 @@ function answerTimer(){
   answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
 
   clue.answer = clue.answer.replace(/\â\\/g, "'");
-  console.log(clue.answer);
+  clue.answer = clue.answer.replace("Â", "");
   clue.answer = clue.answer.replace("Ã³", "ó");
-
+  clue.answer = clue.answer.replace("Ã©", "é");
+  clue.answer = clue.answer.replace("\\", "");
   answerResponce.innerHTML += clue.answer; 
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
@@ -295,7 +299,10 @@ function answerButton() {
  } else {
   answerResponce.innerHTML = "Det rigtige svar er: " ;
   clue.answer = clue.answer.replace(/\â\\/g, "'");
+  clue.answer = clue.answer.replace("Â", "");
   clue.answer = clue.answer.replace("Ã³", "ó");
+  clue.answer = clue.answer.replace("Ã©", "é");
+  clue.answer = clue.answer.replace("\\", "");
   answerResponce.innerHTML += clue.answer;
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
