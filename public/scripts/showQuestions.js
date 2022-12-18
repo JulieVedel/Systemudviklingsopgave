@@ -1,3 +1,4 @@
+
 const BUZZER_TIMER_COUNTDOWN = 1;
 let timer = BUZZER_TIMER_COUNTDOWN;
 const ANSWER_TIMER_COUNTDOWN = 30;
@@ -403,14 +404,11 @@ function gameEnd() {
 };
 
 function findWinner() {
-  
   const players = getPlayers();
-
   let scores = [];
   for (let i = 0; i < players.length; i++) {
     scores.push(parseInt(sessionStorage.getItem("pointsPlayer" + players[i].id)));
   };
-
   let highest = scores[0];
   let highestIndex = 0;
   for (let i = 0; i < scores.length; i++) {
@@ -423,51 +421,29 @@ function findWinner() {
 };
 
 function newPlayerPickQuestionIfAnswerIsWrong() {
-
-  let cards = [];
-
-  cards[0] = document.getElementById("card1");
-  cards[1] = document.getElementById("card2");
-  cards[2] = document.getElementById("card3");
-  cards[3] = document.getElementById("card4");
-
-  let currentPlayersTurn = parseInt(sessionStorage.getItem("currentPlayersTurn"));
-
-  let totalPlayers = getPlayerNames().length;
-
-  if ((currentPlayersTurn + 1) == totalPlayers) {
-    currentPlayersTurn = 0;
-  } else {
-    currentPlayersTurn += 1;
-  };
-
-  for (let i = 0; i < totalPlayers; i++) {
-     cards[i].classList.remove("card-selected");
-  };
-
-  console.log(currentPlayersTurn);
-
-  cards[currentPlayersTurn].classList.add("card-selected");
-
-  sessionStorage.setItem("currentPlayersTurn" , currentPlayersTurn);
-
+ let numberOfPlayers = getPlayerNames().length;
+ let cards = [];
+ for (let i = 0; i < numberOfPlayers; i++) {
+  cards[i] = document.getElementById(`card${i+1}`);
+  cards[i].classList.remove("card-selected");
+ };
+ let currentPlayerIndex = parseInt(sessionStorage.getItem("currentPlayerIndex"));
+ if ((currentPlayerIndex + 1) == numberOfPlayers) {
+   currentPlayerIndex = 0;
+ } else {
+   currentPlayerIndex += 1;
+ };
+ cards[currentPlayerIndex].classList.add("card-selected");
+ sessionStorage.setItem("currentPlayerIndex" , currentPlayerIndex);
 };
 
 function playerWhoAnsweredRightGetsToPick() {
-  
   let cards = [];
-
-  cards[0] = document.getElementById("card1");
-  cards[1] = document.getElementById("card2");
-  cards[2] = document.getElementById("card3");
-  cards[3] = document.getElementById("card4");
-
   for (let i = 0; i < getPlayerNames().length; i++) {
-    cards[i].classList.remove("card-selected");
+   cards[i] = document.getElementById(`card${i+1}`);
+   cards[i].classList.remove("card-selected");
   }
-
   cards[playerWhoBussedFirst].classList.add("card-selected");
-
-  sessionStorage.setItem("currentPlayersTurn" , playerWhoBussedFirst);
+  sessionStorage.setItem("currentPlayerIndex" , playerWhoBussedFirst);
 };
 //--------------------------------------------------------------------------------------------------------
