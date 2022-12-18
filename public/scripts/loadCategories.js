@@ -64,12 +64,9 @@ async function fillDropdownsWithCategories(categories){
    choice.innerHTML += `<option value='default'>Vælg kategori</option>`;
    for (j = 0; j < 5; j++){
     let counter = (j)+i*5;
-    
     let catTitle = categories[counter].title;
     catTitle = fixAsciiChars(catTitle);
-
     choice.innerHTML += `<option value=${categories[counter].id}>${catTitle}</option>`;
-    console.log();
    };
   };
  } catch (e) {
@@ -81,15 +78,10 @@ async function fillDropdownsWithCategories(categories){
 async function setupRandomCategories() {
  console.log("running randomCategories");
  try {
-
   let data = await getDataFromAPI();
-
   let categories = await buildCategories(data)
-
   shuffle(categories);
- 
   await fillRemainingDropDownsWithCategories(categories);
-
  } catch (e) {
   console.log(e);
   console.log("There was an error fetching the data");
@@ -101,7 +93,6 @@ async function getRemainingCategoriIDs(){
  try {
   for (let i = 0; i < 12; i++) {
    let choice = document.getElementById(`kategori${i+1}`);
-   
    if (choice.value == "default" || choice.value == "") {
     remainingCategoriIDs[i] = choice.id;
    };
@@ -113,24 +104,21 @@ async function getRemainingCategoriIDs(){
 };
 
 async function fillRemainingDropDownsWithCategories(categories){
-
  let remainingCategoriIDs = await getRemainingCategoriIDs();
-
  for (let k = 0; k < remainingCategoriIDs.length; k++) {
   let choice = document.getElementById(`kategori${k+1}`);
   if (choice.id == remainingCategoriIDs[k]) {
-   
    choice.innerHTML = "";
    choice.innerHTML += `<option value='default'>Vælg kategori</option>`;
-
    for (j = 0; j < 5; j++){
     if (choice.id != remainingCategoriIDs[i]) {
      let choice = document.getElementById(`kategori${k+1}`);
-
      //Fix forkerte character fra API:
      let catTitle = categories[j+k*5].title;
+     if(catTitle == "act i") {
+      console.log("FOUND IT!!!!!!!!!");
+     };
      catTitle = fixAsciiChars(catTitle);
-
      choice.innerHTML += `<option value=${categories[j+k*5].id}>${catTitle}</option>`;
     };
     console.log();
@@ -140,10 +128,10 @@ async function fillRemainingDropDownsWithCategories(categories){
 };
 
 function fixAsciiChars(string){
-
  //Mangler Ã³
  //Eksempel: Felipe CalderÃ³n - skal være "ó"
  string = string.replaceAll("â", "'");
+ string = string.replaceAll("Ã³", "ó");
  string = string.replace(/\â|\x98|\x80/g, "");
  return string;
 };

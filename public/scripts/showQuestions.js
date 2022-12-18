@@ -116,6 +116,7 @@ function showQuestionPopup() {
  //Tilføj de resterende fixes fra loadQuestion - og træk ud i egen funktion:
  clue.question = clue.question.replace(/\â\\/g, "'");
  clue.question = clue.question.replace("Â", "");
+ clue.question = clue.question.replaceAll("Ã³", "ó");
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
  startQuestionTimer = window.setInterval(inputTimer, 1000);
@@ -155,6 +156,7 @@ function skipQuestion(){
  answerText.classList.remove("hide");
  //Fix forkerte character fra API:
  clue.answer = clue.answer.replace(/\â\\/g, "'");
+ clue.answer = clue.answer.replaceAll("Ã³", "ó");
 
  answerText.innerHTML = clue.answer;
  let answerButton = document.getElementById("answerButton");
