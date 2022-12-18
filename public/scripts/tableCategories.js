@@ -69,7 +69,7 @@ function getPlayerPoints() {
     return playerPoints;
 }
 
-export function getPlayers() {
+function getPlayers() {
     let playerNames = getPlayerNames();
     let buzzerKeys = getBuzzerKeys();
     let playerPoints = getPlayerPoints();

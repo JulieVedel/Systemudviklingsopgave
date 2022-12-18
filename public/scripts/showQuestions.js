@@ -1,4 +1,3 @@
-import { getPlayers } from "./tableCategories";
 const BUZZER_TIMER_COUNTDOWN = 1;
 let timer = BUZZER_TIMER_COUNTDOWN;
 const ANSWER_TIMER_COUNTDOWN = 30;
