@@ -1,3 +1,4 @@
+import { getPlayers } from "./tableCategories";
 const BUZZER_TIMER_COUNTDOWN = 1;
 let timer = BUZZER_TIMER_COUNTDOWN;
 const ANSWER_TIMER_COUNTDOWN = 30;
@@ -379,46 +380,27 @@ function adjustScore() {
 };
 
 function removeQuestion() {
-
-  if (sessionStorage.getItem("activeQuestion") == 1) {
-    sessionStorage.setItem("activeQuestion", "first" + round);
+ for (let i = 1; i < 6; i++) { 
+  if (sessionStorage.getItem("activeQuestion") == i) {
+  sessionStorage.setItem("activeQuestion",`${round}RoundTableRow${i}`);
   };
-
-  if (sessionStorage.getItem("activeQuestion") == 2) {
-    sessionStorage.setItem("activeQuestion", "second" + round);
-  };
-
-  if (sessionStorage.getItem("activeQuestion") == 3) {
-    sessionStorage.setItem("activeQuestion", "third" + round);
-  };
-
-  if (sessionStorage.getItem("activeQuestion") == 4) {
-    sessionStorage.setItem("activeQuestion", "fourth" + round);
-  }; 
-
-  if (sessionStorage.getItem("activeQuestion") == 5) {
-    sessionStorage.setItem("activeQuestion", "fifth" + round);
-  } ;
-
-  // console.log("th tags", document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th'));
-  // console.log(sessionStorage.getItem("activeQuestion"));
-
-  let cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[(parseInt(sessionStorage.getItem("activeCategory"))-1) - ((round - 1) * 6) ];
-  cell.classList.add("removedCell");
+ };
+ let clickedCell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[(parseInt(sessionStorage.getItem("activeCategory"))-1) - ((round - 1) * 6) ];
+ clickedCell.classList.add("removedCell");
 };
 
 function startRoundTwo() {
-  round = 2;
-  document.getElementById("firstTable").classList.add("hide");
-  document.getElementById("secondTable").classList.remove("hide");
-  document.getElementById("secondTable").classList.add("theTableOne");
-  document.getElementById("startingRoundTwo").classList.add("open-popup");
-  document.getElementById("fadeBackground").classList.add("fade");
+ round = 2;
+ document.getElementById("firstTable").classList.add("hide");
+ document.getElementById("secondTable").classList.remove("hide");
+ document.getElementById("secondTable").classList.add("theTableOne");
+ document.getElementById("startingRoundTwo").classList.add("open-popup");
+ document.getElementById("fadeBackground").classList.add("fade");
 };
 
 function gameEnd() {
-  document.getElementById("gameFinished").classList.add("open-popup");
-  document.getElementById("winnerName").innerHTML = findWinner();
+ document.getElementById("gameFinished").classList.add("open-popup");
+ document.getElementById("winnerName").innerHTML = findWinner();
 };
 
 function findWinner() {
