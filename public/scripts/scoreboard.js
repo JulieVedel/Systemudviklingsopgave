@@ -19,7 +19,7 @@ async function savePlayerDataToMongoDB() {
  let player2;
  let player3;
  let player4;
- 
+  
   if (sessionStorage.getItem("player1") == null) {
    player1 = "";
   } else {
@@ -89,25 +89,22 @@ async function savePlayerDataToMongoDB() {
  //-------------------------------------------------------------------------------------
 
  console.log("Sending these players to POST:", players);
-//mangler try catch:
- const res = await fetch('http://localhost:3000/savePlayerData', {
-  method: 'POST',
-  headers: {
-   "Content-Type": 'application/json'
-  },
-  body: JSON.stringify(players)
- });
+
+ try {
+   const res = await fetch('http://localhost:3000/savePlayerData', {
+   method: 'POST',
+   headers: {
+    "Content-Type": 'application/json'
+   },
+   body: JSON.stringify(players)
+  });
+ } catch (error) {
+  console.log(error);
+ };
 };
 
-async function getTop10() {
-
- const res = await fetch('http://localhost:3000/scoreboardInfo', {
-  method: 'GET'
- });
-
- //rename data
- const data = await res.json();
-
+function prepareTable(){
+ //rename og træk ud... prepareTable:
  document.getElementById("rank1").innerHTML = "";
  document.getElementById("scoreboard").innerHTML = "";
  document.getElementById("scoreboard").innerHTML = `
@@ -117,56 +114,73 @@ async function getTop10() {
  <th>Point</th>
  <th>Dato</th>
  <th colspan="3">Modstandere</th>
-</tr>`
-
-countPlayers = data.length;
-
- let i = 1;
- let adjustedRank;
-
- data.forEach(element => {
-  let playDate = element.createdAt + "";
-  playDate = playDate.substring(0,10);
-
-  if(playDate == "2022-12-09") {
-   playDate = "";
-  };
-
-  if (i == 1) {
-   adjustedRank = "🥇";
-  };
-  if (i == 2) {
-   adjustedRank = "🥈";
-  };
-  if (i == 3) {
-   adjustedRank = "🥉";
-  };
-  if (i > 3) {
-   adjustedRank = i;
-  };
-
-  let playerFields = `
- <tr id="rank${i}">
-  <td>${adjustedRank}</td>
-  <td>${element.username}</td>
-  <td>${element.points}</td>
-  <td>${playDate}</td>
-  <td>${element.opponent1}</td>
-  <td>${element.opponent2}</td>
-  <td>${element.opponent3}</td>
  </tr>`
+ // -----------------------------------
+}
 
- document.getElementById("scoreboard").innerHTML += playerFields;
- i++;
+async function getTop10() {
+ prepareTable();
+
+ try {
+  const res = await fetch('http://localhost:3000/scoreboardInfo', {
+  method: 'GET'
+  });
+
+ const top10Players = await res.json();
+ countPlayers = top10Players.length;
+ let rowIndex = 1;
+
+ top10Players.forEach(player => {
+  fillTableWithPlayerData(rowIndex, player);
+  rowIndex++;
  });
+ 
+ } catch (error) {
+  console.log(error);;
+ };
 };
 
-function fillRestOfTable(){
+function fillTableWithPlayerData(rowIndex, player){
+ let adjustedRank;
+
+ if (rowIndex == 1) {
+  adjustedRank = "🥇";
+ };
+ if (rowIndex == 2) {
+  adjustedRank = "🥈";
+ };
+ if (rowIndex == 3) {
+  adjustedRank = "🥉";
+ };
+ if (rowIndex > 3) {
+  adjustedRank = rowIndex;
+ };
+
+ let playDate = player.createdAt + "";
+ playDate = playDate.substring(0,10);
+
+ let playerFields = `
+ <tr id="rank${rowIndex}">
+ <td>${adjustedRank}</td>
+ <td>${player.username}</td>
+ <td>${player.points}</td>
+ <td>${playDate}</td>
+ <td>${player.opponent1}</td>
+ <td>${player.opponent2}</td>
+ <td>${player.opponent3}</td>
+ </tr>`
+ document.getElementById("scoreboard").innerHTML += playerFields;
+
+ console.log(document.getElementById("scoreboard").innerHTML);
+ 
+};
+
+function fillTableWithNonTop10Players(){
  let scoreTable = document.getElementById("scoreboard");
  console.log("scoreTable.innerHTML",scoreTable.innerHTML);
  for (let i = 0; i < (10-countPlayers); i++) {
   scoreTable.innerHTML += "<tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>";
-  console.log("scoreTable.innerHTML",scoreTable.innerHTML);
+  // console.log("scoreTable.innerHTML",scoreTable.innerHTML);
  };
 };
 
@@ -176,10 +190,11 @@ async function getPlayerRanks() {
   method: 'GET'
  });
  //rename data
- const ranks = await res.json();
- ranks.forEach(rank => {
-  console.log("rank{element}:", `rank${rank}`);
-  document.getElementById(`rank${rank}`).classList.add("highlight");
+ const data = await res.json();
+ console.log("data", data);
+ data.forEach(element => {
+  console.log("rank{element}:", `rank${element}`);
+  document.getElementById(`rank${element}`).classList.add("highlight");
  });
 };
 
@@ -232,6 +247,6 @@ function showScoreBoardData(){
 
 showScoreBoardData();
 await getTop10();
-fillRestOfTable();
+fillTableWithNonTop10Players();
 await getPlayerRanks();
 await getAllPlayerRanks();
