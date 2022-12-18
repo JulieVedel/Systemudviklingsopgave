@@ -117,17 +117,15 @@ async function getAllPlayers(){
 
 async function checkCurrentPlayerRanks(){
  let place = 1;
- //rename når usersObj også er renamed:
  let placesAndPlayersObj = [];
-
  try {
   let players = await getAllPlayers();
   players.forEach(player => {
    for (let i = 0; i < 4; i++) {
-    // console.log("playerIDs[i]",playerIDs[i])
     if (player._id.equals(playerIDs[i])) {
+     // Kunne jeg have gemt en ekstra property direkte i player-objektet...?
+     // Måske det bedste er at gøre det allerede fra Player modellen?
      placesAndPlayersObj[i] = {place: place, playerObj: player};
-     
     };
    };
    console.log("placesAndPlayersObj",placesAndPlayersObj)

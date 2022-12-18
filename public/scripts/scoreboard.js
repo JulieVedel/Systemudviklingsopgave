@@ -176,10 +176,10 @@ async function getPlayerRanks() {
   method: 'GET'
  });
  //rename data
- const data = await res.json();
- data.forEach(element => {
-  console.log("rank{element}:", `rank${element}`);
-  document.getElementById(`rank${element}`).classList.add("highlight");
+ const ranks = await res.json();
+ ranks.forEach(rank => {
+  console.log("rank{element}:", `rank${rank}`);
+  document.getElementById(`rank${rank}`).classList.add("highlight");
  });
 };
 
@@ -189,29 +189,29 @@ async function getAllPlayerRanks() {
  });
 
  //rename data
- const data = await res.json();
- console.log("getAllPlayerRanks() scoreboards.js allplayers:", data);
+ const players = await res.json();
+ console.log("getAllPlayerRanks() scoreboards.js allplayers:", players);
  
  // rename element:
- data.forEach(element => {
-  console.log("element:", element);
+ players.forEach(player => {
+  console.log("player:", player);
   
-  console.log("element.player:", element.player);
-  console.log("element.place:", element.place);
+  console.log("player.playerObj:", player.playerObj);
+  console.log("player.place:", player.place);
   
-  if (element.place > 10) {
-   console.log("en spiller landede uden for top 10 - på plads:", element.place);
+  if (player.place > 10) {
+   console.log("en spiller landede uden for top 10 - på plads:", player.place);
    console.log("document.getElementById('scoreboard').innerHTML FØR:",document.getElementById("scoreboard").innerHTML);
-   let playDate = element.player.createdAt.substring(0,10);
+   let playDate = player.playerObj.createdAt.substring(0,10);
    let playerFields = `
-   <tr id="rank${element.place}" class="highlight">
-    <td>${element.place}</td>
-    <td>${element.player.username}</td>
-    <td>${element.player.points}</td>
+   <tr id="rank${player.place}" class="highlight">
+    <td>${player.place}</td>
+    <td>${player.playerObj.username}</td>
+    <td>${player.playerObj.points}</td>
     <td>${playDate}</td>
-    <td>${element.player.opponent1}</td>
-    <td>${element.player.opponent2}</td>
-    <td>${element.player.opponent3}</td>
+    <td>${player.playerObj.opponent1}</td>
+    <td>${player.playerObj.opponent2}</td>
+    <td>${player.playerObj.opponent3}</td>
    </tr>`
   
   document.getElementById("scoreboard").innerHTML += playerFields;
