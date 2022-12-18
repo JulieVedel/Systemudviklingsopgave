@@ -1,4 +1,4 @@
-class User {
+class Player {
  
  constructor(username, points, opponent1, opponent2, opponent3) {
   this.username = username;
@@ -41,61 +41,61 @@ async function savePlayerDataToMongoDB() {
    player4 = sessionStorage.getItem("player4");
   };
 
-  const users = [];
+  const players = [];
 
   if (player1 != "") {
-  const user1 = new User(
+  const player1Obj = new Player(
    player1,
    sessionStorage.getItem("pointsPlayer1"),
    player2,
    player3,
    player4
   );
-  users.push(user1);
+  players.push(player1Obj);
  };
   
  if (player2 != "") {
-  const user2 = new User(
+  const player2Obj = new Player(
    player2,
    sessionStorage.getItem("pointsPlayer2"),
    player1,
    player3,
    player4
   );
-  users.push(user2);
+  players.push(player2Obj);
  };
 
  if (player3 != "") {
-  const user3 = new User(
+  const player3Obj = new Player(
    player3,
    sessionStorage.getItem("pointsPlayer3"),
    player1,
    player2,
    player4
   );
-  users.push(user3);
+  players.push(player3Obj);
  };
 
  if (player4 != "") {
-  const user4 = new User(
+  const player4Obj = new Player(
    player4,
    sessionStorage.getItem("pointsPlayer4"),
    player1,
    player2,
    player3
   );
-  users.push(user4);
+  players.push(player4Obj);
  };
  //-------------------------------------------------------------------------------------
 
- console.log("Sending these users to POST:", users);
+ console.log("Sending these players to POST:", players);
 //mangler try catch:
  const res = await fetch('http://localhost:3000/savePlayerData', {
   method: 'POST',
   headers: {
    "Content-Type": 'application/json'
   },
-  body: JSON.stringify(users)
+  body: JSON.stringify(players)
  });
 };
 
@@ -105,6 +105,7 @@ async function getTop10() {
   method: 'GET'
  });
 
+ //rename data
  const data = await res.json();
 
  document.getElementById("rank1").innerHTML = "";
@@ -144,7 +145,7 @@ countPlayers = data.length;
    adjustedRank = i;
   };
 
-  let userFields = `
+  let playerFields = `
  <tr id="rank${i}">
   <td>${adjustedRank}</td>
   <td>${element.username}</td>
@@ -155,7 +156,7 @@ countPlayers = data.length;
   <td>${element.opponent3}</td>
  </tr>`
 
- document.getElementById("scoreboard").innerHTML += userFields;
+ document.getElementById("scoreboard").innerHTML += playerFields;
  i++;
  });
 };
@@ -174,6 +175,7 @@ async function getPlayerRanks() {
  const res = await fetch('http://localhost:3000/playerRanks', {
   method: 'GET'
  });
+ //rename data
  const data = await res.json();
  data.forEach(element => {
   console.log("rank{element}:", `rank${element}`);
@@ -182,36 +184,37 @@ async function getPlayerRanks() {
 };
 
 async function getAllPlayerRanks() {
-
  const res = await fetch('http://localhost:3000/allPlayerRanks', {
   method: 'GET'
  });
 
+ //rename data
  const data = await res.json();
  console.log("getAllPlayerRanks() scoreboards.js allplayers:", data);
  
+ // rename element:
  data.forEach(element => {
   console.log("element:", element);
   
-  console.log("element.user:", element.user);
+  console.log("element.player:", element.player);
   console.log("element.place:", element.place);
   
   if (element.place > 10) {
    console.log("en spiller landede uden for top 10 - på plads:", element.place);
    console.log("document.getElementById('scoreboard').innerHTML FØR:",document.getElementById("scoreboard").innerHTML);
-   let playDate = element.user.createdAt.substring(0,10);
-   let userFields = `
+   let playDate = element.player.createdAt.substring(0,10);
+   let playerFields = `
    <tr id="rank${element.place}" class="highlight">
     <td>${element.place}</td>
-    <td>${element.user.username}</td>
-    <td>${element.user.points}</td>
+    <td>${element.player.username}</td>
+    <td>${element.player.points}</td>
     <td>${playDate}</td>
-    <td>${element.user.opponent1}</td>
-    <td>${element.user.opponent2}</td>
-    <td>${element.user.opponent3}</td>
+    <td>${element.player.opponent1}</td>
+    <td>${element.player.opponent2}</td>
+    <td>${element.player.opponent3}</td>
    </tr>`
   
-  document.getElementById("scoreboard").innerHTML += userFields;
+  document.getElementById("scoreboard").innerHTML += playerFields;
   console.log("document.getElementById('scoreboard').innerHTML EFTER:",document.getElementById("scoreboard").innerHTML)
   };
    
@@ -232,4 +235,3 @@ await getTop10();
 fillRestOfTable();
 await getPlayerRanks();
 await getAllPlayerRanks();
-

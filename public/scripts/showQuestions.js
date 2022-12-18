@@ -1,4 +1,4 @@
-const BUZZER_TIMER_COUNTDOWN = 5;
+const BUZZER_TIMER_COUNTDOWN = 1;
 let timer = BUZZER_TIMER_COUNTDOWN;
 const ANSWER_TIMER_COUNTDOWN = 30;
 let answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
@@ -6,122 +6,81 @@ let isAnswerCorrect = false;
 let round = 1;
 let currentPoints = 0; 
 let clue;
-// // set css timeCountdown:
+// set css timeCountdown:
+// SKAL være vars.:
 var root = document.querySelector(':root');
 let seconds = timer + 's';
 var timeCountdown = root.style.setProperty('--timeCountdown', seconds);
 // get css timeCountdown:
 var rootStyles = getComputedStyle(root);
 var timeCountdown= rootStyles.getPropertyValue('--timeCountdown');
-console.log("timeCountdown", timeCountdown);
 
 let questionsFinished = 0;
 
+//Yderligere refac ideer:
+// OK: 0. Skift object fra User til Player og implementér overalt!
+// ½   1. Opret funktion til at vise og skjule, som tager henholdsvis elementID og element, som argumenter og implementér overalt.
+//     Er startet under showQuestionPopup().
+//     2. Opret loop under activateBuzzers().
+//     3. Opret loop under playerWhoAnsweredRightGetsToPick()
+//     4. Opret loop under newPlayerPickQuestionIfAnswerIsWrong()
+//     5. Opret loop under removeQuestion() - brug de nye klassenavne i stedet for Id'er.
+//     6. Måske opret nogle objekter?
+//     7. loadQuestion() kan omskrives og helt fjernes. Se noter i funktionen.
+//     8. Saml clear timeouts og reset timeouts i små funktioner.
 
-// rename 'first', 'second', etc. og refac.!:
-// row 1
-
-//TODO: TILFØJ TRY CATCH TIL ALLE DE HER:
-let cells =  document.querySelectorAll('.first th');    
-for (var i = 0; i < cells.length; i++) {
- cells[i].onclick = function () {  clickRow1( this.getAttribute("value")); };
+for (let rowIndex = 0; rowIndex < 5; rowIndex++) {
+ let cells =  document.querySelectorAll(`.tableRow${rowIndex+1} th`); 
+ for (var columnIndex = 0; columnIndex < cells.length; columnIndex++) {
+  cells[columnIndex].onclick = function () {  clickRow(rowIndex, this.getAttribute("value")); };
+ };
 };
-async function clickRow1(i) {
+
+async function clickRow(rowIndex, columnIndex) {
  try {
-  clue = await loadQuestion(0, (parseInt(i) + ((round - 1) * 6  )));
-  showQuestionPopup();
- } catch (error) {
- }
-};
-
-// row 2
-let cells2 = document.querySelectorAll('.second th');
-for (var i = 0; i < cells2.length; i++) {
- cells2[i].onclick = function () { clickRow2(this.getAttribute("value")); };
-};
-async function clickRow2(i) {
- try {
-  clue = await loadQuestion(1, (parseInt(i) + ((round - 1) * 6)) );
+  // columnIndex går fra 1-12. Vi har to tabeller. Se det som om runde 1 er kolonne 1-5, og runde 2 er kolonne 6-10.
+  // så her justeret kolonneIndex baseret på runde-nummeret:
+  columnIndex = parseInt(columnIndex) + ((round - 1) * 6  );
+  clue = await loadQuestion(rowIndex, columnIndex);
   showQuestionPopup();
  } catch (error) {
  };
 };
 
-// row 3
-let cells3 = document.querySelectorAll('.third th');
-for (var i = 0; i < cells3.length; i++) {
- cells3[i].onclick = function () { clickRow3(this.getAttribute("value")); };
-};
-async function clickRow3(i) {
+//I virkeligheden gør den her funktion ingenting...
+async function loadQuestion(rowIndex, columnIndex) {
+ //de næste 3 linjer er generelle sessionSets og globale variable. De kan sættes i forrige funktion.
+ currentPoints = (rowIndex + 1) * (round * 100);
+ sessionStorage.setItem("activeCategory", columnIndex);
+ sessionStorage.setItem("activeQuestion", (rowIndex + 1));
  try {
-  clue = await loadQuestion(2, (parseInt(i) + ((round - 1) * 6)) );
-  showQuestionPopup();
+  //sessionGet og db kald kan flyttes til getQuestionFromAPI...
+  let categoriID = sessionStorage.getItem(`cat${columnIndex}`)
+  return await getQuestionFromAPI(rowIndex, categoriID);
  } catch (error) {
+  console.log(error);
  };
 };
 
-// row 4
-let cells4 = document.querySelectorAll('.forth th');
-for (var i = 0; i < cells4.length; i++) {
- cells4[i].onclick = function () { clickRow4(this.getAttribute("value")); };
-};
-async function clickRow4(i) {
+async function getQuestionFromAPI(value, categoriID){
+ let apiPath = `https://jservice.io/api/clues?category=${categoriID}`;
  try {
-  clue = await loadQuestion(3, (parseInt(i) + ((round - 1) * 6)) );
-  showQuestionPopup();
- } catch (error) {
+  const response = await fetch(apiPath);
+  const data = await response.json();
+  return data[value];
+ } catch(e) {
+  console.log(e);
  };
 };
 
-// row 5
-let cells5 = document.querySelectorAll('.fifth th');
-for (var i = 0; i < cells5.length; i++) {
- cells5[i].onclick = function () { clickRow5(this.getAttribute("value")); };
-};
-async function clickRow5(i) {
- try {
-  clue = await loadQuestion(4, (parseInt(i) + ((round - 1) * 6)) );
-  showQuestionPopup();
- } catch (error) {
- };
+
+function hideElementbyID(ID){
+ document.getElementById(ID).classList.add("hide");
 };
 
-async function loadQuestion(value, categori) {
-
-  console.log(categori);
-
-    currentPoints = (value + 1) * (round * 100);
-
-    let categorieIDs = [];
-    categorieIDs.push(sessionStorage.getItem("cat1"));
-    categorieIDs.push(sessionStorage.getItem("cat2"));
-    categorieIDs.push(sessionStorage.getItem("cat3"));
-    categorieIDs.push(sessionStorage.getItem("cat4"));
-    categorieIDs.push(sessionStorage.getItem("cat5"));
-    categorieIDs.push(sessionStorage.getItem("cat6"));
-    categorieIDs.push(sessionStorage.getItem("cat7"));
-    categorieIDs.push(sessionStorage.getItem("cat8"));
-    categorieIDs.push(sessionStorage.getItem("cat9"));
-    categorieIDs.push(sessionStorage.getItem("cat10"));
-    categorieIDs.push(sessionStorage.getItem("cat11"));
-    categorieIDs.push(sessionStorage.getItem("cat12"));
-    
-
-    sessionStorage.setItem("activeCategory", categori - 1);
-    sessionStorage.setItem("activeQuestion", (value + 1));
-
-    let apiPath = `https://jservice.io/api/clues?category=${categorieIDs[categori - 1]}`;
-    try {
-     const response = await fetch(apiPath);
-     const data = await response.json();
-     return data[value];
-    } catch(e) {
-     console.log(e);
-     // Tilføj await?!?!!??!:
-     // loadQuestion();
-    };
-    
-};
+function showElementbyID(ID){
+ document.getElementById(ID).classList.remove("hide");
+}
 
 // ------------------------------ QUESTION POPUP ------------------------------------
 let startQuestionTimer;
@@ -133,33 +92,32 @@ function showQuestionPopup() {
  clearTimeout(startAnswerTimer);
  answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
 
- document.getElementById("skipButton").classList.add("hide");
+ console.log("clue.question",clue.question);
+ 
  document.getElementById("skipButton").classList.remove("knap");
 
+ hideElementbyID("skipButton");
+ hideElementbyID("OKButtonSkip");
+ hideElementbyID("backQuestion");
 
- document.getElementById("OKButtonSkip").classList.add("hide");
+ showElementbyID("answerInput");
+ showElementbyID("itWasRightButton");
 
- document.getElementById("answerInput").classList.remove("hide");
- document.getElementById("itWasRightButton").classList.remove("hide");
-
- document.getElementById("backQuestion").classList.add("hide");
  document.getElementById("question_popup_H2").innerHTML = "Spørgsmål";
  document.getElementById("thecard").classList.remove("flipcard");
 
  var popup = document.getElementById("Question_popup");
  popup.classList.add("question-open-popup");
-
  var popup = document.getElementById("fadeQuestion_popup_background");
  popup.classList.add("fade");
 
  document.getElementById("question_popup_H2").innerHTML += " til " + currentPoints;
-
- //Fix forkerte character fra API:
+ //Fix forkerte characters fra API:
+ //Tilføj de resterende fixes fra loadQuestion - og træk ud i egen funktion:
  clue.question = clue.question.replace(/\â\\/g, "'");
  clue.question = clue.question.replace("Â", "");
 
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
-
  startQuestionTimer = window.setInterval(inputTimer, 1000);
 };
 
@@ -173,14 +131,11 @@ function flipCardDelay(){
  document.getElementById("answerInput").readOnly = false;
  document.getElementById("answerInput").value = "";
  answerResponce.innerHTML = "";
-
  startAnswerTimer = window.setInterval(answerTimer, 1000);
-
  document.getElementById("continueButton").classList.add("hide");
  document.getElementById("itWasRightButton").classList.add("hide");
  document.getElementById("question_popup_H2_Back").innerHTML += " til " + currentPoints;
  document.getElementById("question_popup_H2_Back").innerHTML += "<h3>" + clue.question + "</h3>";
-
 };
 
 function closeQuestionPopup() {
@@ -188,68 +143,53 @@ function closeQuestionPopup() {
  popup.classList.remove("question-open-popup");
  var popup = document.getElementById("fadeQuestion_popup_background");
  popup.classList.remove("fade");
-
  document.getElementById("frontQuestion").classList.remove("hide");
-
  timer = BUZZER_TIMER_COUNTDOWN;
-
  document.getElementById("numberTimeout").classList.remove("numberTimeout");
  document.getElementById("textTimeout").classList.remove("textTimeout");
-
 };
 
 function skipQuestion(){
- console.log("skip!");
  flipCardDelay();
  let answerText = document.getElementById("answerResponce")
  answerText.classList.remove("hide");
-
  //Fix forkerte character fra API:
  clue.answer = clue.answer.replace(/\â\\/g, "'");
-// console.log("clue.answer",clue.answer);
-
-
  answerText.innerHTML = clue.answer;
-
  let answerButton = document.getElementById("answerButton");
  answerButton.classList.add("hide");
- 
  document.getElementById("answerInput").classList.add("hide");
  document.getElementById("itWasRightButton").classList.add("hide");
-
  let OKButtonSkip = document.getElementById("OKButtonSkip");
  OKButtonSkip.classList.remove("hide");
-
  let countdownAnswer = document.getElementById("countdownAnswer");
  countdownAnswer.classList.add("hide");
-
 };
 
 function OKButtonSkip(){
-  document.getElementById("firstToBuzzH2").innerHTML = "";
-  document.getElementById("numberTimeout").innerHTML = "";
-  document.getElementById("frontQuestion").classList.remove("hide");
-  firstToBuzz = "";
-  document.onkeydown = null;
-  removeQuestion();
-  closeQuestionPopup();
-   questionsFinished += 1;
-   console.log(questionsFinished);
-   if (questionsFinished == 30) {
-     startRoundTwo();
-   };
-   if (questionsFinished == 60) {
-     gameEnd();
-   };
+ document.getElementById("firstToBuzzH2").innerHTML = "";
+ document.getElementById("numberTimeout").innerHTML = "";
+ document.getElementById("frontQuestion").classList.remove("hide");
+ firstToBuzz = "";
+ document.onkeydown = null;
+ removeQuestion();
+ closeQuestionPopup();
+ questionsFinished += 1;
 
-   // TEST:
-   clearTimeout(startAnswerTimer);
-   timer = BUZZER_TIMER_COUNTDOWN;
-   window.clearInterval(answerTimer, 1000);
-   clearTimeout(startAnswerTimer);
-   answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
+ if (questionsFinished == 30) {
+   startRoundTwo();
+ };
 
-}
+ if (questionsFinished == 60) {
+   gameEnd();
+ };
+ // TEST:
+ clearTimeout(startAnswerTimer);
+ timer = BUZZER_TIMER_COUNTDOWN;
+ window.clearInterval(answerTimer, 1000);
+ clearTimeout(startAnswerTimer);
+ answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
+};
 // --------------------------------------------------------------------------------
 
 // ------------------------------ TIMER -------------------------------------------
@@ -268,12 +208,9 @@ function inputTimer(){
 
   document.getElementById("skipButton").classList.remove("hide");
   document.getElementById("skipButton").classList.add("knap");
-
  };
  timer = timer - 1;
 };
-
-
 
  function answerTimer(){
 
@@ -282,9 +219,7 @@ function inputTimer(){
  };
 
  if (answerTimerInSeconds <= 0) {
-   clearTimeout(startAnswerTimer);
-   // TODO: Giv besked og luk question popup:
-  // window.alert("Tiden løb ud");
+  clearTimeout(startAnswerTimer);
   console.log("time is over");
 
     isAnswerCorrect = false;
@@ -296,7 +231,6 @@ function inputTimer(){
     document.getElementById("countdownAnswer").innerHTML = "";
     document.getElementById("answerButton").classList.add("hide");
     document.getElementById("answerInput").classList.add("hide");
-
     answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
     answerResponce.innerHTML += clue.answer; 
     document.getElementById("continueButton").classList.remove("hide");
@@ -308,72 +242,67 @@ function inputTimer(){
     document.getElementById("continueButton").onclick = function () {
       closePopUpAndContinueGame();
     };
-
   };
   answerTimerInSeconds = answerTimerInSeconds - 1;
  };
 
-
 //------------------------------ ACTIVATE BUZZERS & SOUND ------------------------------------------------
 let firstToBuzz = "";
 let playerWhoBussedFirst = -1;
+
 function activateBuzzers(){
 
  document.onkeydown = function (e) {
- document.getElementById("firstToBuzzH2").innerHTML = "";
- 
- let key1 = sessionStorage.getItem("buzzer1Label");
- let key2 = sessionStorage.getItem("buzzer2Label");
- let key3 = sessionStorage.getItem("buzzer3Label");
- let key4 = sessionStorage.getItem("buzzer4Label");
-
- console.log(e.key);
-
- console.log(key1);
-
- if (e.key !== key1 && e.key !== key2 && e.key !== key3 && e.key !== key4) {
-   return;
- };
-
- if (firstToBuzz == "" && e.key == key1) {
-  firstToBuzz = e.key;
-  console.log(sessionStorage.getItem("player1"), "var først!");
-  playBuzzer();
-  document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!";
-  window.setTimeout(flipCardDelay, 1000);
-  sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player1"));
-   playerWhoBussedFirst = 0;
- };
+  document.getElementById("firstToBuzzH2").innerHTML = "";
   
- if (firstToBuzz == "" && e.key == key2) {
-  firstToBuzz = e.key;
-  console.log(sessionStorage.getItem("player2"), "var først!");
-  playBuzzer();
-  document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!";
-  window.setTimeout(flipCardDelay, 1000);
-  sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player2"));
-   playerWhoBussedFirst = 1;
- };
+  let key1 = sessionStorage.getItem("buzzer1Label");
+  let key2 = sessionStorage.getItem("buzzer2Label");
+  let key3 = sessionStorage.getItem("buzzer3Label");
+  let key4 = sessionStorage.getItem("buzzer4Label");
 
- if (firstToBuzz == "" && e.key == key3) {
-  firstToBuzz = e.key;
-  console.log(sessionStorage.getItem("player3"), "var først!");
-  playBuzzer();
-  document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!";
-  window.setTimeout(flipCardDelay, 1000);
-  sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player3"));
-   playerWhoBussedFirst = 2;
- };
+  if (e.key !== key1 && e.key !== key2 && e.key !== key3 && e.key !== key4) {
+    return;
+  };
 
- if (firstToBuzz == "" && e.key == key4) {
-  firstToBuzz = e.key;
-  console.log(sessionStorage.getItem("player4"), "var først!");
-  playBuzzer();
-  document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!";
-  window.setTimeout(flipCardDelay, 1000);
-  sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player4"));
-   playerWhoBussedFirst = 3;
- };
+  if (firstToBuzz == "" && e.key == key1) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player1"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player1") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player1"));
+    playerWhoBussedFirst = 0;
+  };
+   
+  if (firstToBuzz == "" && e.key == key2) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player2"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player2") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player2"));
+    playerWhoBussedFirst = 1;
+  };
+
+  if (firstToBuzz == "" && e.key == key3) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player3"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player3") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player3"));
+    playerWhoBussedFirst = 2;
+  };
+
+  if (firstToBuzz == "" && e.key == key4) {
+   firstToBuzz = e.key;
+   console.log(sessionStorage.getItem("player4"), "var først!");
+   playBuzzer();
+   document.getElementById("firstToBuzzH2").innerHTML = sessionStorage.getItem("player4") + " var først!";
+   window.setTimeout(flipCardDelay, 1000);
+   sessionStorage.setItem("playerAnswering", sessionStorage.getItem("player4"));
+    playerWhoBussedFirst = 3;
+  };
  };
 };
 
@@ -386,10 +315,8 @@ function playBuzzer() {
 
 //------------SVAR KNAP CLICK OG VALIDERING---------------------------------------------------------------
 function answerButton() {
-// document.getElementById("answerButton").onclick = function () { 
- clearTimeout(startAnswerTimer);
- document.getElementById("countdownAnswer").innerHTML = "";
 
+ document.getElementById("countdownAnswer").innerHTML = "";
  document.getElementById("answerButton").classList.add("hide");
  document.getElementById("answerInput").readOnly = true;
 
@@ -398,15 +325,13 @@ function answerButton() {
 
  window.clearInterval(answerTimer, 1000);
  clearTimeout(startAnswerTimer);
- answerTimerInSeconds = 30;
+ answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
 
  if (checkAnswer(answerText)) {
   answerResponce.innerHTML = "Tillykke du svarede rigtigt!"; 
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
-
   isAnswerCorrect = true;
-
   playerWhoAnsweredRightGetsToPick();
    
  } else {
@@ -416,28 +341,22 @@ function answerButton() {
   document.getElementById("continueButton").classList.add("knap");
   document.getElementById("itWasRightButton").classList.remove("hide");
   document.getElementById("itWasRightButton").classList.add("knap");
-
   isAnswerCorrect = false;
-
-   newPlyaerPickQuestionIfAnswerIsWrong();
-
-
-
-
+  newPlayerPickQuestionIfAnswerIsWrong();
  };
+
  window.isAnswerCorrect = isAnswerCorrect;
  window.currentPoints = currentPoints;
 
-
-document.getElementById("continueButton").onclick = function () {
- closePopUpAndContinueGame();
-};
-
-document.getElementById("itWasRightButton").onclick = function () {
-  window.isAnswerCorrect = true;
-  playerWhoAnsweredRightGetsToPick();
+ document.getElementById("continueButton").onclick = function () {
   closePopUpAndContinueGame();
-};
+ };
+
+ document.getElementById("itWasRightButton").onclick = function () {
+   window.isAnswerCorrect = true;
+   playerWhoAnsweredRightGetsToPick();
+   closePopUpAndContinueGame();
+ };
 
 };
 
@@ -446,7 +365,7 @@ function closePopUpAndContinueGame() {
  document.getElementById("firstToBuzzH2").innerHTML = "";
  document.getElementById("numberTimeout").innerHTML = "";
  document.getElementById("frontQuestion").classList.remove("hide");
-  document.getElementById("answerInput").classList.remove("hide");
+ document.getElementById("answerInput").classList.remove("hide");
 
  firstToBuzz = "";
  document.onkeydown = null;
@@ -455,18 +374,15 @@ function closePopUpAndContinueGame() {
  removeQuestion();
  closeQuestionPopup();
 
-  questionsFinished += 1;
+ questionsFinished += 1;
 
-  console.log(questionsFinished);
+ if (questionsFinished == 30) {
+   startRoundTwo();
+ };
 
-  if (questionsFinished == 30) {
-    startRoundTwo();
-  };
-
-
-  if (questionsFinished == 60) {
-    gameEnd();
-  }
+ if (questionsFinished == 60) {
+   gameEnd();
+ }
 };
 
 function checkAnswer(answer) {
@@ -483,7 +399,6 @@ function adjustScore() {
     player = players.find(player => player.name === playerAnswering);
   };
 
-  console.log("adjustScore: ", sessionStorage.getItem("pointsPlayer" + player.id));
   sessionStorage.getItem("pointsPlayer" + player.id);
 
   if (window.isAnswerCorrect) {
@@ -499,95 +414,70 @@ function adjustScore() {
   document.querySelector(`#card${player.id} > div.points > p`).innerHTML = player.score;
 };
 
-
 function removeQuestion() {
- 
+
   if (sessionStorage.getItem("activeQuestion") == 1) {
     sessionStorage.setItem("activeQuestion", "first" + round);
-  } 
+  };
 
   if (sessionStorage.getItem("activeQuestion") == 2) {
     sessionStorage.setItem("activeQuestion", "second" + round);
-  } 
+  };
 
   if (sessionStorage.getItem("activeQuestion") == 3) {
     sessionStorage.setItem("activeQuestion", "third" + round);
-  } 
+  };
 
   if (sessionStorage.getItem("activeQuestion") == 4) {
     sessionStorage.setItem("activeQuestion", "fourth" + round);
-  }  
+  }; 
 
   if (sessionStorage.getItem("activeQuestion") == 5) {
     sessionStorage.setItem("activeQuestion", "fifth" + round);
-  } 
+  } ;
 
-  console.log("knap skal fjernes");
-  console.log(sessionStorage.getItem("activeCategory"), sessionStorage.getItem("activeQuestion"));
+  // console.log("th tags", document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th'));
+  // console.log(sessionStorage.getItem("activeQuestion"));
 
-  // console.log(document.getElementsByClassName("first").getElementByTagName('th')[0]);
-
-  console.log(document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory") - ((round - 1 ) * 6) ]);
-
-  let cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[sessionStorage.getItem("activeCategory") - ((round - 1) * 6) ];
-
-  console.log(cell);
-
+  let cell = document.getElementById(sessionStorage.getItem("activeQuestion")).getElementsByTagName('th')[(parseInt(sessionStorage.getItem("activeCategory"))-1) - ((round - 1) * 6) ];
   cell.classList.add("removedCell");
 };
 
-
 function startRoundTwo() {
   round = 2;
-
   document.getElementById("firstTable").classList.add("hide");
   document.getElementById("secondTable").classList.remove("hide");
   document.getElementById("secondTable").classList.add("theTableOne");
   document.getElementById("startingRoundTwo").classList.add("open-popup");
   document.getElementById("fadeBackground").classList.add("fade");
-
-}
-
+};
 
 function gameEnd() {
-
   document.getElementById("gameFinished").classList.add("open-popup");
-
   document.getElementById("winnerName").innerHTML = findWinner();
-
-}
+};
 
 function findWinner() {
   
   const players = getPlayers();
 
   let scores = [];
-
   for (let i = 0; i < players.length; i++) {
-
     scores.push(parseInt(sessionStorage.getItem("pointsPlayer" + players[i].id)));
-    
-  }
+  };
 
   let highest = scores[0];
   let highestIndex = 0;
-
   for (let i = 0; i < scores.length; i++) {
     if (scores[i] > highest ) {
       highestIndex = i;
       highest = scores[i];
-    }
-
+    };
     return players[highestIndex].name;
+  };
+};
 
-  }
-
-
-}
-
-
-
-function newPlyaerPickQuestionIfAnswerIsWrong() {
+function newPlayerPickQuestionIfAnswerIsWrong() {
 
   let cards = [];
 
@@ -604,11 +494,11 @@ function newPlyaerPickQuestionIfAnswerIsWrong() {
     currentPlayersTurn = 0;
   } else {
     currentPlayersTurn += 1;
-  }
+  };
 
   for (let i = 0; i < totalPlayers; i++) {
      cards[i].classList.remove("card-selected");
-  }
+  };
 
   console.log(currentPlayersTurn);
 
@@ -616,8 +506,7 @@ function newPlyaerPickQuestionIfAnswerIsWrong() {
 
   sessionStorage.setItem("currentPlayersTurn" , currentPlayersTurn);
 
-}
-
+};
 
 function playerWhoAnsweredRightGetsToPick() {
   
@@ -635,9 +524,5 @@ function playerWhoAnsweredRightGetsToPick() {
   cards[playerWhoBussedFirst].classList.add("card-selected");
 
   sessionStorage.setItem("currentPlayersTurn" , playerWhoBussedFirst);
-
-}
-
-
-
+};
 //--------------------------------------------------------------------------------------------------------

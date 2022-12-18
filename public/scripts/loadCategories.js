@@ -1,3 +1,5 @@
+// const { getVersion } = require("jest");
+
 //Stjålet fra: https://bost.ocks.org/mike/shuffle/ og https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
  var m = array.length, t, i;
@@ -13,79 +15,90 @@ function shuffle(array) {
  return array;
 };
 // Hent data fra API via JSON
-// tilføj categoriNumbers
-async function loadCategories() {
+async function setupCategoryDropdowns() {
  sessionStorage.clear();
- console.log("running loadCategories");
+ console.log("running setupCategoryDropdowns");
+ // Get data from API
+ let data = await getDataFromAPI();
+ // Byg categories med 60 kategorier:
+ let categories = await buildCategories(data);
+ // Randomize categories array:
+ shuffle(categories);
+ // Fill HTML dropdown fields:
+ await fillDropdownsWithCategories(categories);
+};
+
+async function getDataFromAPI() {
  try {
   let randomCategoryOffset = Math.round(Math.random()*5400);
   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
   const response = await fetch(apiPath);
   console.log("Raw response:", response);
   const data = await response.json();
+  return data;
+ } catch (e) {
+  console.log(e);
+  console.log("There was an error fetching the data");
+ };
+}
 
-  console.log("Raw data, categories:", data);
-  // Test for tomme kategorier og byg categories med 60 kategorier:
-  let categories = [];
-
-  try {
-   for (i = 0; categories.length < 60; i++){
-    //4068 er "name that artist" og burde vist indeholde billeder. Så den er sorteret fra her.
-     if (data[i].clues_count > 4 && data.id != 4068){
-      categories.push(data[i]);
-     };
-   };
-  } catch (e) {
-   console.log(e);
-   // loadCategories();
-  };
-  //Randomize categories array:
-  shuffle(categories);
-   // Load dropdowns:
-  try {
-   for (let i = 0; i < 12; i++) {
-    let choice = document.getElementById(`kategori${i+1}`);
-    choice.innerHTML = "";
-    choice.innerHTML += `<option value='default'>Vælg kategori</option>`;
-    for (j = 0; j < 5; j++){
-     let counter = (j)+i*5;
-     choice.innerHTML += `<option value=${categories[counter].id}>${categories[counter].title.replace(/\â\\/g, "'")}</option>`;
-     console.log();
+async function buildCategories(data){
+ let categories = [];
+ try {
+  for (i = 0; categories.length < 60; i++){
+    if (data[i].clues_count){
+     categories.push(data[i]);
     };
-   };
-  } catch (e) {
-   console.log(e)
   };
-  // showCategoriHeading = false;
+  return categories;
+ } catch (e) {
+  console.log(e);
+ };
+};
+
+async function fillDropdownsWithCategories(categories){
+ try {
+  for (let i = 0; i < 12; i++) {
+   let choice = document.getElementById(`kategori${i+1}`);
+   choice.innerHTML = "";
+   choice.innerHTML += `<option value='default'>Vælg kategori</option>`;
+   for (j = 0; j < 5; j++){
+    let counter = (j)+i*5;
+    
+    let catTitle = categories[counter].title;
+    catTitle = fixAsciiChars(catTitle);
+
+    choice.innerHTML += `<option value=${categories[counter].id}>${catTitle}</option>`;
+    console.log();
+   };
+  };
+ } catch (e) {
+  console.log(e)
+ };
+};
+
+//Tilfældige kategorier
+async function setupRandomCategories() {
+ console.log("running randomCategories");
+ try {
+
+  let data = await getDataFromAPI();
+
+  let categories = await buildCategories(data)
+
+  shuffle(categories);
+ 
+  await fillRemainingDropDownsWithCategories(categories);
+
  } catch (e) {
   console.log(e);
   console.log("There was an error fetching the data");
  };
 };
 
-async function randomCategories() {
- console.log("running randomCategories");
+async function getRemainingCategoriIDs(){
+ let remainingCategoriIDs = [];
  try {
-  let randomCategoryOffset = Math.round(Math.random()*5400);
-  let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
-  const response = await fetch(apiPath);
-  let data = await response.json();
-  console.log("Raw data, categories:", data);
-  
-  let categories = [];
-  try {
-   for (i = 0; categories.length < 60; i++){
-     if (data[i].clues_count > 4 && data[i].id != 4068){
-      categories.push(data[i]);
-     };
-   };
-  } catch (e) {
-   console.log(e);
-  };
-
-  shuffle(categories);
-
-  let remainingCategoriIDs = [];
   for (let i = 0; i < 12; i++) {
    let choice = document.getElementById(`kategori${i+1}`);
    
@@ -93,84 +106,44 @@ async function randomCategories() {
     remainingCategoriIDs[i] = choice.id;
    };
   };
-  
-  for (let k = 0; k < remainingCategoriIDs.length; k++) {
-   let choice = document.getElementById(`kategori${k+1}`);
-   if (choice.id == remainingCategoriIDs[k]) {
-    
-    choice.innerHTML = "";
-    choice.innerHTML += `<option value='default'>Vælg kategori</option>`;
-
-    for (j = 0; j < 5; j++){
-     if (choice.id != remainingCategoriIDs[i]) {
-      let choice = document.getElementById(`kategori${k+1}`);
-
-      //Fix forkerte character fra API:
-      let catTitle = categories[j+k*5].title;
-      catTitle = catTitle.replaceAll("â", "'");
-      catTitle = catTitle.replace(/\â|\x98|\x80/g, "");
-
-      choice.innerHTML += `<option value=${categories[j+k*5].id}>${catTitle}</option>`;
-     };
-     console.log();
-    };
-   };
-  };
- } catch (e) {
-  console.log(e);
-  console.log("There was an error fetching the data");
+ return remainingCategoriIDs;
+ } catch (error) {
+  console.log(error);
  };
 };
-// function replaceAll(str, find, replace) {
-//  return str.replace(escapeRegExp(find, 'g'), replace);
-// };
-// function escapeRegExp(string) {
-//  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-// };
-// også for castArray, fx. Rock 'n roll
 
-// loadCategories();
+async function fillRemainingDropDownsWithCategories(categories){
 
-// if (data == null) {
-//   showCategoriHeading = true;
-//   loadCategories();
-// }
+ let remainingCategoriIDs = await getRemainingCategoriIDs();
 
-// async function findWrongCat() {
-//  console.log("running randomCategories");
-//    let randomCategoryOffset = 0;
-//     // = Math.round(Math.random()*5400);
-//  for (let k = 0; k < 54; k++) {
+ for (let k = 0; k < remainingCategoriIDs.length; k++) {
+  let choice = document.getElementById(`kategori${k+1}`);
+  if (choice.id == remainingCategoriIDs[k]) {
+   
+   choice.innerHTML = "";
+   choice.innerHTML += `<option value='default'>Vælg kategori</option>`;
 
-//  try {
+   for (j = 0; j < 5; j++){
+    if (choice.id != remainingCategoriIDs[i]) {
+     let choice = document.getElementById(`kategori${k+1}`);
 
-  
-//   let apiPath = `https://jservice.io/api/categories?count=100&offset=${randomCategoryOffset}`;
-//   const response = await fetch(apiPath);
-//   let data = await response.json();
-//   // console.log("Raw data, categories:", data);
+     //Fix forkerte character fra API:
+     let catTitle = categories[j+k*5].title;
+     catTitle = fixAsciiChars(catTitle);
 
-//   try {
-//    for (i = 0; i < 100; i++){
-//     console.log(randomCategoryOffset)
-//      if (data[i].title == "world history"){
-//       console.log("I FOUND IT!!!!!!: ",data[i]);
-//       // 260
-//       // 205
-//       // 314
-//      };
-//    };
-//   } catch (e) {
-//    console.log(e);
-//   };
+     choice.innerHTML += `<option value=${categories[j+k*5].id}>${catTitle}</option>`;
+    };
+    console.log();
+   };
+  };
+ };
+};
 
-  
-//  } catch (e) {
-//   console.log(e);
-//   console.log("There was an error fetching the data");
-//  };
-//  randomCategoryOffset += 100;
-// };
-// };
+function fixAsciiChars(string){
 
-// findWrongCat();
+ //Mangler Ã³
+ //Eksempel: Felipe CalderÃ³n - skal være "ó"
+ string = string.replaceAll("â", "'");
+ string = string.replace(/\â|\x98|\x80/g, "");
+ return string;
+};

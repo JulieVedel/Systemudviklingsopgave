@@ -371,20 +371,35 @@ img.playerButton:hover {
     max-height: 40px;
 }
 
-.table .first th {
+.table .tableRow1 th {
     background-color: #FF9700;
 }
-.table .second th {
+.table .tableRow2 th {
     background-color: #E18603;
 }
-.table .third th {
+.table .tableRow3 th {
     background-color: #D17C00;
 }
-.table .forth th {
+.table .tableRow4 th {
     background-color: #B86D00;
 }
-.table .fifth th {
+.table .tableRow5 th {
     background-color: #9D5D00;
+}
+.table .tableRow6 th {
+ background-color: #FF9700;
+}
+.table .tableRow7 th {
+ background-color: #E18603;
+}
+.table .tableRow8 th {
+ background-color: #D17C00;
+}
+.table .tableRow9 th {
+ background-color: #B86D00;
+}
+.table .tableRow10 th {
+ background-color: #9D5D00;
 }
 
 

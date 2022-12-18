@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%=title%></title>
     <link rel="stylesheet" href="/css/styles.css">
 
     <!-- Find bedre ikon: -->
@@ -12,7 +12,7 @@
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/31M2GpmH5VL.png">
     
 </head>
-<body onload="loadCategories()">
+<body onload="setupCategoryDropdowns()">
     
     <nav role='navigation'>
         <div class="header">
@@ -301,7 +301,7 @@
       </form>
 
       <div class="bundKnapperDiv">
-       <div class="bundKnapper"><button class="knap" id="kategori-knap" onclick="randomCategories()">Tilfældige kategorier</button></div>
+       <div class="bundKnapper"><button class="knap" id="kategori-knap" onclick="setupRandomCategories()">Tilfældige kategorier</button></div>
        <div class="bundKnapper"><button class="knap" id="start-knap" onclick="startGame()">START</button></div>
        <div class="bundKnapper"></div>
       </div>
