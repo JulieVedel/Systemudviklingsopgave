@@ -45,7 +45,7 @@ async function buildCategories(data){
  let categories = [];
  try {
   for (i = 0; categories.length < 60; i++){
-    if (data[i].clues_count){
+    if (data[i].clues_count > 4){
      categories.push(data[i]);
     };
   };

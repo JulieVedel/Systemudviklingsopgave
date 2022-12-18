@@ -32,11 +32,11 @@ let questionsFinished = 0;
 for (let rowIndex = 0; rowIndex < 5; rowIndex++) {
  let cells =  document.querySelectorAll(`.tableRow${rowIndex+1} th`); 
  for (var columnIndex = 0; columnIndex < cells.length; columnIndex++) {
-  cells[columnIndex].onclick = function () {  clickRow(rowIndex, this.getAttribute("value")); };
+  cells[columnIndex].onclick = function () {  clickCell(rowIndex, this.getAttribute("value")); };
  };
 };
 
-async function clickRow(rowIndex, columnIndex) {
+async function clickCell(rowIndex, columnIndex) {
  try {
   // columnIndex går fra 1-12. Vi har to tabeller. Se det som om runde 1 er kolonne 1-5, og runde 2 er kolonne 6-10.
   // så her justeret kolonneIndex baseret på runde-nummeret:
@@ -44,7 +44,7 @@ async function clickRow(rowIndex, columnIndex) {
   currentPoints = (rowIndex + 1) * (round * 100);
   sessionStorage.setItem("activeCategory", columnIndex);
   sessionStorage.setItem("activeQuestion", (rowIndex + 1));
-  let categoriID = sessionStorage.getItem(`cat${columnIndex}`)
+  let categoriID = sessionStorage.getItem(`cat${columnIndex}`);
   clue = await getClueFromAPI(rowIndex, categoriID);
   showQuestionPopup();
  } catch (error) {
