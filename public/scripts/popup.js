@@ -68,7 +68,7 @@ function showBuzzerPopup(buzzerInputFieldID) {
   };
 
      console.log(buzzerLabel.id);
-
+  // return e.key;
  };
 
  var popup = document.getElementById("popupBuzzer");
@@ -78,6 +78,8 @@ function showBuzzerPopup(buzzerInputFieldID) {
  popup.classList.add("fade");
 
 };
+
+// exports.showBuzzerPopup = showBuzzerPopup;
 
 function closeBuzzerPopup() {
 
@@ -115,7 +117,7 @@ function showStartingPlayerPopup() {
    };
    
    function closeStartingPlayerPopup() {
-   
+    closeHelpPopup();
     var popup = document.getElementById("startingPlayerPopup");
     popup.classList.remove("open-popup");
    

@@ -24,7 +24,7 @@ const { result } = require('lodash');
 
 // mongo database connection string:
 const dbURI = 'mongodb+srv://user1:1234@cluster0.1kjeku1.mongodb.net/test?retryWrites=true&w=majority';
-
+  
 mongoose.connect(dbURI)
  // .then((result) => console.log('connected to db'))
  // server lytter kun hvis der er oprettet forbindelse til db:
@@ -37,6 +37,7 @@ mongoose.connect(dbURI)
 // mongoose.set('strictQuery', true);
 //listen for req: (localhost assumed)
 // app.listen(5500);
+
 
 //Middleware and static files. static gør at filer i den tildelte mappe public kan tilgås
 // http://localhost:5500/images/logo.png
@@ -154,7 +155,10 @@ async function getTop10Users(){
  } catch(err) {
   console.log(err);
  };
+ 
 };
+
+exports.getTop10Users = getTop10Users;
 
 async function checkIfCurrentPlayerIsInTop10(){
  let place = 1;
@@ -183,6 +187,8 @@ async function checkIfCurrentPlayerIsInTop10(){
   console.log(e);
  };
 };
+
+
 
 async function getAllUsers(){
  try {
