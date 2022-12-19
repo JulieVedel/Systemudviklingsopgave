@@ -1,4 +1,4 @@
-const BUZZER_TIMER_COUNTDOWN = 1;
+const BUZZER_TIMER_COUNTDOWN = 10;
 let timer = BUZZER_TIMER_COUNTDOWN;
 const ANSWER_TIMER_COUNTDOWN = 30;
 let answerTimerInSeconds = ANSWER_TIMER_COUNTDOWN;
@@ -46,7 +46,7 @@ async function clickCell(rowIndex, columnIndex) {
   sessionStorage.setItem("activeQuestion", (rowIndex + 1));
   let categoriID = sessionStorage.getItem(`cat${columnIndex}`);
   clue = await getClueFromAPI(rowIndex, categoriID);
-  showQuestionPopup();
+  await showQuestionPopup();
  } catch (error) {
  };
 };
@@ -73,7 +73,7 @@ function showElementbyID(ID){
 
 // ------------------------------ QUESTION POPUP ------------------------------------
 let startQuestionTimer;
-function showQuestionPopup() {
+async function showQuestionPopup() {
  // TEST:
  clearTimeout(startAnswerTimer);
  timer = BUZZER_TIMER_COUNTDOWN;
@@ -101,11 +101,12 @@ function showQuestionPopup() {
  document.getElementById("question_popup_H2").innerHTML += " til " + currentPoints;
  //Fix forkerte characters fra API:
  //Tilføj de resterende fixes fra loadQuestion - og træk ud i egen funktion:
- clue.question = clue.question.replace(/\â\\/g, "'");
- clue.question = clue.question.replace("Â", "");
- clue.question = clue.question.replace("Ã³", "ó");
- clue.question = clue.question.replace("Ã©", "é");
- clue.question = clue.question.replace("\\", "");
+ clue.question = await clue.question.replace(/\â\\/g, "'");
+ clue.question = await clue.question.replace("Â", "");
+ clue.question = await clue.question.replace("Ã³", "ó");
+ clue.question = await clue.question.replace("Ã©", "é");
+ clue.question = await clue.question.replace("\\", "");
+
  document.getElementById("question_popup_H2").innerHTML += "<h3>" + clue.question + "</h3>";
  startQuestionTimer = window.setInterval(inputTimer, 1000);
 };
@@ -205,7 +206,7 @@ function inputTimer(){
  timer = timer - 1;
 };
 
-function answerTimer(){
+async function answerTimer(){
 
  if (!document.getElementById("countdownAnswer").classList.contains("hide")) {
   document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
@@ -226,11 +227,11 @@ function answerTimer(){
   document.getElementById("answerInput").classList.add("hide");
   answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
 
-  clue.answer = clue.answer.replace(/\â\\/g, "'");
-  clue.answer = clue.answer.replace("Â", "");
-  clue.answer = clue.answer.replace("Ã³", "ó");
-  clue.answer = clue.answer.replace("Ã©", "é");
-  clue.answer = clue.answer.replace("\\", "");
+  clue.answer = await clue.answer.replace(/\â\\/g, "'");
+  clue.answer = await clue.answer.replace("Â", "");
+  clue.answer = await clue.answer.replace("Ã³", "ó");
+  clue.answer = await clue.answer.replace("Ã©", "é");
+  clue.answer = await clue.answer.replace("\\", "");
   answerResponce.innerHTML += clue.answer; 
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
@@ -276,7 +277,7 @@ function playBuzzer() {
 //--------------------------------------------------------------------------------------------------------
 
 //------------SVAR KNAP CLICK OG VALIDERING---------------------------------------------------------------
-function answerButton() {
+async function answerButton() {
 
  document.getElementById("countdownAnswer").innerHTML = "";
  document.getElementById("answerButton").classList.add("hide");
@@ -298,11 +299,11 @@ function answerButton() {
    
  } else {
   answerResponce.innerHTML = "Det rigtige svar er: " ;
-  clue.answer = clue.answer.replace(/\â\\/g, "'");
-  clue.answer = clue.answer.replace("Â", "");
-  clue.answer = clue.answer.replace("Ã³", "ó");
-  clue.answer = clue.answer.replace("Ã©", "é");
-  clue.answer = clue.answer.replace("\\", "");
+  clue.answer = await clue.answer.replace(/\â\\/g, "'");
+  clue.answer = await clue.answer.replace("Â", "");
+  clue.answer = await clue.answer.replace("Ã³", "ó");
+  clue.answer = await clue.answer.replace("Ã©", "é");
+  clue.answer = await clue.answer.replace("\\", "");
   answerResponce.innerHTML += clue.answer;
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");

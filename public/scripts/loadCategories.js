@@ -39,7 +39,7 @@ async function getDataFromAPI() {
   console.log(e);
   console.log("There was an error fetching the data");
  };
-}
+};
 
 async function buildCategories(data){
  let categories = [];
