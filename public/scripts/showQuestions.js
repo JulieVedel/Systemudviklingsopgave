@@ -121,7 +121,9 @@ function flipCardDelay(){
  document.getElementById("answerInput").readOnly = false;
  document.getElementById("answerInput").value = "";
  answerResponce.innerHTML = "";
- startAnswerTimer = window.setInterval(answerTimer, 1000);
+
+answerTimer();
+
  document.getElementById("continueButton").classList.add("hide");
  document.getElementById("itWasRightButton").classList.add("hide");
  document.getElementById("question_popup_H2_Back").innerHTML += " til " + currentPoints;
@@ -206,14 +208,85 @@ function inputTimer(){
  timer = timer - 1;
 };
 
-async function answerTimer(){
+const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 15;
+const ALERT_THRESHOLD = 7;
 
- if (!document.getElementById("countdownAnswer").classList.contains("hide")) {
-  document.getElementById("countdownAnswer").innerHTML = answerTimerInSeconds;
- };
+const COLOR_CODES = {
+  info: {
+    color: "green"
+  },
+  warning: {
+    color: "orange",
+    threshold: WARNING_THRESHOLD
+  },
+  alert: {
+    color: "red",
+    threshold: ALERT_THRESHOLD
+  }
+};
 
- if (answerTimerInSeconds <= 0) {
+const TIME_LIMIT = 30;
+let timePassed = 0;
+let timeLeft = TIME_LIMIT;
+let timerInterval = null;
+let remainingPathColor = COLOR_CODES.info.color;
+
+document.getElementById("countdownAnswer").innerHTML = `
+<div class="base-timer">
+  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+      <path
+        id="base-timer-path-remaining"
+        stroke-dasharray="283"
+        class="base-timer__path-remaining ${remainingPathColor}"
+        d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+      ></path>
+    </g>
+  </svg>
+  <span id="base-timer-label" class="base-timer__label">${formatTime(
+  timeLeft
+)}</span>
+</div>
+`;
+
+  clue.answer = await clue.answer.replace(/\â\\/g, "'");
+  clue.answer = await clue.answer.replace("Â", "");
+  clue.answer = await clue.answer.replace("Ã³", "ó");
+  clue.answer = await clue.answer.replace("Ã©", "é");
+  clue.answer = await clue.answer.replace("\\", "");
+
+function answerTimer(){
+
+console.log("it starts now");
+
+
+   timerInterval = setInterval(() => {
+     timePassed = timePassed += 1;
+     timeLeft = TIME_LIMIT - timePassed;
+     console.log(timeLeft);
+     document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
+     setCircleDasharray();
+     setRemainingPathColor(timeLeft);
+
+     if (timeLeft === 0) {
+       onTimesUp();
+     }
+   }, 1000);
+ }
+
+
+
+function onTimesUp() {
   clearTimeout(startAnswerTimer);
+  // TODO: Giv besked og luk question popup:
+  // window.alert("Tiden løb ud");
   console.log("time is over");
 
   isAnswerCorrect = false;
@@ -225,14 +298,11 @@ async function answerTimer(){
   document.getElementById("countdownAnswer").innerHTML = "";
   document.getElementById("answerButton").classList.add("hide");
   document.getElementById("answerInput").classList.add("hide");
+  
+  let answerResponce = document.getElementById("answerResponce");
   answerResponce.innerHTML = "Tiden løb ud, det rigtige svar er: ";
+  answerResponce.innerHTML += clue.answer;
 
-  clue.answer = await clue.answer.replace(/\â\\/g, "'");
-  clue.answer = await clue.answer.replace("Â", "");
-  clue.answer = await clue.answer.replace("Ã³", "ó");
-  clue.answer = await clue.answer.replace("Ã©", "é");
-  clue.answer = await clue.answer.replace("\\", "");
-  answerResponce.innerHTML += clue.answer; 
   document.getElementById("continueButton").classList.remove("hide");
   document.getElementById("continueButton").classList.add("knap");
 
@@ -242,6 +312,59 @@ async function answerTimer(){
   document.getElementById("continueButton").onclick = function () {
     closePopUpAndContinueGame();
   };
+
+}
+
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+}
+
+function setRemainingPathColor(timeLeft) {
+  const { alert, warning, info } = COLOR_CODES;
+  if (timeLeft <= alert.threshold) {
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.remove(warning.color);
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.add(alert.color);
+  } else if (timeLeft <= warning.threshold) {
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.remove(info.color);
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.add(warning.color);
+  }
+}
+
+function calculateTimeFraction() {
+  const rawTimeFraction = timeLeft / TIME_LIMIT;
+  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+}
+
+function setCircleDasharray() {
+  const circleDasharray = `${(
+    calculateTimeFraction() * FULL_DASH_ARRAY
+  ).toFixed(0)} 283`;
+  document
+    .getElementById("base-timer-path-remaining")
+    .setAttribute("stroke-dasharray", circleDasharray);
+}
+
+   
+
+
+
+
 
  };
  answerTimerInSeconds = answerTimerInSeconds - 1;
