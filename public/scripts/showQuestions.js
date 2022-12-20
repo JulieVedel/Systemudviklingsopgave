@@ -29,6 +29,16 @@ let questionsFinished = 0;
 //     7. loadQuestion() kan omskrives og helt fjernes. Se noter i funktionen.
 //     8. Saml clear timeouts og reset timeouts i små funktioner.
 
+async function correctClueSpecialChars(){
+ clue.answer = await clue.answer.replace(/\â\\/g, "'");
+ clue.answer = await clue.answer.replace("Â", "");
+ clue.answer = await clue.answer.replace("Ã³", "ó");
+ clue.answer = await clue.answer.replace("Ã©", "é");
+ clue.answer = await clue.answer.replace("\\", "");
+};
+
+
+
 for (let rowIndex = 0; rowIndex < 5; rowIndex++) {
  let cells =  document.querySelectorAll(`.tableRow${rowIndex+1} th`); 
  for (var columnIndex = 0; columnIndex < cells.length; columnIndex++) {
@@ -46,6 +56,7 @@ async function clickCell(rowIndex, columnIndex) {
   sessionStorage.setItem("activeQuestion", (rowIndex + 1));
   let categoriID = sessionStorage.getItem(`cat${columnIndex}`);
   clue = await getClueFromAPI(rowIndex, categoriID);
+  await correctClueSpecialChars();
   await showQuestionPopup();
  } catch (error) {
  };
@@ -256,11 +267,7 @@ document.getElementById("countdownAnswer").innerHTML = `
 </div>
 `;
 
-  clue.answer = await clue.answer.replace(/\â\\/g, "'");
-  clue.answer = await clue.answer.replace("Â", "");
-  clue.answer = await clue.answer.replace("Ã³", "ó");
-  clue.answer = await clue.answer.replace("Ã©", "é");
-  clue.answer = await clue.answer.replace("\\", "");
+
 
 function answerTimer(){
 
@@ -360,15 +367,6 @@ function setCircleDasharray() {
     .setAttribute("stroke-dasharray", circleDasharray);
 }
 
-   
-
-
-
-
-
- };
- answerTimerInSeconds = answerTimerInSeconds - 1;
-};
 
 //------------------------------ ACTIVATE BUZZERS & SOUND ------------------------------------------------
 let firstToBuzz = "";
@@ -393,7 +391,7 @@ function activateBuzzers(){
 
 // Man kunne lade det være op til spillere at vælge lyd under game setup:
 function playBuzzer() {
- var audio = new Audio("../sounds/buzz1.mp3");
+ var audio = new Audio("../sounds/buzz2.wav");
  audio.play();
 };
 
