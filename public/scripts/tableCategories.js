@@ -97,7 +97,7 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
 
     let names = [];
 
-    // -------- refactor eksempel --------// 
+    // -------- refactor --------// 
 
     names[0] = document.querySelector("#card1 .name p");
     names[1] = document.querySelector("#card2 .name p");
@@ -148,19 +148,17 @@ function pupulatePlayerNamesAndStartSelectPlayer() {
     const randomNumber = Math.round(Math.random() * (getPlayerNames().length - 1));
     cards[randomNumber].classList.add("card-selected");
 
-    sessionStorage.setItem("currentPlayersTurn" , randomNumber);
+    sessionStorage.setItem("currentPlayerIndex" , randomNumber);
 
     startingPlayer(cards[randomNumber].querySelector("div.name > p").innerHTML)
 
-        }
-    
+};
 
 getSessionCategories();
 pupulatePlayerNamesAndStartSelectPlayer();
 
 function startingPlayer(player) {
     document.getElementById('startingPlayer').innerHTML = player + " starter spillet!";
-
 };
 
 sessionStorage.setItem("preventScoreboardRefresh", 0);

@@ -112,8 +112,6 @@ function showStartingPlayerPopup() {
     var popup = document.getElementById("fadeBackground");
     popup.classList.add("fade");
 
-
-   
    };
    
    function closeStartingPlayerPopup() {

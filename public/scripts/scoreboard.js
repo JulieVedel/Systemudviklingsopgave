@@ -1,4 +1,4 @@
-class User {
+class Player {
  
  constructor(username, points, opponent1, opponent2, opponent3) {
   this.username = username;
@@ -19,7 +19,7 @@ async function savePlayerDataToMongoDB() {
  let player2;
  let player3;
  let player4;
- 
+  
   if (sessionStorage.getItem("player1") == null) {
    player1 = "";
   } else {
@@ -41,72 +41,70 @@ async function savePlayerDataToMongoDB() {
    player4 = sessionStorage.getItem("player4");
   };
 
-  const users = [];
+  const players = [];
 
   if (player1 != "") {
-  const user1 = new User(
+  const player1Obj = new Player(
    player1,
    sessionStorage.getItem("pointsPlayer1"),
    player2,
    player3,
    player4
   );
-  users.push(user1);
+  players.push(player1Obj);
  };
   
  if (player2 != "") {
-  const user2 = new User(
+  const player2Obj = new Player(
    player2,
    sessionStorage.getItem("pointsPlayer2"),
    player1,
    player3,
    player4
   );
-  users.push(user2);
+  players.push(player2Obj);
  };
 
  if (player3 != "") {
-  const user3 = new User(
+  const player3Obj = new Player(
    player3,
    sessionStorage.getItem("pointsPlayer3"),
    player1,
    player2,
    player4
   );
-  users.push(user3);
+  players.push(player3Obj);
  };
 
  if (player4 != "") {
-  const user4 = new User(
+  const player4Obj = new Player(
    player4,
    sessionStorage.getItem("pointsPlayer4"),
    player1,
    player2,
    player3
   );
-  users.push(user4);
+  players.push(player4Obj);
  };
  //-------------------------------------------------------------------------------------
 
- console.log("Sending these users to POST:", users);
-//mangler try catch:
- const res = await fetch('http://localhost:3000/savePlayerData', {
-  method: 'POST',
-  headers: {
-   "Content-Type": 'application/json'
-  },
-  body: JSON.stringify(users)
- });
+ console.log("Sending these players to POST:", players);
+
+ try {
+   const res = await fetch('http://localhost:3000/savePlayerData', {
+   method: 'POST',
+   headers: {
+    "Content-Type": 'application/json'
+   },
+   body: JSON.stringify(players)
+  });
+ } catch (error) {
+  console.log(error);
+ };
 };
 
-async function getTop10() {
-
- const res = await fetch('http://localhost:3000/scoreboardInfo', {
-  method: 'GET'
- });
-
- const data = await res.json();
-
+function prepareTable(){
+ //rename og træk ud... prepareTable:
  document.getElementById("rank1").innerHTML = "";
  document.getElementById("scoreboard").innerHTML = "";
  document.getElementById("scoreboard").innerHTML = `
@@ -116,56 +114,73 @@ async function getTop10() {
  <th>Point</th>
  <th>Dato</th>
  <th colspan="3">Modstandere</th>
-</tr>`
-
-countPlayers = data.length;
-
- let i = 1;
- let adjustedRank;
-
- data.forEach(element => {
-  let playDate = element.createdAt + "";
-  playDate = playDate.substring(0,10);
-
-  if(playDate == "2022-12-09") {
-   playDate = "";
-  };
-
-  if (i == 1) {
-   adjustedRank = "🥇";
-  };
-  if (i == 2) {
-   adjustedRank = "🥈";
-  };
-  if (i == 3) {
-   adjustedRank = "🥉";
-  };
-  if (i > 3) {
-   adjustedRank = i;
-  };
-
-  let userFields = `
- <tr id="rank${i}">
-  <td>${adjustedRank}</td>
-  <td>${element.username}</td>
-  <td>${element.points}</td>
-  <td>${playDate}</td>
-  <td>${element.opponent1}</td>
-  <td>${element.opponent2}</td>
-  <td>${element.opponent3}</td>
  </tr>`
+ // -----------------------------------
+}
 
- document.getElementById("scoreboard").innerHTML += userFields;
- i++;
+async function getTop10() {
+ prepareTable();
+
+ try {
+  const res = await fetch('http://localhost:3000/scoreboardInfo', {
+  method: 'GET'
+  });
+
+ const top10Players = await res.json();
+ countPlayers = top10Players.length;
+ let rowIndex = 1;
+
+ top10Players.forEach(player => {
+  fillTableWithPlayerData(rowIndex, player);
+  rowIndex++;
  });
+ 
+ } catch (error) {
+  console.log(error);;
+ };
 };
 
-function fillRestOfTable(){
+function fillTableWithPlayerData(rowIndex, player){
+ let adjustedRank;
+
+ if (rowIndex == 1) {
+  adjustedRank = "🥇";
+ };
+ if (rowIndex == 2) {
+  adjustedRank = "🥈";
+ };
+ if (rowIndex == 3) {
+  adjustedRank = "🥉";
+ };
+ if (rowIndex > 3) {
+  adjustedRank = rowIndex;
+ };
+
+ let playDate = player.createdAt + "";
+ playDate = playDate.substring(0,10);
+
+ let playerFields = `
+ <tr id="rank${rowIndex}">
+ <td>${adjustedRank}</td>
+ <td>${player.username}</td>
+ <td>${player.points}</td>
+ <td>${playDate}</td>
+ <td>${player.opponent1}</td>
+ <td>${player.opponent2}</td>
+ <td>${player.opponent3}</td>
+ </tr>`
+ document.getElementById("scoreboard").innerHTML += playerFields;
+
+ // console.log(document.getElementById("scoreboard").innerHTML);
+ 
+};
+
+function prepareRestOfTable(){
  let scoreTable = document.getElementById("scoreboard");
- console.log("scoreTable.innerHTML",scoreTable.innerHTML);
+ // console.log("scoreTable.innerHTML",scoreTable.innerHTML);
  for (let i = 0; i < (10-countPlayers); i++) {
   scoreTable.innerHTML += "<tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>";
-  console.log("scoreTable.innerHTML",scoreTable.innerHTML);
+  // console.log("scoreTable.innerHTML",scoreTable.innerHTML);
  };
 };
 
@@ -174,7 +189,9 @@ async function getPlayerRanks() {
  const res = await fetch('http://localhost:3000/playerRanks', {
   method: 'GET'
  });
+ //rename data
  const data = await res.json();
+ console.log("data", data);
  data.forEach(element => {
   console.log("rank{element}:", `rank${element}`);
   document.getElementById(`rank${element}`).classList.add("highlight");
@@ -182,37 +199,38 @@ async function getPlayerRanks() {
 };
 
 async function getAllPlayerRanks() {
-
  const res = await fetch('http://localhost:3000/allPlayerRanks', {
   method: 'GET'
  });
 
- const data = await res.json();
- console.log("getAllPlayerRanks() scoreboards.js allplayers:", data);
+ //rename data
+ const players = await res.json();
+ console.log("getAllPlayerRanks() scoreboards.js allplayers:", players);
  
- data.forEach(element => {
-  console.log("element:", element);
+ // rename element:
+ players.forEach(player => {
+  // console.log("player:", player);
   
-  console.log("element.user:", element.user);
-  console.log("element.place:", element.place);
+  // console.log("player.playerObj:", player.playerObj);
+  // console.log("player.place:", player.place);
   
-  if (element.place > 10) {
-   console.log("en spiller landede uden for top 10 - på plads:", element.place);
-   console.log("document.getElementById('scoreboard').innerHTML FØR:",document.getElementById("scoreboard").innerHTML);
-   let playDate = element.user.createdAt.substring(0,10);
-   let userFields = `
-   <tr id="rank${element.place}" class="highlight">
-    <td>${element.place}</td>
-    <td>${element.user.username}</td>
-    <td>${element.user.points}</td>
+  if (player.place > 10) {
+   console.log("en spiller landede uden for top 10 - på plads:", player.place);
+   // console.log("document.getElementById('scoreboard').innerHTML FØR:",document.getElementById("scoreboard").innerHTML);
+   let playDate = player.playerObj.createdAt.substring(0,10);
+   let playerFields = `
+   <tr id="rank${player.place}" class="highlight">
+    <td>${player.place}</td>
+    <td>${player.playerObj.username}</td>
+    <td>${player.playerObj.points}</td>
     <td>${playDate}</td>
-    <td>${element.user.opponent1}</td>
-    <td>${element.user.opponent2}</td>
-    <td>${element.user.opponent3}</td>
+    <td>${player.playerObj.opponent1}</td>
+    <td>${player.playerObj.opponent2}</td>
+    <td>${player.playerObj.opponent3}</td>
    </tr>`
   
-  document.getElementById("scoreboard").innerHTML += userFields;
-  console.log("document.getElementById('scoreboard').innerHTML EFTER:",document.getElementById("scoreboard").innerHTML)
+  document.getElementById("scoreboard").innerHTML += playerFields;
+  // console.log("document.getElementById('scoreboard').innerHTML EFTER:",document.getElementById("scoreboard").innerHTML)
   };
    
  });
@@ -229,7 +247,6 @@ function showScoreBoardData(){
 
 showScoreBoardData();
 await getTop10();
-fillRestOfTable();
+prepareRestOfTable();
 await getPlayerRanks();
 await getAllPlayerRanks();
-
